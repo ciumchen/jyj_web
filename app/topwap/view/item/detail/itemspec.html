@@ -1,0 +1,22 @@
+<{if $item.spec_desc}>
+<div id="skuScroll" class="goods-sku-list shopex-off-canvas-wrap">
+  <div class="shopex-scroll">
+    <ul>
+      <{foreach from=$item.spec_desc item=spec key=spec_id}>
+      <li>
+        <div class="goods-sku-name"><{$item.spec.specName.$spec_id}></div>
+        <div class="goods-sku-options">
+          <{foreach from=$spec item=spec_value key=spec_value_id }>
+          <{if $spec_value.spec_image_url}>
+          <span data-spec-value-id="<{$spec_value_id}>" class="has-img" title="<{$spec_value.spec_value}>"><img src="<{$spec_value.spec_image_url|storager:"t"}>" mid="<{$spec_value.spec_image_url|storager:"l"}>" big="<{$spec_value.spec_image_url}>"></span>
+          <{else}>
+          <span data-spec-value-id="<{$spec_value_id}>" title="<{$spec_value.spec_value}>"><{$spec_value.spec_value}></span>
+          <{/if}>
+          <{/foreach}>
+        </div>
+      </li>
+      <{/foreach}>
+    </ul>
+  </div>
+</div>
+<{/if}>

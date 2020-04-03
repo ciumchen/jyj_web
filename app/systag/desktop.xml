@@ -1,0 +1,12 @@
+<desktop>
+    <permissions>
+        <permission id="systag" display='true' parent='0' workground='system'>系统标签管理</permission>
+    </permissions>
+
+    <workground name="系统" id="system" controller="admin_tags" action="index" order='100'>
+        <menugroup name="标签管理">
+            <menu controller='admin_tags' action='index' permission='systag' display='true' order='10'>标签列表</menu>
+        </menugroup>
+    </workground>
+
+</desktop>

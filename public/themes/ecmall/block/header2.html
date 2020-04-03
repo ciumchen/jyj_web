@@ -1,0 +1,51 @@
+<div class="head-second">
+  <!-- 顶部导航 -->
+  <div id="topbar" class="topbar">
+    <div class="wrap-lg">
+      <div class="topbar-right">
+        <{widgets id="tbr"}>
+      </div>
+      <div class="topbar-login">
+        <{widgets id="tbl"}>
+      </div>
+    </div>
+  </div>
+  <div class="top-banner t-bn"><{widgets id="top_banner"}></div>
+  <!-- 头部信息栏 -->
+  <div id="header" class="header">
+    <div class="wrap-lg">
+      <div class="row">
+        <div class="col-lg-4 scale-img logo-wrap">
+          <{widgets id="hl"}>
+        </div>
+        <div class="col-lg-8 mid-cont">
+          <{widgets id="hm"}>
+        </div>
+        <div class="col-lg-3">
+          <{widgets id="hr"}>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页面导航栏 -->
+  <div id="nav" class="nav-bar">
+    <div class="wrap-lg">
+      <div class="row">
+        <div class="offset-lg-3 nav-main">
+          <div class="sub-cat"><{widgets id="sub_cat"}></div>
+          <div class="menu-wrap"><{widgets id="navm" isCache="false"}></div>
+          <div class="nav-ad"><{widgets id="nav_ad"}></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+</script>
+

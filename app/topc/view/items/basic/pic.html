@@ -1,0 +1,47 @@
+<div class="col-lg-5 box zoom-slider">
+  <div class="pic-show">
+    <{if !$item.list_image}>
+    <div class="show-box"><img src="<{$image_default_id.L.default_image|storager}>" /></div>
+    <{else}>
+    <div class="show-box"><img src="<{$item.list_image.0|storager:'l'}>" rel="<{$item.list_image.0|storager}>" class="jqzoom" alt="" /></div>
+    <{/if}>
+  </div>
+  <div class="pic-thumb">
+    <div class="next-group"><i class="icon-chevron-right"></i></div>
+    <div class="pre-group"><i class="icon-chevron-left"></i></div>
+    <div class="slider-thumb-wrap">
+      <ul class="slider-thumb" id="thumblist">
+        <{if !$item.list_image}>
+        <li class="active"><img src="<{$image_default_id.S.default_image|storager:t}>" /></li>
+        <{else}>
+        <{foreach from=$item.list_image item=image_id}>
+        <{if $image_id == $item.image_default_id}>
+        <li class="active"><div class="thumb-item"><span><img src="<{$image_id|storager:t}>" mid="<{$image_id|storager:l}>" big="<{$image_id|storager}>" /></span></div></li>
+        <{else}>
+        <li><div class="thumb-item"><span><img src="<{$image_id|storager:t}>" mid="<{$image_id|storager:l}>" big="<{$image_id|storager:l}>"></span></div></li>
+        <{/if}>
+        <{/foreach}>
+        <{/if}>
+      </ul>
+    </div>
+  </div>
+  <div class="clearfix pro-like">
+      <div class="fr bdsharebuttonbox">
+        <span class="fl" style="margin-right: 10px;margin-top:5px;">分享到:</span><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+       <span class="fl" style="margin-left: 5px;">
+          <{if $nologin!=1}>
+            <a href="<{url action=topc_ctl_passport@signin next_page=$next_page}>" class="favorite-btn on"><i class="icon icon-heart-a"></i>收藏商品</a>
+            <{else}>
+              <{if $collect.itemCollect}>
+               <a href="javascript:void(0);" class="favorite-btn favorite on has-favorite" data-ajax-data="item_id=<{$item.item_id}>" rel="_request"><i class="icon icon-heart"></i>已收藏</a>
+               <{else}>
+               <a href="javascript:void(0);" class="favorite-btn favorite on has-favorite hidden" data-ajax-data="item_id=<{$item.item_id}>" rel="_request"><i class="icon icon-heart"></i>已收藏</a>
+              <a href="javascript:void(0);" class="favorite-btn favorite on no-favorite" data-ajax-data="item_id=<{$item.item_id}>" rel="_request"><i class="icon icon-heart-a"></i>收藏商品</a>
+              <{/if}>
+            <{/if}>
+       </span>
+
+  </div>
+</div>

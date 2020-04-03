@@ -1,0 +1,113 @@
+<div class="goods-wrap">
+  <{if $setting.block_name}>
+    <div class="section-title">
+      <h4><{$data.block_name}></h4>
+      <div class="filter-bar">
+          <span class="sale active">销量</span>
+          <span class="price">价格</span>
+          <span class="time">上架时间</span>
+      </div>
+    </div>
+  <{/if}>
+  <div class="item-content">
+    <{foreach from=$data.item item=item key=key}>
+        <div class="goods-content" data-time="<{$item.modified_time}>" data-sale="<{$item.sold_quantity}>" data-price="<{$item.price|cur}>" >
+          <div class="goods-pic">
+            <a href="<{url action=topc_ctl_item@index item_id=$item.item_id}>">
+              <img src="<{$item.image_default_id|default:$data.defaultImg.S.default_image|storager:'s'}>" alt="">
+            </a>
+          </div>
+          <div class="goods-name"><a href="<{url action=topc_ctl_item@index item_id=$item.item_id}>"><{$item.title}></a></div>
+          <div class="price-cont">
+            <strong><{$item.price|cur}></strong> <span class="foll"><em><{$item.sold_quantity}></em>人已购买</span>
+          </div>
+          <div class="oper-cont">
+            <a href="<{url action=topc_ctl_item@index item_id=$item.item_id}>" class="shopping">点击抢购</a>
+            <{if $item.collect == 1}>
+            <a href="#" class="fav faved" data-ajax-data="item_id=<{$item.item_id}>">已收藏</a>
+            <{else}>
+            <a href="#" class="fav fave" data-ajax-data="item_id=<{$item.item_id}>">收藏</a>
+            <{/if}>
+          </div>
+        </div>
+    <{/foreach}>
+  </div>
+</div>
+<script>
+// 收藏商品
+$('.fav').on('click',function(e) {
+    e.preventDefault();
+    var $this = $(this),
+    url = '';
+    url = $this.hasClass('fave') ? '<{url action=topc_ctl_collect@ajaxFav}>': '<{url action=topc_ctl_collect@ajaxFavDel}>';
+    $.post(url, $(this).attr('data-ajax-data'),function(rs) {
+        if (rs.error) {
+            Message.error(rs.message);
+            setTimeout(function() {
+                window.location.href = rs.redirect;
+            },
+            2000)
+        }
+        if (rs.success) {
+            rs.message == '商品收藏删除成功' ? $this.text('收藏') : $this.text('已收藏');
+            Message.success(rs.message);
+        }
+    });
+});
+
+// 商品排序
+var $goodDiv = $('.all-goods .goods-content');
+$goodDiv.each(function(e, elm) {
+    var v = $(elm).data('price').slice(1, $(elm).data('price').indexOf('.'));
+    $(elm).attr('data-price', v);
+})
+
+function sortArray(type, $this) {
+    $goodDiv.sort(function(a, b) {
+        var saleSmall = Number(a.getAttribute('data-sale')),
+        saleBig = Number(b.getAttribute('data-sale')),
+        timeSmall = Number(a.getAttribute('data-time')),
+        timeBig = Number(b.getAttribute('data-time')),
+        priceSmall = Number(a.getAttribute('data-price')),
+        priceBig = Number(b.getAttribute('data-price'));
+        if ($this) {
+            if (type == 'sale') {
+                return saleSmall - saleBig;
+            }
+            if (type == 'time') {
+                return timeSmall - timeBig;
+            }
+            if (type == 'price') {
+                return priceBig - priceSmall;
+            }
+        } else {
+            if (type == 'sale') {
+                return saleBig - saleSmall;
+            }
+            if (type == 'time') {
+                return timeBig - timeSmall;
+            }
+            if (type == 'price') {
+                return priceSmall - priceBig;
+            }
+        }
+    }) 
+
+    $goodDiv.each(function(i, el) {
+        $('.all-goods .item-content').append(el);
+    })
+}
+
+$('.filter-bar > span').click(function() {
+    $(this).toggleClass('cur');
+    var $this = $(this).hasClass('cur');
+    $(this).addClass('active').siblings().removeClass('active');
+    if ($(this).hasClass('sale')) {
+        sortArray('sale', $this)
+    } else if ($(this).hasClass('price')) {
+        sortArray('price', $this)
+    } else {
+        sortArray('time', $this)
+    }
+})
+</script>

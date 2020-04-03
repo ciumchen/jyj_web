@@ -1,0 +1,16 @@
+<desktop>
+    <permissions>
+        <permission id="wechatlist" display='true' parent="0" workground='syswechat.workground.wechatlist'>微信公众号列表</permission>
+    </permissions>
+
+    <workground name="站点" id="site.wrokground.theme" controller="admin_theme_manage" action="index"  order="1">
+        <menugroup name="微信管理">
+             <menu controller='admin_wechat' action='index' permission='wechatlist' display='true' order='30'>微信公众号列表</menu>
+             <!--
+             <menu controller='admin_wechat' action='edit' permission='shoptype_edit' display='false' order='30'>店铺类型更改</menu>
+             <menu controller='admin_wechat' action='saveShoptype' permission='shoptype_edit' display='false' order='30'>店铺类型更改</menu>
+             -->
+        </menugroup>
+    </workground>
+</desktop>
+

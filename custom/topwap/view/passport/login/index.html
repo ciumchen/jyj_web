@@ -1,0 +1,88 @@
+<div class="ly-mb-head">
+  <span onclick="history.go(-1)" class="ly-back"></span>
+  <a class=" font-orange" href="<{url action=topwap_ctl_passport@goRegister}>">注册</a>
+</div>
+<div class="ly-login-box">
+  <form class="form-container" action="<{url action=topwap_ctl_passport@doLogin}>" method="post" id="login_form">
+    <div class="title">
+      账号登录
+    </div>
+    <ul>
+      <li class="ub">
+        <input type="hidden" name="key" value="topwap_signin">
+        <input placeholder="请输入手机号" type="text" name="account"  required="required"   value="" />
+        <span></span>
+      </li>
+      <li class="up">
+        <input placeholder="请输入密码" type="password" name="password"  required="required"   value="" />
+        <span></span>
+      </li>
+      <{if $isShowVcode}>
+      <li class="vf_code">
+        <img align="absmiddle" class="auto-change-verify-handle"  src="<{url action=toputil_ctl_vcode@gen_vcode key=topwap_signin width=120 height=35}>" alt="" width="100" height="30">
+        <input type="text" name="verifycode" class="" placeholder="请输入验证码">
+        <span></span>
+      </li>
+      <{/if}>
+      <li class="noinput"> <a class="" href="<{url action=topwap_ctl_passport@goFindPwd}>">忘记密码</a></li>
+    </ul>
+
+    <button type="submit" class="dl" id="action_signin_submit">立即登录</button>
+    <button onclick="location.href='<{url action=topwap_ctl_passport@goRegister}>'" type="button" class="zc">快速注册</button>
+  </form>
+</div>
+<{if $trustInfoList}>
+<section class="font-gray-20 sns-login">
+  <div class="section-title">使用其他账号</div>
+  <div class="section-container">
+    <{foreach from=$trustInfoList item=trust_info}>
+    <a href="<{$trust_info.url}>" class="section-init content-center">
+      <i class="bbc-icon bbc-icon-<{$trust_info.flag}>-member"></i><br><{$trust_info.name}>
+    </a>
+    <{/foreach}>
+  </div>
+</section>
+<{/if}>
+
+<script>
+$('.ly-login-box').on('click','.up span',function(){
+  if(!$(this).parent().hasClass('act')){
+    $(this).parent().addClass('act')
+    $(this).parent().find('input').attr('type','text')
+  }else{
+    $(this).parent().removeClass('act')
+    $(this).parent().find('input').attr('type','password')
+  }
+})
+$('.ly-login-box').on('click','.ub span',function(){
+  $(this).parent().find('input')[0].value=''
+  $(this).parent().removeClass('act')
+})
+$('.ly-login-box .ub input').keyup(function(){
+  if($('.ly-login-box .ub input')[0].value!='' && $('.ly-login-box .ub input')[0].value){
+    $(this).parent().addClass('act')
+  }else{
+    $(this).parent().removeClass('act')
+  }
+})
+$('#action_signin_submit').data('ajaxCallback', function(rs) {
+
+	  var isShowVcode = "<{$isShowVcode}>";
+	  if(rs.error && isShowVcode) {
+		changeCode($('.auto-change-verify-handle'));
+	  }
+	  if(rs.redirect) {
+		location.href = rs.redirect;
+	  }
+  
+});
+
+$('#login_form').find('button[type=submit]').data('ajaxConfig', {
+  callback: function(rs) {
+    if(rs.error) {
+      shopex.alert(rs.message);
+    }
+  }
+});
+
+</script>

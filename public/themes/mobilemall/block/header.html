@@ -1,0 +1,30 @@
+<div class="ly-header-box">
+    <!--TODO 暂时隐藏-->
+<!--    <div class="saoma"></div>-->
+    <form action="<{url action=topwap_ctl_item_list@index}>" method="post" class="ly-search" style="margin: 0 12px" id="goods_search">
+            <input  type="search" name="search_keywords" class="header-search shopex-input-clear" value="<{$search_keywords}>" placeholder="<{t}>寻找感兴趣的商品<{/t}>">
+<!--        <span class="hd-xiangji"></span>-->
+    </form>
+<!--TODO 暂时隐藏-->
+<!--    <div class="ly-hd-msg">-->
+<!--        <i class="num">5</i>-->
+<!--    </div>-->
+    <div class="bg"></div>
+</div>
+<script>
+$(document).ready(function () {
+  var scroll_top = null;
+  var opacity = null;
+  $(window).scroll(function () {
+    sctop()
+  })
+
+  function sctop() {
+    var scroll_top = $(window).scrollTop() / 500;
+    scroll_top = scroll_top > 1 ? 1 : scroll_top
+    $('.ly-header-box .bg').css({"opacity": scroll_top})
+  }
+
+  sctop()
+})
+</script>

@@ -1,0 +1,62 @@
+<style>
+    .footer-cont {
+         text-align: center;
+         padding-top: 10px;
+         padding-bottom: 10px;
+    }
+    #goods_modal .goods-search{
+       margin-left:6px;
+    }
+    .goods-category .filters-list{
+      z-index:99;
+      width:870px;
+      height:366px;
+      border:none;
+      outline:none;
+      overflow:hidden;
+      overflow-y:auto;
+    }
+    .goods-category .filters-list::-webkit-scrollbar{
+      width:6px;
+      height:100%;
+    }
+    
+    .goods-category .filters-list::-webkit-scrollbar-track 
+    { 
+      border-radius: 10px; 
+      background-color: rgba(255,255,255,.0);
+    }
+    .goods-category .filters-list ul, .goods-category .child-list ul{
+        display:inline-block;
+    }
+</style>
+<ul class="clearfix">
+<{if !$itemsList}>
+  <p class="help-block text-center">暂无数据</p>
+  <script>
+    $('#orderCancel,#orderEdit').on('hide.bs.modal', function(e) {
+      $(this).removeData('bs.modal');
+    })
+  </script>
+<{else}>
+  <{foreach from=$itemsList item=data}>
+  <li data-id="<{$data.item_id}>" data-src="<{$data.image_default_id}>" title="<{$data.title}>" >
+    <div class="thumb">
+        <{if $data.image_default_id}>
+        <img src="<{$data.image_default_id|storager:'m'}>">
+        <{else}>
+        <img src="<{$image_default_id.M.default_image}>">
+        <{/if}>
+
+    </div>
+    <div class="title"><{$data.title}></div>
+  </li>
+  <{/foreach}>
+<{/if}>
+</ul>
+<div class="footer-cont">
+  <{pagers data=$pagers}>
+    <{if $count > 0}>
+    <span class="page-number">共&nbsp;<em class="text-aqua"><{$count}></em>&nbsp;条记录</span>
+    <{/if}>
+</div>

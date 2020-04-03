@@ -1,0 +1,39 @@
+<div class="ly-ad-box">
+	<a href="<{$setting.link}>">	<img src="<{$setting.img}>" alt="">
+	</a>
+</div>
+
+
+<div class="ly-brand-tabs">
+	<div class="left">
+		<ul>
+			<{foreach from=$setting.text item=parent key=parentId name=morepic}>
+			<li class="<{if $env.foreach.morepic.iteration == 1}>act<{/if}>"><span><{$parent.linkinfo}></span></li>
+			<{/foreach}>
+		</ul>
+	</div>
+	<div class="right">
+		<{foreach from=$setting.text item=parent key=parentId name=morepic}>
+		<div class="ct-box" style="<{if $env.foreach.morepic.iteration != 1}>display:none<{/if}>">
+			<{foreach from=$parent.lv_2 item=parent2 key=parentId2 name=morepic2}>
+			<div class="title">
+				<{$parent2.linkinfo}>
+			</div>
+			<ul>
+				<{foreach from=$parent2.lv_3 item=parent3 key=parentId3 name=morepic3}>
+				<li><a class="img-box" href="<{$parent3.linktarget}>"><img src="<{$parent3.link}>" ></a><span><{$parent3.linkinfo}></span></li>
+				<{/foreach}>
+			</ul>
+			<{/foreach}>
+		</div>
+		<{/foreach}>
+
+	</div>
+</div>
+<script>
+$('.ly-brand-tabs').on('click','.left li',function(){
+	var index = $(this).index()
+	$('.ct-box').eq(index).show().siblings().hide()
+	$(this).addClass('act').siblings().removeClass('act')
+})
+</script>

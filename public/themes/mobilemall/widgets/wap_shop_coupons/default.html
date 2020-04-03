@@ -1,0 +1,44 @@
+<style>
+  .coupons-wrap{background-color: white;}
+  .coupons-wrap .module-hd{padding: 0.5rem; font-size: 0.9rem; border-bottom: 1px solid #ddd;}
+  .store-coupons{display: flex; flex-wrap:wrap; box-sizing: border-box; justify-content: flex-start; padding: 5px;} .store-coupons li{width: 50%; box-sizing: border-box; padding: 5px;} .store-coupons li .inner-wrap{position: relative; background: #f62f51; height: 90px; border-radius: 5px; overflow: hidden;}
+  .store-coupons li:last-child{margin-right: 0;}
+  .coupons-type{width: 0; height: 0; position: absolute; left: 0; top: 0; border-width: 0; border-style: solid; border-color: transparent; border-top-width: 30px; border-right-width: 30px;}
+  .coupons-type:after{content: " "; position: absolute; color: #632f2c; font-size:0.7rem; left: 3px; bottom: 13px;}
+  .coupons-title{line-height: 2.5rem; font-size: 1.2rem; text-align: center;}
+  .coupons-title span{color: #ffff02; line-height: 1; position: relative;}
+  .quan .coupons-type{border-top-color: #f3c111;}
+  .quan .coupons-type:after{content: "券";}
+  .quan .coupons-title span:before{content: "¥"; font-size: 0.7rem;}
+  .store-info{padding: 0 10px 7px 10px;}
+  .store-info .store-logo{width: 32px; height: 32px; float: left; margin-right: 10px; background: #fff;}
+  .store-info .store-logo a{height: 32px; display: table-cell; vertical-align: middle;}
+  .store-info .store-logo a img{width: 100%; height: auto; max-width: 100%; max-height: 100%;}
+  .store-info .info-txt{overflow: hidden; font-size: 0.75rem;}
+  .store-info .info-txt p{overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #fff; margin: 0;}
+  .store-info .info-txt p a{color: #fff;}
+  .get-coupons{width: 14%; height: 90px; position: absolute; right: 0; top: 0; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff; background-color: orange;}
+</style>
+<div class="coupons-wrap">
+  <div class="module-hd"><{$setting.class_name}><span><{$setting.class_detail}></span></div>
+  <ul class="store-coupons">
+    <{foreach from=$setting.data item=item}>
+    <li class="quan">
+      <div class="inner-wrap">
+          <div class="coupons-type"></div>
+          <div class="coupons-title">
+            <span><{$item.deduct_money}></span>
+          </div>
+          <div class="store-info clearfix">
+            <div class="store-logo"><a href="<{url subdomain=$item.subdomain action=topwap_ctl_shop@index shop_id=$item.shop_id}>"><img src="<{$item.shop_logo}>" width="32" height="32" alt=""></a></div>
+            <div class="info-txt">
+              <p><a href="#"><{$item.shop_name}></a></p>
+              <p><{$item.coupon_name}></p>
+            </div>
+          </div>
+          <a href="<{url action=topwap_ctl_shop@index shop_id=$item.shop_id}>" class="get-coupons"><span>点<br>击<br>领<br>取</span></a>
+      </div>
+    </li>
+    <{/foreach}>
+  </ul>
+</div>

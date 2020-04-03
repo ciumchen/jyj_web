@@ -1,0 +1,27 @@
+<div class="tableform">
+   <a href="<{$url}>" target="dialog::{title:'公司信息编辑', width:500, height:450}"><span class="btn btn-default btn-sm">公司信息编辑</span></a>
+  <div class="division">
+    <table width="100%" cellspacing="0" cellpadding="0">
+      <tr>
+        <th><label><{t}>公司名称：<{/t}></label></th>
+        <td><{$data.company_name|escape:'html'}></td>
+        <th><label><{t}>手机：<{/t}></label></th>
+        <td><{$data.mobile}></td>
+      </tr>
+      <tr>
+        <th><label><{t}>联系人姓名：<{/t}></label></th>
+        <td><{$data.touch_name}></td>
+        <th><label><{t}>地址：<{/t}></label></th>
+        <td><{$data.addr}></td>
+      </tr>
+	         <tr>
+			 <th><label>营业执照：</label></th>
+        <td><{if $data.business_img}><a href="<{$data.business_img}>" target="_blank"><img src="<{$data.business_img}>" width="50" height="50"/></a><{else}>无<{/if}></td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<script>
+</script>

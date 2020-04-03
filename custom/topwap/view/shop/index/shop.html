@@ -1,0 +1,52 @@
+<div class="shop-sign">
+  <div class="shop-sign-cover"></div>
+  <div class="shop-sign-img">
+    <{foreach from=$widgets item=widgetDetail}>
+      <{if $widgetDetail.widgets_type=="shopsign"}>
+      <img src="<{$widgetDetail.params.imgurl|storager}>">
+      <{/if}>
+    <{/foreach}>
+  </div>
+  <div class="shop-sign-info">
+      <div class="shop-logo">
+        <a href="<{url action=topwap_ctl_shop@shopInfo shop_id=$shopdata.shop_id}>"><img src="<{$shopdata.shop_logo|storager}>" alt=""></a>
+      </div>
+      <div class="shop-name">
+      </div>
+      <button id="shop_collect" data-shopid="<{$shopdata.shop_id}>" class="shopex-btn shop-favorite-btn <{if $collect.shopCollect}>has-favorited<{/if}>"><i class="bbc-icon <{if $collect.shopCollect}>bbc-icon-faverite<{else}>bbc-icon-star-empty<{/if}>"></i>  <span><{if $collect.shopCollect}>已收藏<{else}>收藏<{/if}></span></button>
+      <{imwap type='shop' shop_id=$shopdata.shop_id content='<button class="shopex-btn shopex-btn-warning bbc-btn-warning"><i class="bbc-icon bbc-icon-communication"></i>客服</button>' }>
+  </div>
+</div>
+<div class="addr-inf">
+  <div class="shop-name"><span class="bbc-wap icon-dianpu"></span><a href="<{url action=topwap_ctl_shop@shopInfo shop_id=$shopdata.shop_id}>"><{$shopdata.shop_name}></a></div>
+  <{if $shopInfo.addr_switch == 'open'}>
+    <div class="shop-addr receiver-info">
+        <i class="bbc-wap icon-dingwei"></i>
+        <p class="receiver-info-item addr-detail">
+            <{$shopInfo.shop_area}>,<{$shopInfo.shop_addr}>
+        </p>
+    </div>
+  <{/if}>
+<!--  <{if $shopInfo.mobile!=''}>-->
+<!--    <div class="shop-addr receiver-info">-->
+<!--        <span class="bbc-wap icon-tel"></span>-->
+<!--        <p class="receiver-info-item ">-->
+<!--            <{$shopInfo.mobile}>-->
+<!--        </p>-->
+<!--        <a href="tel:<{$shopInfo.mobile}>" class="bbc-wap icon-dianhua"></a>-->
+<!--    </div>-->
+<!--  <{/if}>-->
+</div>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<{script src="share.js" app="topwap"}>
+<script>
+
+  $(function(){
+      wxShare({
+        title: $('.shop-name a').html(),
+        desc: '',
+        link: location.href,
+        imgUrl: $('.shop-logo img').attr('src')
+      });
+  });
+</script>

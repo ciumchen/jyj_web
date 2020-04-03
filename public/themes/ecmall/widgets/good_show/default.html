@@ -1,0 +1,18 @@
+<div class="goods-wrap">
+  <{if $setting.block_name}>
+    <div class="section-title"><{$data.block_name}></div>
+  <{/if}>
+  <div class="item-content">
+    <{foreach from=$data.item item=item key=key}>
+        <div class="goods-content">
+          <div class="goods-pic">
+            <a href="<{url action=topc_ctl_item@index item_id=$item.item_id}>">
+              <img src="<{$item.image_default_id|default:$data.defaultImg.S.default_image|storager:'s'}>" alt="">
+            </a>
+          </div>
+          <div class="goods-name"><a href="<{url action=topc_ctl_item@index item_id=$item.item_id}>"><{$item.title}></a></div>
+          <div class="good-price"><{$item.price|cur}> </div>
+        </div>
+    <{/foreach}>
+  </div>
+</div>

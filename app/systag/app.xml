@@ -1,0 +1,23 @@
+<app>
+    <name>标签系统</name>
+    <type>service</type>
+    <description>提供标签基本功能以及标签的筛选</description>
+
+    <author>
+        <name>Elrond</name>
+        <email>guocheng@shopex.cn</email>
+        <url>http://www.shopex.cn</url>
+    </author>
+
+    <version>0.5</version>
+    <license>shopex license</license>
+
+    <parent_model_class>dbeav_model</parent_model_class>
+
+    <depends>
+        <app>desktop</app>
+        <app>pam</app>
+        <app>dbeav</app>
+    </depends>
+
+</app>

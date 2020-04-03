@@ -1,0 +1,164 @@
+
+<link rel="stylesheet" href="/app/topwap/statics/stylesheets/v20200324.css?v=2.0.0">
+<header class="icons-header">
+    <i class="header-left icon-func bbc-icon bbc-icon-back shopex-action-back"></i>
+</header>
+
+<section class="container no-header">
+  <div style="display: flex;padding: 0 10px;background-color: #fff;">
+      <div style="flex: 0 0 30%; width:30%; height: 7rem;" >
+        <img src="<{$item.image_default_id|default:$image_default_id.S.default_image|storager:'t'}>" width="100%" style="margin-top: 10px;max-height:7rem">
+      </div>
+      <section style="flex: 1;border-bottom: none;" class="section-white">
+          <div class="goods-detail-brief shopex-content-padded">
+              <div class="goods-detail-title">
+                  <h1 class="max-2-lines" style="font-weight: 600;display: -webkit-box;font-size: 1rem" ><{$item.title}></h1>
+                  <{if $item.sub_title}>
+                    <h2 class="single-line" style="font-size: .9rem;max-width: 14rem"><{$item.sub_title}></h2>
+                  <{/if}>
+              </div>
+          </div>
+          <a href="#">
+              <div class="goods-detail-purchase shopex-content-padded" style="margin-top: -10px">
+                <{if $item.def_step_price}>
+                  <{foreach from=$item.def_step_price item=v key=k}>
+                    <{if $k <= 2}>
+                    <div class="goods-detail-purchase-price" <{if $k==0}>style="flex:0 0 25%"<{elseif $k==1}>style="flex:0 0 40%"<{else}>style="flex:0 0 35%;text-align: right"<{/if}> >
+                      <p><{$v.p_desc}></p>
+                      <p><{$v.f}>~<{$v.e}><{$item.unit}></p>
+                    </div>
+                    <{/if}>
+                  <{/foreach}>
+                <{else}>
+                  <div class="goods-detail-purchase-price" style="flex:1;margin-top: -10px">
+                    <p>零售价<span><{$item.price|cur}></span></p>
+                  </div>
+                <{/if}>   
+              </div>
+          </a>
+      </section>
+  </div>
+</div>
+
+<{include file="topwap/item/detail/itemspec.html"}>
+
+<script>
+var isload = false
+$('.tab-top li').on('click',function(){
+  var index = $(this).index()
+  if(index == 1){
+    isload =true
+  }else{
+    isload =false
+  }
+  $(this).addClass('act').siblings().removeClass('act')
+  $('.tab-content li.item').eq(index).show().siblings().hide()
+  if(index == 1 && $('.tab-content .item').eq(index).data('load') == 0){
+    isload =false
+    getcomtent($('.tab-content .item').eq(index).find('div')[0],function(){
+      $('.tab-content .item').eq(index).attr('data-load',1)
+      isPullup =true
+      count ++
+    })
+  }
+
+})
+
+  
+
+var cm_obj = {
+  pages:count,
+  rate_type: 0,
+  item_id: <{$item.item_id}>, 
+}
+var totalpage;
+var count = 1;
+var isPullup =false
+function getcomtent(el,cb){
+  cm_obj.pages = count
+  $.get('<{url action=topwap_ctl_item_detail@getItemRateList}>',cm_obj , function(rs) {
+    cb()
+    totalpage = rs.total;
+    $(el).parent().attr('data-count', count);
+    if (isPullup == false) {
+      if(rs.html.indexOf('nodata-wrapper') > 0){
+        $(el).parent().parent().html(rs.html);
+      } else {
+        $(el).html(rs.html);
+        isload = true
+      }
+    } else {
+      $(el).append(rs.html);
+      isload = true
+
+    }
+  });
+}
+$(window).scroll(function(){
+  var winwidth = $(window).width();
+  var img = $('.goods-graphic img');
+  img.each(function(){$(this).width()});
+  if($(img).width() > winwidth){
+    $(img).width(winwidth);
+  }
+}); 
+
+$(function(){
+  var windowHeight = $(window).height();
+  var headerHeight = $('header').height();
+  var navHeight = $('#sliderSegmentedControl').height() + $('#sliderProgressBar').height();
+  var contentHeight = windowHeight-(headerHeight+navHeight);
+  $('.shopex-control-content').height(contentHeight);
+});
+
+// (function($) {
+//   $('.shopex-scroll-wrapper').scroll({
+//     indicators: true //是否显示滚动条
+//   });
+
+//   var html2='<{$itemParamshtml}>';
+//   var html3='<{$itemremarkhtml}>';
+//   var item2 = document.getElementById('item2mobile');
+//   var item3 = document.getElementById('item3mobile');
+//   document.getElementById('slider').addEventListener('slide', function(e) {
+//     if (e.detail.slideNumber === 1) {
+//       if (item2.querySelector('.shopex-loading')) {
+//         setTimeout(function() {
+//           item2.querySelector('.shopex-scroll').innerHTML = html2;
+//         }, 500);
+//       }
+//     } else if (e.detail.slideNumber === 2) {
+//       if (item3.querySelector('.shopex-loading')) {
+//         setTimeout(function() {
+//           item3.querySelector('.shopex-scroll').innerHTML = html3;
+//         }, 500);
+//       }
+//     }
+//   });
+// })(shopex);
+
+
+
+
+</script>
+
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <{script src="share.js" app="topwap"}>
+  <script>
+  $(function(){
+    wxShare({
+      title: $('.goods-detail-title h1').html(),
+      desc: '',
+      link: location.href,
+      imgUrl: $('.shopex-slider-item').eq(1).find('img').attr('src')
+    });
+  });
+  
+
+  //流量统计
+  $.post('<{url action=toputil_ctl_trafficStatic@stat type=item id=$item.item_id use_platform=wap shop_id=$item.shop_id}>',function(rs){
+
+  });
+  
+  
+</script>

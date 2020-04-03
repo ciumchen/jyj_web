@@ -1,0 +1,225 @@
+<script src="<{$env.base_url}>/app/topc/statics/scripts/area_select.js?"></script>
+<style>
+  .area select{margin-right:0.5rem;border:1px solid #ddd;height:2.5rem;line-height:1.5rem;}
+  #container{height:300px;margin-top:1rem;}
+  #container img{max-width:none!important;}
+  .box-footer{text-align:center;}
+  .addr-control i{display:none;}
+  .addr-control input{width:70%;height:34px;line-height:34px;padding:0 0.5rem;border:1px solid #ddd;}
+  .addr-switch{margin-bottom:1rem;}
+  .addr-switch label{margin-right:1rem;}
+  .addr-switch label input{margin-right:0.3rem;}
+</style>
+<form  action="<{url action=topshop_ctl_shop_setting@saveSetting}>" method="post" data-validate-onsuccess="ajaxSubmit" role="form">
+  <div class="box box-default">
+    <div class="box-header with-border">
+      <h3 class="box-title"><a href="<{url subdomain=$shop.subdomain action=topc_ctl_shopcenter@index shop_id=$shop.shop_id}>" target="_blank"><{t}><{$shop.shop_id|shopname}><{/t}></a></h3>
+    </div>
+    <div class="box-body">
+      <{if $shop.shop_id}><input type="hidden" name="shop_id" value="<{$shop.shop_id}>"><{/if}>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group text-center">
+            <div class="pad">
+              <a class="select-image center-block" data-toggle="modal" href="<{url action=topshop_ctl_shop_image@loadImageModal}>" data-target="#gallery_modal">
+                <input type="hidden" name="shop_logo" value="<{$shop.shop_logo}>">
+                <div class="img-put">
+                  <img src="<{$shop.shop_logo|storager}>">
+                  <i class="glyphicon glyphicon-picture"></i>
+                </div>
+              </a>
+            </div>
+            <span class="help-block"><small>点击上传/修改</small></span>
+            <span class="help-block"><small>尺寸标准：290*84或者290*290 px</small></span>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label><{t}>店铺描述<{/t}>：</label>
+            <textarea class="form-control" name="shop_descript"><{$shop.shop_descript}></textarea>
+          </div>
+          <{if $im_plugin == 'toputil_im_plugin_qq'}>
+          <div class="form-group">
+            <label"><{t}>QQ<{/t}>：</label>
+            <input  class="form-control" type="text" name='qq' value="<{$shop.qq}>"> <a target="_blank" class="block" href="http://shang.qq.com/v3/widget.html">初次使用需要激活QQ推广</a>
+          </div>
+          <{/if}>
+          <{if $im_plugin == 'toputil_im_plugin_wangwang'}>
+          <div class="form-group">
+            <label><{t}>旺旺<{/t}>：</label>
+            <input type="text" name="wangwang" class="form-control" value="<{$shop.wangwang}>" >
+          </div>
+          <{/if}>
+          <div class="form-group">
+            <label><{t}>手机<{/t}>：</label>
+            <input type="text" name="mobile" class="form-control" value="<{$shop.mobile}>" >
+          </div>
+          <div class="form-group">
+            <label><{t}>地区配置<{/t}>：</label>
+          </div>
+          <div class="addr-switch">
+            <label>
+              <input type="radio" name="addr_switch" value="close" id="close" <{if $shop.addr_switch == 'close' || !$shop.addr_switch}> checked <{/if}>>关闭
+            </label>
+            <label>
+              <input type="radio" name="addr_switch" value="open" id="open" <{if $shop.addr_switch == 'open' || !$shop.addr_switch}> checked <{/if}>>开启
+            </label>
+          </div>
+          <div class="addr-control">
+              <div class="form-group">
+                <label for><{t}>所在地区<{/t}>：</label>
+                <div class="area"><span id="area" data-validate="area"></span></div>
+                <input type="hidden" name="selected_addr">
+              </div>
+              <div class="addr-control">
+                <label for><{t}>街道地址<{/t}>：</label><br>
+                <input type="text" name="shop_addr"  maxlength="100" value="<{$addrInfo.addr}>" id="addr">
+                <a class="btn btn-success location-btn">定位</a>
+              </div>
+              <div id="container"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-footer">
+      <button type="submit" class="btn btn-primary">保存</button>
+    </div>
+  </div>
+</form>
+
+<script>
+  // 公用变量
+  var selectedAddr = [],
+      selected = '',
+      secretKey = '<{$baiDuapiAk}>',
+      shopArea = '<{$shop.shop_area}>',
+      shopAddr = '<{$shop.shop_addr}>',
+      switchName = '<{$shop.addr_switch}>',
+      areaCode = '<{$shop.area}>',
+      $localBtn = $('.location-btn'),
+      $addrIput = $('#addr');
+  // 初始化地址列表
+  new AreaWidget({
+      dataUrl:"<{$env.base_url}>/app/ectools/statics/scripts/region.json",
+      select:$('#area')
+  });
+
+  // 动态插入百度api地址
+  function loadScript(key){
+      var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "http://api.map.baidu.com/api?v=2.0&ak="+key+"&callback=init";
+        document.head.appendChild(script);
+   }
+
+  function init(){
+      var map = new BMap.Map("container");
+      var point = {};
+      function myFun(result){
+        var cityName = result.name;
+        map.setCenter(cityName);
+        map.centerAndZoom(cityName,12);
+        var urlData = 'http://api.map.baidu.com/geocoder/v2/?address='+ cityName +'&output=json&ak='+ secretKey
+        $.ajax({
+          url:urlData,
+          type:'GET',
+          dataType:'jsonp',
+          success:function(res){
+            new BMap.Point(res.result.location.lng,res.result.location.lat);
+          }
+        })
+      }
+      // 根据ip获取当前城市
+      var myCity = new BMap.LocalCity();
+      myCity.get(myFun);
+      // 创建地址解析器实例
+      var myGeo = new BMap.Geocoder();
+      // 将地址解析结果显示在地图上,并调整地图视野
+     $('#area').on('change','select',function(){
+         $addrIput.val('');
+         var idx = $(this).index();
+         selected = $(this).find('option:selected').text();
+         if(idx == 0){
+            selectedAddr = [];
+         }
+         selectedAddr[idx] = selected;
+         area = selectedAddr.join();
+         $('input[name="selected_addr"]').val(area);
+         myGeo.getPoint(selectedAddr, function(point){
+            if (point) {
+              map.centerAndZoom(point, 16);
+              map.addOverlay(new BMap.Marker(point));
+            }else{
+              $('#messagebox').message("抱歉，没有定位到此地址!");
+            }
+        }, selected);
+     })
+
+     $localBtn.click(function(){
+           var adrVal = $addrIput.val(),
+               local = area + adrVal;
+           myGeo.getPoint(local, function(point){
+            if (point) {
+              map.centerAndZoom(point, 16);
+              map.addOverlay(new BMap.Marker(point));
+            }else{
+              $('#messagebox').message("抱歉，没有定位到此地址!");
+            }
+        },selected);
+      })
+
+      map.enableScrollWheelZoom(true);
+  }
+
+   $(function(){
+      loadScript(secretKey);
+      var addrCode = areaCode.split(',');
+      addrCode.forEach(function(el,i){
+          setTimeout(function(){
+            $('#area').find('select').eq(i).find('option[value='+ el + ']').attr('selected',true).change();
+            $addrIput.empty().val(shopAddr);
+          },500)
+      })
+      $addrIput.val(shopArea + ',' + shopAddr);
+      setTimeout(function(){
+         $localBtn.trigger('click');
+      },1000);
+      $(".sidebar .sidebar-menu li a i.glyphicon").eq(1).removeClass("glyphicon-list-alt").addClass("glyphicon-cog");
+   })
+
+  function ajaxSubmit (e) {
+    var form = e.target;
+    e.preventDefault();
+    $.post(form.action, $(form).serialize(), function(rs) {
+      if(rs.error) {
+        $('#messagebox').message(rs.message);
+        return;
+      }
+      if(rs.success) {
+        $('#messagebox').message(rs.message, 'success');
+      }
+      if(rs.redirect) {
+        setTimeout(function(){location.href=rs.redirect;}, 800);
+      }
+    });
+  }
+
+  // 地区开关
+  var addrCtl = $('.addr-control'),
+      switchLabel = $('.addr-switch label');
+  switchLabel.each(function(i,el){
+     switchBtn(switchName);
+  })
+  switchLabel.on('click',function(){
+      var v = $(this).find('input:checked').val();
+      switchBtn(v);
+  })
+  function switchBtn (val){
+    if(val == 'close'){
+      addrCtl.hide()
+    }else if(val == 'open'){
+      addrCtl.show();
+    }
+  }
+</script>

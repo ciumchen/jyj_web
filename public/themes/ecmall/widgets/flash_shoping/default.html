@@ -1,0 +1,67 @@
+<div class="module">
+  <{if $setting.texttag}>
+    <div class="module-hd"><{$data.texttag}></div>
+  <{/if}>
+  <div class="module-bd">
+    <div class="fl flash-time">
+        <div class="flash-title">
+          <h2>限量闪购</h2>
+          <p>拼的就是速度</p>
+        </div>
+        <div class="count-down">
+          <{if $setting.activity.end_time < $setting.time }>
+          <p class="active-end">活动已结束</p>
+          <{else}>
+          <h4>本场剩余时间</h4>
+          <p class="item-time" data-time="<{$setting.activity.end_time}>"><span></span></p>
+          <{/if}>
+        </div>
+    </div>
+    <div class="switchable-container goods-scrollable" data-toggle="switchable" data-switchable-config='{
+    "effect": "scrollx", 
+    "viewSize": [812], 
+    "lazyload": true, 
+    "hasFlips": true, 
+    "circle": true, 
+    "step": 4
+    }'>
+      <span class="iconfont prev">&#xe642;</span>
+      <span class="iconfont next">&#xe65e;</span>
+      <div class="scroller">
+        <div class="switchable-content">
+          <{foreach from=$data.activity_item.list item=item}>
+            <div class="goods-content">
+              <div class="goods-pic">
+                <a href="<{url action=topc_ctl_item@index item_id=$item.item_id}>">
+                  <img src="<{$item.item_default_image|default:$data.defaultImg.S.default_image|storager:'s'}>" alt="">
+                </a>
+              </div>
+              <div class="goods-name"><a href="<{url action=topc_ctl_item@index item_id=$item.item_id}>"><{$item.title}></a></div>
+              <div class="goods-price">
+                <{if $setting.activity.end_time < $setting.time }>
+                  <{$item.price|cur}>
+                <{else}>
+                  <{$item.activity_price|cur}>
+                   <del><{$item.price|cur}></del>
+                <{/if}> 
+              </div>
+            </div>
+          <{/foreach}>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  //倒计时
+  var now = "<{$setting.time}>";
+  $('.item-time').each(function() {
+    countdown('.item-time span',{
+      'start': $(this).attr('data-time') - now,
+      'secondOnly': false,
+      'callback': function() {
+        location.href = location.href;
+      }
+    });
+  });
+</script>

@@ -1,0 +1,20 @@
+<div class="ly-footer-box">
+  <div class="ul-item">
+    <a data-href="<{url action=topwap_ctl_default@index}>" class="item-1 act"><span></span><em>首页</em></a>
+    <a data-href="/wap/brand.html" class="item-2"><span></span><em>品牌</em></a>
+    <a class="item-3" data-href="<{url action=topwap_ctl_category@index}>"><span></span><em>分类</em></a>
+    <a data-href="<{url action=topwap_ctl_cart@index}>" class="item-4"><span></span><em>进货单</em></a>
+    <a data-href="<{url action=topwap_ctl_member@index}>" class="item-5"><span></span><em>我的</em></a>
+  </div>
+</div>
+<script>
+  $('.ul-item a').on('click',function () {
+    $(this).addClass('act').siblings().removeClass('act')
+    var href = $(this).data('href')
+    window.location.href = href;
+  })
+</script>
+<div class="ly-f-zw"></div>
+</footer>
+<div <{if !$env.get.ctl=="admin_theme_widget"}>style="display:none"<{/if}>><{footer app=topwap}>
+</div>

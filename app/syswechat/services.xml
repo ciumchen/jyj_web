@@ -1,0 +1,5 @@
+<services>
+    <service id="desktop_finder.syswechat_mdl_wechat">
+        <class>syswechat_finder_wechat</class>
+    </service>
+</services>

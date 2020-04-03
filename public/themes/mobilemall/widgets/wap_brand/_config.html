@@ -1,0 +1,230 @@
+<div class="tableform" id="textAddress">
+    <div class="division piccontent td">
+
+            广告图片:<input type='text' name="img" class="imgsrc" id="picimg" value="<{$setting.img}>">
+            <input type="button" value="上传图片" class="uploadbtn">
+        链接：<input type="text" name="link" value="<{$setting.link}>">
+    </div>
+    <div id="ad_ly_morelink" class="piccontent">
+        <div class="textcontent" id="">
+            <{foreach from=$setting.text item=item key=key}>
+            <div  class="text_items clearfix division">
+                <div class="tr">
+                    <div class="th"><input type=hidden name=text[<{$item.id}>][id] value="<{$item.id}>"><{t app="b2c"}>文本:<{/t}></div>
+                    <div class="td"><input type="text" name="text[<{$item.id}>][linkinfo]" value="<{$item.linkinfo}>"></div>
+                    <div class="th"><{t app="b2c"}>图片:<{/t}></div>
+                    <div class="td"><input type="text" class="imgsrc" id="pic[<{$data.id}>][link]"  name="text[<{$item.id}>][link]" value="<{$item.link}>"><input type=button value=上传图片 class="uploadbtn"></div>
+                    <div class="th"><{t app="b2c"}>链接:<{/t}></div>
+                    <div class="td"><input type="text" name="text[<{$item.id}>][linktarget]" value="<{$item.linktarget}>"></div>
+                    <div class="th"><{t app="b2c"}>分隔符:<{/t}></div>
+                    <div class="td"><input class="w" type="text" name="text[<{$item.id}>][fenge]" value="<{$item.fenge}>"></div>
+                    <div class="td">
+                        <label style="float:left">新窗口：<input type="checkbox"   name="text[<{$item.id}>][tg]" value="1"  <{if $item.tg}>checked<{/if}> /></label>
+                        <span class="go-prev">↑</span>
+                        <span class="go-next">↓</span>
+                        <span onclick="$(this).getParents('.text_items').destroy()" class="delete"></span>
+                    </div>
+                </div>
+                <div class="sub">
+
+                    <{foreach from=$item.lv_2 item=bads}>
+                    <div  class="text_items clearfix division" id="<{$bads.id}>">
+                        <div class="tr">
+                            <div class="th"><input type=hidden name=text[<{$item.id}>][lv_2][<{$bads.id}>][id] value="<{$bads.id}>"><{t app="b2c"}><{$item.linkinfo}>子集文本:<{/t}></div>
+                            <div class="td"><input type="text" name="text[<{$item.id}>][lv_2][<{$bads.id}>][linkinfo]" value="<{$bads.linkinfo}>"></div>
+                            <div class="th"><{t app="b2c"}>图片:<{/t}></div>
+                            <div class="td"><input type="text" class="imgsrc" id="pic[<{$data.id}>][lv_2][<{$bads.id}>][link]" name="text[<{$item.id}>][lv_2][<{$bads.id}>][link]" value="<{$bads.link}>"><input type=button value=上传图片 class="uploadbtn"></div>
+                            <div class="th"><{t app="b2c"}>链接:<{/t}></div>
+                            <div class="td"><input type="text" name="text[<{$item.id}>][lv_2][<{$bads.id}>][linktarget]" value="<{$bads.linktarget}>"></div>
+                            <div class="th"><{t app="b2c"}>分隔符:<{/t}></div>
+                            <div class="td"><input class="w" type="text" name="text[<{$item.id}>][lv_2][<{$bads.id}>][fenge]" value="<{$bads.fenge}>"></div>
+                            <div class="td">
+                                <label style="float:left">新窗口：<input type="checkbox"   name="text[<{$item.id}>][lv_2][<{$bads.id}>][tg]" value="1"  <{if $bads.tg}>checked<{/if}> /></label>
+                                <span class="go-prev">↑</span>
+                                <span class="go-next">↓</span>
+                                <span onclick="$('<{$bads.id}>').destroy()" class="delete"></span>
+                            </div>
+                        </div>
+
+                        <div class="sub">
+
+                            <{foreach from=$bads.lv_3 item=bads2}>
+                            <div  class="text_items clearfix division" id="<{$bads.id}>">
+                                <div class="tr">
+                                    <div class="th"><input type=hidden name=text[<{$item.id}>][lv_2][<{$bads.id}>][lv_3][<{$bads2.id}>][id] value="<{$bads2.id}>"><{t app="b2c"}><{$bads.linkinfo}>子集文本:<{/t}></div>
+                                    <div class="td"><input type="text" name="text[<{$item.id}>][lv_2][<{$bads.id}>][lv_3][<{$bads2.id}>][linkinfo]" value="<{$bads2.linkinfo}>"></div>
+                                    <div class="th"><{t app="b2c"}>图片:<{/t}></div>
+                                    <div class="td"><input type="text" class="imgsrc" id="pic[<{$item.id}>][lv_2][<{$bads.id}>][lv_3][<{$bads2.id}>][link]" name="text[<{$item.id}>][lv_2][<{$bads.id}>][lv_3][<{$bads2.id}>][link]" value="<{$bads2.link}>"><input type=button value=上传图片 class="uploadbtn"></div>
+                                    <div class="th"><{t app="b2c"}>链接:<{/t}></div>
+                                    <div class="td"><input type="text" name="text[<{$item.id}>][lv_2][<{$bads.id}>][lv_3][<{$bads2.id}>][linktarget]" value="<{$bads2.linktarget}>"></div>
+                                    <div class="th"><{t app="b2c"}>分隔符:<{/t}></div>
+                                    <div class="td"><input class="w" type="text" name="text[<{$item.id}>][lv_2][<{$bads.id}>][lv_3][<{$bads2.id}>][fenge]" value="<{$bads2.fenge}>"></div>
+                                    <div class="td">
+                                        <label style="float:left">新窗口：<input type="checkbox"   name="text[<{$item.id}>][lv_2][<{$bads.id}>][lv_3][<{$bads2.id}>][tg]" value="1"  <{if $bads2.tg}>checked<{/if}> /></label>
+                                        <span class="go-prev">↑</span>
+                                        <span class="go-next">↓</span>
+                                        <span onclick="$('<{$bads.id}>').destroy()" class="delete"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <{/foreach}>
+
+                        </div>
+                        <button data-id="text[<{$item.id}>][lv_2][<{$bads.id}>]" data-lv="3" class="btn addimage2 btn-has-icon" app="desktop" type="button"><span><span>添加链接</span></span></button>
+                    </div>
+
+                    <{/foreach}>
+
+                </div>
+                <button data-id="text[<{$item.id}>]" data-lv="2" class="btn addimage2 btn-has-icon" app="desktop" type="button"><span><span>添加链接</span></span></button>
+            </div>
+            <{/foreach}>
+        </div>
+        <{button label=$___b2c="添加链接"|t:'b2c' class="addimage2" app="desktop" icon="btn_add.gif"}>
+    </div>
+</div>
+<script>
+
+(function(){
+
+
+  var tagtxt_type='div',tagtxt_class='text_items clearfix division';
+
+  $("ad_ly_morelink").addEvents({
+    'click:relay(.addimage2)':function(){
+      var dataId=this.get('data-id');
+      var dataLv=this.get('data-lv');
+      var prev=this.getPrevious('.sub')
+      var i=new Date().getTime();
+      if(!dataId){
+        var tpltext='<div class="tr"><div class="th"><{t app="b2c"}>文本:<{/t}></div>'+
+          '<div class="td"><input type=hidden name=text['+i+'][id] value="'+i+'"><input type="text" name="text['+i+'][linkinfo]"></div>'+
+          '<div class="th"><{t app="b2c"}>图片:<{/t}></div>'+
+          '<div class="td"><input type="text" name="pic['+i+'][link]" class="imgsrc">'+
+          '<input type=button value=<{t app="b2c"}>上传图片<{/t}> class="uploadbtn" id="pic['+i+']"></div>'+
+          '<div class="th"><{t app="b2c"}>链接:<{/t}></div>'+
+          '<div class="td"><input type="text" name="text['+i+'][linktarget]"></div>'+
+          '<div class="th"><{t app="b2c"}>分隔符:<{/t}></div>'+
+          '<div class="td"><input class="w" type="text" name="text['+i+'][fenge]"></div>'+
+          '<div class="td"><label  style="float:left">新窗口：<input type="checkbox"   name="text['+i+'][tg]" /></label><span class="go-prev">↑</span><span class="go-next">↓</span><span class="delete" onclick="$(this).getParents(\'.text_items\').destroy()">'+
+          '</span></div></div>'+
+          '';
+        tpltext+='<div class="sub"></div><button data-id="text['+i+']" data-lv="2" class="btn addimage2 btn-has-icon" app="desktop" type="button"><span><span>添加链接</span></span></button>';
+        $('textAddress').getElement('.textcontent').adopt(new Element(tagtxt_type,{'html':tpltext,'width':'100%','class':tagtxt_class}));
+      }else{
+        // pic[1532421959316][bads][1532421978612][target_link]
+        // text[1532421557805][lv_2][1532425585498][id]
+        var tpltext='<div class="tr"><div class="th"><{t app="b2c"}>文本:<{/t}></div>'+
+          '<div class="td"><input type=hidden name='+dataId+'[lv_'+dataLv+']'+'['+i+'][id] value="'+i+'"><input type="text" name='+dataId+'[lv_'+dataLv+']'+'['+i+'][linkinfo]"></div>'+
+          '<div class="th"><{t app="b2c"}>图片:<{/t}></div>'+
+          '<div class="td"><input type="text" name='+dataId+'[lv_'+dataLv+']'+'['+i+'][link]" class="imgsrc">'+
+          '<input type=button value=<{t app="b2c"}>上传图片<{/t}> class="uploadbtn" id="pic['+i+']"></div>'+
+          '<div class="th"><{t app="b2c"}>链接:<{/t}></div>'+
+          '<div class="td"><input type="text" name='+dataId+'[lv_'+dataLv+']'+'['+i+'][linktarget]"></div>'+
+          '<div class="th"><{t app="b2c"}>分隔符:<{/t}></div>'+
+          '<div class="td"><input class="w" type="text" name='+dataId+'[lv_'+dataLv+']'+'['+i+'][fenge]"></div>'+
+          '<div class="td"><label  style="float:left">新窗口：<input type="checkbox"   name='+dataId+'[lv_'+dataLv+']'+'['+i+'][tg]" /></label><span class="go-prev">↑</span><span class="go-next">↓</span><span class="delete" onclick="$(\''+i+'\').destroy()">'+
+          '</span></div></div>'+
+          '';
+
+
+        if(Number(dataLv)<3){
+          dataId+='[lv_'+dataLv+']['+i+']';
+          console.log(dataId)
+          tpltext+='<div class="sub"></div><button data-id="'+dataId+'" data-lv="'+(Number(dataLv)+1)+'" class="btn addimage2 btn-has-icon" app="desktop" type="button"><span><span>添加链接</span></span></button>';
+        }
+        prev.adopt(new Element(tagtxt_type,{'html':tpltext,id:i,'width':'100%','class':tagtxt_class}));
+      }
+      $('pic['+i+']').addEvent('click',function(e){bindevent(this)});
+    }});
+
+
+  $$(".piccontent .uploadbtn").addEvent('click',function(e){bindevent(this)});
+  function bindevent(el){
+    var target=$(el).getParent('.td').getElement('.imgsrc');
+    console.log(target)
+    var goto_url=encodeURIComponent('<{url route="shopadmin" app="image" ctl="admin_manage" act="image_broswer" type="big"}>');
+    var url='<{url route="shopadmin" app="desktop" act="alertpages" goto=""}>'+goto_url;
+    Ex_Loader('modedialog',function(){
+      return new imgDialog(url,{onCallback:function(image_id,image_src){
+        alert(image_src)
+          target.value=image_src;
+        }});
+    });
+  }
+
+
+  var panel = $('ad_ly_morelink');
+  panel.addEvent('click',function(e){
+    var clickTarget = $(e.target);
+
+    if(clickTarget.hasClass('go-prev')){
+      e.stop();
+      var item = clickTarget.getParent('.division'),
+        itemP = item.getPrevious('.division');
+      if(itemP){
+        item.injectBefore(itemP);
+      }
+    }
+    if(clickTarget.hasClass('go-next')){
+      e.stop();
+      var item = clickTarget.getParent('.division'),
+        itemN =item.getNext('.division');
+      if(itemN){
+        item.injectAfter(itemN);
+      }
+    }
+  })
+
+
+})();
+
+
+
+
+
+
+
+</script>
+<style type="text/css">
+    .text_items {line-height:25px;}
+    .text_items input[type="text"]{border: #ddd 1px solid;height: 25px;border-radius: 3px;margin-left: 5px;}
+    .text_items .td,.text_items .th{float:left;}
+    .text_items .td{padding-right:10px;}
+    .text_items .w{width:30px}
+    .go-next,.go-prev{display:inline-block;border:1px solid #eee;padding:2px 9px;cursor: pointer;color:#204097;float:left;    display: block; height: 20px;line-height: 20px;
+    }
+    .go-next:hover,.go-prev:hover{color:#f60;border-color:#f60; background-color:#eee}
+    .go-next{margin-left:5px}
+    #ad_ly_morelink .delete {height: 20px;width: 16px;cursor: pointer;float: left;_display: inline; margin-left: 5px;background-color: #fff;    margin-top: 5px;}
+    .tr{
+        clear: both;
+        overflow:hidden;
+    }
+    .sub{padding-left:20px;position: relative;}
+    .sub:before {
+        display: block;
+        content: "";
+        position: absolute;
+        top: 16px;
+        bottom: 16px;
+        width: 1px;
+        background: #999;
+    }
+
+    .sub .text_items:before {
+        display: block;
+        content: "";
+        position: absolute;
+        top: 16px;
+        height: 1px;
+        width: 22px;
+        left: -5px;
+        background: #999;
+    }
+    .dialog .division .division.text_items {
+        border: 0;
+        margin-left: 1px;
+        position: relative;padding-left: 20px}
+</style>

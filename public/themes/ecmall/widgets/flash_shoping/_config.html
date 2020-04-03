@@ -1,0 +1,31 @@
+<div id="goods_exshow_config" class="tableform">
+  <div class="division">
+    <p>
+      <label>板块名称：</label>
+      <{input type="text" name="texttag" value=$setting.texttag}>
+    </p>
+  </div>
+  <div class="division goods-selector">
+   <!--  <select id="active_list">
+      <{foreach from=$setting.activityList.data item=item}>
+      <option name='activity_id' value="<{$item.activity_id}>"><{$item.activity_name}></option>
+      <{/foreach}>
+    </select> -->
+    <div data-extend = "select" <{if $setting.selector=="filter"}>style="display:none;"<{/if}>>
+      <{input type="object" value=$setting.activity_select object="activity" app="syspromotion" filter=""  name="activity_select" select="radio" multiple="true" textcol="activity_name" }>
+    </div>
+  </div>
+</div>
+<script>
+  $$('#goods_exshow_config .goods-selector-handle input[type=radio]').addEvent('change',function(){
+    var radio  = this;
+    if(!radio.checked)return;
+    $$('#goods_exshow_config .goods-selector [data-extend]').each(function(activity){
+      if(activity.get('data-extend')!=activity.value){
+        activity.hide();
+      }else{
+        activity.show();
+      }
+    });
+  });
+</script>

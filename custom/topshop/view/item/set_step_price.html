@@ -1,0 +1,38 @@
+
+		  <div>
+			<button id="addWholesaleRule" type="button" class="btn btn-default text-blue">
+			  <i class="glyphicon glyphicon-plus"></i>
+			  添加数量区间
+			</button>
+		  </div>
+		  <div class="rule-dom">
+		<{if $item}>
+			<{foreach from=$item item=condition}>
+				<div class="wholesale-rule-discount">
+				  <div class="wholesale-row">
+					<span>
+					  数量大于等于 <input type="text" size="5" name="from[]" value="<{$condition[f]}>"> ，
+					  小于 <input type="text" size="5" name="end[]" value="<{$condition[e]}>"> ，
+					  销售价为 <input type="text" size="5" name="discount[]" value="<{$condition[p]}>">
+					</span>
+					<a class="del-btn" href="javascript:void(0);">删除</a>
+				  </div>
+				</div>
+			<{/foreach}>
+		<{/if}>
+		  </div>
+<script>
+var optionA = '<div class="wholesale-rule-discount"><div class="wholesale-row"><span>数量大于等于 <input type="text" size="5" name="from[]"> ，小于 <input type="text" size="5" name="end[]" > ，销售价为 <input type="text" size="5" name="discount[]"></span><a class="del-btn" href="javascript:void(0);">删除</a></div></div>';
+//添加和删除批发规则
+$('#addWholesaleRule').click(function(){
+    var ruleDom = $('.rule-dom').find('.wholesale-rule-discount');
+    if(ruleDom.length < 3){
+        $('.rule-dom').append(optionA);
+    }else{
+        $('#messagebox').message('最多添加3条规则!')
+    }
+});
+$('.rule-dom').on('click','.del-btn',function(){
+    $(this).parents('.wholesale-rule-discount').remove();
+});
+</script>

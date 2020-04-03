@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topwap}>
+
+    <link rel="stylesheet" href="images/lanyi.css">
+  </head>
+  <body class="has-footer" style="background: #fff">
+    <{main}>
+    <{require file="block/footer.html"}>
+    <script>
+    $('.ly-footer-box a').eq(4).addClass('act').siblings().removeClass('act')
+    </script>
+  </body>
+</html>

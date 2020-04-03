@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/swiper.css">
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+
+  <body class="is-index">
+    <{require file="block/header.html"}>
+    <!-- 主内容区 -->
+    <div class="seaview">
+      <div class="wrap-lg">
+        <div class="fl lf-cat"><{widgets id="left_cat"}></div>
+        <div class="fl full-slider">
+          <{widgets id="main_focus"}>
+        </div>
+        <div class="fr fr-ad"><{widgets id="fr_ad"}></div>
+      </div>
+    </div>
+    <div id="main" class="main index">
+      <div class="wrap-lg">
+          <div class="clearfix module">
+            <div class="fl flash-cont">
+              <{widgets id="flash_shoping"}>
+            </div>
+            <div class="fr r-ad">
+              <{widgets id="flash_ads"}>
+            </div>
+          </div>
+          <!-- floor1 -->
+          <div class="clearfix section-item">
+            <div class="items new">
+              <div class="section-title">
+                <{widgets id="section_title1"}>
+              </div>
+              <{widgets id="new_good"}>
+            </div>
+            <div class="items good">
+              <div class="section-title">
+                <{widgets id="section_title2"}>
+              </div>
+              <{widgets id="good_pro"}>
+            </div>
+            <div class="items coupons">
+              <div class="section-title">
+                <{widgets id="section_title3"}>
+              </div>
+              <{widgets id="get_coupon"}>
+            </div>
+          </div>
+          <!-- floor2 -->
+          <div class="foor-title"><{widgets id="floor_title1"}></div>
+          <div class="clearfix section-item floor">
+            <div class="items full-ad"><{widgets id="fashion_left"}></div>
+            <div class="items">
+              <div class="section-title">
+                  <{widgets id="section_title4"}>
+              </div>
+              <{widgets id="fashion_mid"}>
+              </div>
+            <div class="items">
+              <div class="section-title">
+                <{widgets id="section_title5"}>
+              </div>
+              <{widgets id="fashion_right"}></div>
+          </div>
+          <!-- floor3 -->
+          <div class="foor-title"><{widgets id="floor_title2"}></div>
+          <div class="clearfix section-item floor">
+            <div class="items no-padding"><{widgets id="fashion_left2"}></div>
+            <div class="items no-padding goods-list">
+              <{widgets id="fashion_mid2"}>
+              </div>
+            <div class="items full-ad">
+              <{widgets id="fashion_right2"}></div>
+          </div>
+          <!-- floor3 -->
+          <div class="foor-title"><{widgets id="floor_title3"}></div>
+          <div class="clearfix section-item floor">
+            <div class="items full-ad"><{widgets id="fashion_left3"}></div>
+            <div class="items">
+              <div class="section-title">
+                  <{widgets id="section_title6"}>
+              </div>
+              <{widgets id="fashion_mid3"}>
+             </div>
+            <div class="items three-ad">
+              <div class="section-title">
+                  <{widgets id="section_title7"}>
+              </div>
+              <{widgets id="fashion_right3"}>
+            </div>
+          </div>
+          <!-- floor4 -->
+          <div class="clearfix section-item floor">
+            <div class="items no-padding"><{widgets id="fashion_left4"}></div>
+            <div class="items no-padding goods-list">
+              <{widgets id="fashion_mid4"}>
+              </div>
+            <div class="items full-ad">
+              <{widgets id="fashion_right4"}></div>
+          </div>
+          <div class="all-goods">
+            <{widgets id="all_goods"}>
+          </div>
+      </div>
+    </div>
+  <script src="images/swiper.js"></script>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>

@@ -1,0 +1,40 @@
+<!-- <div class="module-hd"><{$setting.class_name}><span><{$setting.class_detail}></span></div> -->
+<!-- Swiper -->
+  <div class="swiper-container coupon-slide">
+    <div class="swiper-wrapper">
+      <{foreach from=$setting.data item=item}>
+        <div class="swiper-slide">
+             <div class="store-info clearfix">
+                  <div class="store-logo"><a href="<{url subdomain=$item.subdomain action=topc_ctl_shopcenter@index shop_id=$item.shop_id}>"><img src="<{$item.shop_logo}>" width="32" height="32" alt=""></a></div>
+                  <div class="info-txt">
+                    <p><a href="<{url subdomain=$item.subdomain action=topc_ctl_shopcenter@index shop_id=$item.shop_id}>"><{$item.shop_name}></a></p>
+                    <p><{$item.coupon_name}></p>
+                  </div>
+                  <div class="coupon-acc">
+                    <a href="<{url subdomain=$item.subdomain action=topc_ctl_shopcenter@index shop_id=$item.shop_id}>">
+                      <small>￥</small><strong><{$item.deduct_money}></strong>
+                      <p><{$item.coupon_name}></p>
+                    </a>
+                  </div>
+              </div>
+        </div>
+      <{/foreach}>
+    </div>
+  </div>
+    <div class="swiper-pagination coupon-pagination"></div>
+ <script>
+    var swiper = new Swiper('.coupon-slide', {
+      slidesPerView: 1,
+      slidesPerColumn: 3,
+      spaceBetween: 5,
+      pagination: {
+        el: '.coupon-pagination',
+        clickable: true,
+      },
+      autoplay: {
+        delay: 5000,
+        stopOnLastSlide: false,
+        disableOnInteraction: true,
+      }
+    });
+  </script>

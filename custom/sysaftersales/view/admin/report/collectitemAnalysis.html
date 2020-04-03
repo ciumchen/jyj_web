@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>charts</title>
+  <meta name="description" content="Highcharts" />
+  <{css src="jquery.datetimepicker.css" app="sysstat" }>
+  <{css src="sysstat-analysis.css" app="sysstat" }>
+  <{css src="framework.css" app="desktop" }>
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <{script src="jquery.js" app="sysstat" }>
+  <{script src="jquery.datetimepicker.js" app="sysstat" }>
+</head>
+
+<body>
+  <!-- <div class="notice">收藏量为用户执行收藏次数的累计数据，不包含取消收藏次数</div> -->
+  <div class="gridlist-action data-action" id="dataAction">
+    <label>
+      <{t}>申请日期:<{/t}>
+    </label>
+   <input class="x-input cal datetimepicker" readonly="readonly" type="text" value="<{$time_start}>" id="time_from" name="time_from"> 至
+    <input class="x-input cal datetimepicker" type="text" value="<{$time_end}>" id="time_end" name="time_end">   
+	<label>
+      <{t}>下单日期:<{/t}>
+    </label>
+   <input class="x-input cal datetimepicker" readonly="readonly" type="text" value="<{$time_start_order}>" id="time_from_order" name="time_from_order"> 至
+    <input class="x-input cal datetimepicker" type="text" value="<{$time_end_order}>" id="time_end_order" name="time_end_order">
+    <button id="confirmBtn" class="btn btn-primary" type="button">确定</button>
+    <!-- <div class="btn-group"> -->
+      <!-- <button class="btn btn-default dataBtn btn-fourthly" value="yesterday" type="button">昨日</button> -->
+      <!-- <button class="btn btn-default dataBtn btn-fourthly" value="beforeday" type="button">前日</button> -->
+      <!-- <button class="btn btn-default dataBtn btn-fourthly" value="week" type="button">最近七天</button> -->
+      <!-- <button class="btn btn-default dataBtn btn-fourthly" value="month" type="button">最近30天</button> -->
+    <!-- </div> -->
+		    <select id="storeListFrom" class="trade-select">
+      <option value="5">前五个</option>
+      <option value="10">前十个</option>
+      <option value="20">前二十个</option>
+    </select>
+		<br/>
+    		<label>商家选择：</label>
+		<{html_options name='shop_id' options=$options selected=$shop_id id="shop_id"}>
+   <label>&nbsp;&nbsp;类型：</label> <select id="aftersales_type" class="trade-select">
+      <option value="all">所有</option>
+      <option value="ONLY_REFUND">仅退款</option>
+      <option value="REFUND_GOODS">退货退款</option>
+      <option value="EXCHANGING_GOODS">换货</option>
+    </select>   
+
+	<label>&nbsp;&nbsp;货品状态：</label><select id="progress" class="trade-select">
+      <option value="all">所有</option>
+      <option value="0">等待商家处理</option>
+      <option value="1">商家接受申请，等待消费者回寄</option>
+      <option value="2">消费者回寄，等待商家收货确认</option>
+      <option value="3">商家已驳回</option>
+      <option value="4">商家已处理</option>
+      <option value="5">商家确认收货</option>
+      <option value="6">平台驳回退款申请</option>
+      <option value="7">平台已处理退款申请</option>
+      <option value="8">同意退款,提交到平台,等待平台处理</option>
+    </select>	
+	<label>&nbsp;&nbsp;处理状态：</label><select id="status" class="trade-select">
+      <option value="all">所有</option>
+      <option value="0">待处理</option>
+      <option value="1">处理中</option>
+      <option value="2">已处理</option>
+      <option value="3">已驳回</option>
+    </select>
+
+    <div class="browse-old-data"><a href="?app=sysaftersales&ctl=list&act=index" target="_blank" class="old-data">浏览原始数据 <i class="fa fa-angle-right"></i></a></div>
+
+  </div>
+  <script type="text/javascript">
+  $('.datetimepicker').datetimepicker({
+    lang: "ch",
+    format: "Y-m-d"
+  });
+  </script>
+  <div class="data-tabs">
+    <!-- <ul> -->
+      <!-- <li class="current"><a href="javascript:void(0);" data-param="num">商品收藏量排行</a></li> -->
+    <!-- </ul> -->
+    <div class="clear"></div>
+  </div>
+  <div id="container" class="data-content table-content">
+    <table>
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>订单时间</th>
+          <th>订单号</th>
+          <th>子订单号</th>
+          <th>订单交易数量</th>
+          <th>订单金额</th>
+          <th>买家ID</th>
+          <th>商品ID</th>
+          <th>商品名称</th>
+          <th>退货申请ID</th>
+          <th>退货申请数量</th>
+          <th>退货金额</th>
+          <th>退货申请时间</th>
+          <!-- <th>商品所属店铺</th> -->
+          <th>申请原因</th>
+        </tr>
+      </thead>
+      <tbody id='sss' class="table-tbody">
+        <{if $collectItemData}>
+          <{foreach from=$collectItemData item=goodsList}>
+            <tr>
+              <td class="td-1"><span><{assign var="i" value=$i+1}><{$i}></span></td>
+              <td class="td-1"><{$goodsList.octime}></td>
+              <td class="td-1"><{$goodsList.tid}></td>
+              <td class="td-1"><{$goodsList.oid}></td>
+              <td class="td-1"><{$goodsList.buynum}></td>
+              <td class="td-1"><{$goodsList.buyprice}></td>
+              <td class="td-1"><{$goodsList.user_id}></td>
+              <td class="td-1"><{$goodsList.item_id}></td>
+              <td class="td-1">
+                <div class="analysis-goods">
+                  <a href="<{url action=topc_ctl_item@index item_id=$goodsList.item_id}>" target="_blank"><{$goodsList.title}></a>
+                </div>
+              </td>
+              <td class="td-1">
+                <{$goodsList.aftersales_bn}>
+              </td>
+              <td class="td-1">
+                <{$goodsList.num}>
+              </td>
+              <td class="td-1">
+                <{$goodsList.refund_fee}>
+              </td>   
+			  <td class="td-1">
+                <{$goodsList.created_time}>
+              </td>		
+			  <!-- <td class="td-1"> -->
+                <!-- <{$goodsList.shop_id|shopname}> -->
+              <!-- </td>		 -->
+			  <td class="td-1">
+                <{$goodsList.reason}>
+              </td>
+            </tr>
+          <{/foreach}>
+        <{else}>
+          <tr>
+            <td colspan="14">
+              暂无数据
+            </td>
+          </tr>
+        <{/if}>
+      </tbody>
+    </table>
+  </div>
+</body>
+<script>
+$(function() {
+
+  $('#confirmBtn').click(function() {
+    loadData();
+  });
+  $('.data-tabs li a').click(function() {
+    $(this).parent().addClass('current').siblings().removeClass('current');
+    loadData();
+  });
+  $('#storeListFrom').change(function() {
+    loadData();
+  });
+  $('#aftersales_type').change(function() {
+    loadData();
+  }); 
+  $('#progress').change(function() {
+    loadData();
+  });  
+  $('#status').change(function() {
+    loadData();
+  });  
+  $('#shop_id').change(function() {
+    loadData();
+  });
+
+
+  function loadData() {
+    var dataType = $('li.current').children('a').attr('data-param') ? $('li.current').children('a').attr('data-param') : 'num';
+
+    var timeFrom = $("#time_from").val() + ' 00.00.00';
+    var timeEnd = $("#time_end").val() + ' 23.59.59';
+    var storeLimit = $('#storeListFrom').val() ? $('#storeListFrom').val() : '5';
+    var aftersales_type = $('#aftersales_type').val() ? $('#aftersales_type').val() : 'all';
+    var progress = $('#progress').val() ? $('#progress').val() : 'all';
+    var status = $('#status').val() ? $('#status').val() : 'all';
+    var shop_id = $('#shop_id').val() ? $('#shop_id').val() : 'all';
+
+    var htmlstr = '';
+
+    var url = '?app=sysaftersales&ctl=admin_return&act=ajaxData'
+    var postdata = 'time_start=' + timeFrom + '&time_end=' + timeEnd + '&dataType=' + dataType + '&storeLimit=' + storeLimit + '&aftersales_type=' + aftersales_type+ '&progress=' + progress+ '&status=' + status+ '&shop_id=' + shop_id;
+	if($("#time_from_order").val() && $("#time_end_order").val() ){
+		var timeFrom_order = $("#time_from_order").val() + ' 00.00.00';
+		var timeEnd_order = $("#time_end_order").val() + ' 23.59.59';
+		postdata += '&time_start_order=' + timeFrom_order + '&time_end_order=' + timeEnd_order;
+	}
+    $.post(url, postdata, function(data) {
+      if (data.error) {
+        alert(data.error);
+      }
+
+      var top_1 = 0;
+      var bar_width = 0;
+	        if (data.collectItemData.length == 0) {
+        htmlstr = '<tr><td colspan="14">暂无数据</td></tr>';
+      }else{
+			  for (var i = 0; i <= data.collectItemData.length - 1; i++) {
+				var isdisplay = '';
+				top_1 = data.collectItemData[0].collectnum;
+				isdisplay = data.collectItemData[i].collectnum;
+
+				bar_width = i > 0 ? (isdisplay / top_1) * 100 * 0.8 : 80;
+
+				  htmlstr += '<tr><td class="td-1"><span>' + (i + 1) + '</span></td><td class="td-1">'+data.collectItemData[i].octime+'</td><td class="td-1">'+data.collectItemData[i].tid+'</td><td class="td-1">'+data.collectItemData[i].oid+'</td><td class="td-1">'+data.collectItemData[i].buynum+'</td><td class="td-1">'+data.collectItemData[i].buyprice+'</td><td class="td-1">'+data.collectItemData[i].user_id+'</td><td class="td-1">'+data.collectItemData[i].item_id+'</td><td class="td-1"><div class="analysis-goods"><a href="'+ data.collectItemData[i].itemUrl +'" target="_blank">'+ data.collectItemData[i].title +'</a></div></td><td class="td-1">'+data.collectItemData[i].aftersales_bn+'</td><td class="td-1">'+data.collectItemData[i].num+'</td><td class="td-1">'+data.collectItemData[i].refund_fee+'</td><td class="td-1">'+data.collectItemData[i].created_time+'</td><td class="td-1">'+data.collectItemData[i].reason+'</td></tr>';
+
+			  }; 
+		}
+      $('#container #sss').html(htmlstr);    
+    });
+  }
+  $('.dataBtn').click(function() {
+    var dataType = $(this).attr('data-param') ? $(this).attr('data-param') : 'num';
+    var timeType = $(this).attr("value");
+    var storeLimit = $('#storeListFrom').val() ? $('#storeListFrom').val() : '5';
+    var aftersales_type = $('#aftersales_type').val() ? $('#aftersales_type').val() : 'all';
+    var progress = $('#progress').val() ? $('#progress').val() : 'all';
+    var status = $('#status').val() ? $('#status').val() : 'all';
+    var shop_id = $('#shop_id').val() ? $('#shop_id').val() : 'all';
+    var htmlstr = '';
+    var url = '?app=sysaftersales&ctl=admin_return&act=ajaxData';
+    var postdata = 'timeType=' + timeType + '&dataType=' + dataType + '&storeLimit=' + storeLimit +'&aftersales_type=' + aftersales_type+ '&progress=' + progress+ '&status=' + status+ '&shop_id=' + shop_id;
+
+    $.post(url, postdata, function(data) {
+      if (data.error) {
+        alert(data.error);
+      }
+      $("#time_from").val(data.time_start);
+      $("#time_end").val(data.time_end);
+      var top_1 = 0;
+      var bar_width = 0;
+      for (var i = 0; i <= data.collectItemData.length - 1; i++) {
+        var isdisplay = '';
+        top_1 = data.collectItemData[0].collectnum;
+        isdisplay = data.collectItemData[i].collectnum;
+        bar_width = i > 0 ? (isdisplay / top_1) * 100 * 0.8 : 80;
+        if (i < 3) {
+          htmlstr += '<tr><td class="td-1"><span>' + (i + 1) + '</span></td><td class="td-2"><div class="analysis-goods"><a href=' + data.collectItemData[i].itemUrl + ' target=_blank> <img src=\"' + data.collectItemData[i].pic_path + '\"/>' + data.collectItemData[i].title + '</a></div></td><td class="td-3">' + data.collectItemData[i].cat_name + '</td><td class="td-4">' + data.collectItemData[i].shop_name + '</td><td class="td-5 td-ranking"><div><i class="icon top"></i><span class="ranking-bar top" style="width:' + bar_width + '%;"></span><span class="ranking-num">' + isdisplay + '</span></div></td></tr>';
+        } else {
+          htmlstr += '<tr><td class="td-1 top-default"><span>' + (i + 1) + '</span></td><td class="td-2"><div class="analysis-goods"><a href=' + data.collectItemData[i].itemUrl + ' target=_blank> <img src=\"' + data.collectItemData[i].pic_path + '\"/>' + data.collectItemData[i].title + '</a></div></td><td class="td-3">' + data.collectItemData[i].cat_name + '</td><td class="td-4">' + data.collectItemData[i].shop_name + '</td><td class="td-5 td-ranking"><div><i class="icon"></i><span class="ranking-bar" style="width:' + bar_width + '%;"></span><span class="ranking-num">' + isdisplay + '</span></div></td></tr>';
+        }
+      };
+      if (data.collectItemData.length == 0) {
+        htmlstr = '<tr><td colspan="13">暂无数据</td></tr>';
+      }
+      $('#container').find('tbody').html(htmlstr);
+    })
+  })
+
+  //初始化数据列表中的统计样式
+  var td_ranking = $('.td-ranking');
+  var number_one = 0;
+  var ranking_bar_width = 0;
+  for (var i = 0; i <= td_ranking.length; i++) {
+    number_one = Number($(td_ranking[0]).find('.ranking-num').text());
+    ranking_bar_width = i > 0 ? (Number($(td_ranking[i]).find('.ranking-num').text()) / number_one) * 100 * 0.8 : 80;
+    if (i < 3) {
+      $(td_ranking[i]).find('.icon').addClass('top');
+      $(td_ranking[i]).find('.ranking-bar').addClass('top');
+    } else {
+      $(td_ranking[i]).siblings('.td-1').addClass('top-default');
+    }
+    $(td_ranking[i]).find('.ranking-bar').css('width', ranking_bar_width + "%");
+  }
+});
+</script>
+
+</html>

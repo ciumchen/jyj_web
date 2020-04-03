@@ -1,0 +1,23 @@
+<form method="post" action="?app=syslogistics&ctl=admin_regions&act=addBaiduAk" class="tableform" id="area_add_form">
+  <div class="division">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <th><{t}>百度ak值:<{/t}></th>
+        <td><input type="text" vtype="required" name="baiduAk" maxlength="" value="<{$baiduAk}>"><span><a href="http://lbsyun.baidu.com/index.php?title=jspopular/guide/getkey" target='_blank'>获取百度apiAk值</a></span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="table-action">
+    <{button label=$___ectools="保存"|t:'ectools' type="submit"}>
+    <{button label=$___ectools="取消"|t:'ectools' isCloseDialogBtn="true"}>
+  </div>
+</form>
+<script>
+  $('area_add_form').store('target',{
+    onComplete:function(){
+      if($('area_add_form').getParent('.dialog'))
+    $('area_add_form').getParent('.dialog').retrieve('instance').close();
+    }
+  });
+</script>

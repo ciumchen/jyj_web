@@ -1,0 +1,1664 @@
+a:9:{s:2:"id";i:1;s:8:"platform";s:6:"mobile";s:8:"filename";s:10:"index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:21:"mobilemall:index.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:606:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topwap}>
+  </head>
+
+  <!--首页头部-->
+  <body class="has-footer">
+    <{require file="block/header.html"}>
+    <!--首页顶部轮播-->
+    <section class="container">
+    <{widgets id="wap_top_slider"}>
+
+    <!--首页导航-->
+    <{widgets id="wap_nav_label"}>
+
+    <!--楼层-->
+    <{widgets id="wap_floor"}>
+    <!-- 商品类型 -->
+    <{widgets id="wap_goods_type"}>
+    <!-- 猜你喜欢商品 -->
+    <{widgets id="wap_like_goods_item"}>
+
+    <{main app=topwap}>
+  </section>
+  <{require file="block/footer.html"}>
+</body>
+</html>
+";}
+a:9:{s:2:"id";i:2;s:8:"platform";s:6:"mobile";s:8:"filename";s:12:"default.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:23:"mobilemall:default.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:118:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topwap}>
+  </head>
+  <body>
+    <{main}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:3;s:8:"platform";s:6:"mobile";s:8:"filename";s:12:"product.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:23:"mobilemall:product.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:231:"<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<{header app=topwap}>
+</head>
+<body class="body-padding-mini">
+  <{main}>
+</body>
+</html>
+";}
+a:9:{s:2:"id";i:4;s:8:"platform";s:6:"mobile";s:8:"filename";s:14:"promotion.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:25:"mobilemall:promotion.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:297:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topwap}>
+  </head>
+  <body class="no-fix">
+    <section class="container widgets-bottom-padded">
+    <{widgets id="activity_slide"}>
+    <{widgets id="activity_ads"}>
+    </section>
+    <{main}>
+    <{footer app=topwap}>
+  </body>
+</html>";}
+a:9:{s:2:"id";i:5;s:8:"platform";s:6:"mobile";s:8:"filename";s:13:"category.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:24:"mobilemall:category.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:1281:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topwap}>
+    <style>
+      .shopex-row.shopex-fullscreen>[class*="shopex-col-"] {
+        height: 100%;
+      }
+      .shopex-col-xs-3,
+      .shopex-control-content {
+        overflow-y: auto;
+        height: 100%;
+      }
+      .shopex-segmented-control .shopex-control-item {
+        line-height: 3rem;
+        width: 100%;
+      }
+      .shopex-segmented-control.shopex-segmented-control-inverted .shopex-control-item.shopex-active {
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <{main}>
+    <footer class="navigation">
+      <ul class="nav-group">
+        <li><a href="<{url action=topwap_ctl_default@index}>"><i class="bbc-icon bbc-icon-home-empty"></i><span>首页</span></a></li>
+        <li class="active"><a href="<{url action=topwap_ctl_category@index}>"><i class="bbc-icon bbc-icon-category"></i><span>分类</span></a></li>
+        <li><a href="<{url action=topwap_ctl_cart@index}>"><i class="bbc-icon bbc-icon-cart-empty"></i><span>购物车</span></a></li>
+        <li><a href="<{url action=topwap_ctl_member@index}>"><i class="bbc-icon bbc-icon-user-empty"></i><span>会员</span></a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:6;s:8:"platform";s:6:"mobile";s:8:"filename";s:16:"order_index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:27:"mobilemall:order_index.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:144:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topwap}>
+  </head>
+  <body class="body-padding-mini">
+    <{main}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:7;s:8:"platform";s:6:"mobile";s:8:"filename";s:9:"shop.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:20:"mobilemall:shop.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:247:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <{header app=topwap}>
+  </head>
+
+  <!--首页头部-->
+  <body>
+    <{main}>
+  </body>
+</html>
+
+";}
+a:9:{s:2:"id";i:8;s:8:"platform";s:6:"mobile";s:8:"filename";s:11:"member.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:22:"mobilemall:member.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:804:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topwap}>
+  </head>
+  <body class="has-footer">
+    <{main}>
+    <footer class="navigation">
+      <ul class="nav-group">
+        <li><a href="<{url action=topwap_ctl_default@index}>"><i class="bbc-icon bbc-icon-home-empty"></i><span>首页</span></a></li>
+        <li><a href="<{url action=topwap_ctl_category@index}>"><i class="bbc-icon bbc-icon-category-empty"></i><span>分类</span></a></li>
+        <li><a href="<{url action=topwap_ctl_cart@index}>"><i class="bbc-icon bbc-icon-cart-empty"></i><span>购物车</span></a></li>
+        <li class="active"><a href="<{url action=topwap_ctl_member@index}>"><i class="bbc-icon bbc-icon-user"></i><span>会员</span></a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:9;s:8:"platform";s:6:"mobile";s:8:"filename";s:13:"passport.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:24:"mobilemall:passport.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:331:"<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<{header app=topwap}>
+<link rel="stylesheet" href="images/index.css">
+</head>
+<body>
+  <{require file="block/header.html"}>
+  <{main}>
+  <{require file="block/footer.html"}>
+</body>
+</html>
+";}
+a:9:{s:2:"id";i:10;s:8:"platform";s:6:"mobile";s:8:"filename";s:9:"cart.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:20:"mobilemall:cart.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:783:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topwap}>
+  </head>
+  <body class="body-padding-big">
+    <{main}>
+    <footer class="navigation">
+      <ul class="nav-group">
+        <li><a href="<{url action=topwap_ctl_default@index}>"><i class="bbc-icon bbc-icon-home-empty"></i><span>首页</span></a></li>
+        <li><a href="<{url action=topwap_ctl_category@index}>"><i class="bbc-icon bbc-icon-category-empty"></i><span>分类</span></a></li>
+        <li class="active"><a href="<{url action=topwap_ctl_cart@index}>"><i class="bbc-icon bbc-icon-cart"></i><span>购物车</span></a></li>
+        <li><a href="<{url action=topwap_ctl_member@index}>"><i class="bbc-icon bbc-icon-user-empty"></i><span>会员</span></a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:11;s:8:"platform";s:6:"mobile";s:8:"filename";s:17:"order_detail.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:28:"mobilemall:order_detail.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:274:"<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<{header app=topwap}>
+<link rel="stylesheet" href="images/index.css">
+</head>
+<body class="body-padding">
+  <{main}>
+</body>
+</html>
+";}
+a:9:{s:2:"id";i:12;s:8:"platform";s:6:"mobile";s:8:"filename";s:19:"activity_index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:30:"mobilemall:activity_index.html";s:7:"version";i:1532414119;s:5:"theme";s:10:"mobilemall";s:4:"memo";s:12:"模板文件";s:7:"content";s:298:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topwap}>
+  </head>
+  <body class="no-fix">
+    <section class="container widgets-bottom-padded">
+    <{widgets id="activity_slide"}>
+    <{widgets id="activity_ads"}>
+    </section>
+    <{main}>
+    <{footer app=topwap}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:13;s:8:"platform";s:2:"pc";s:8:"filename";s:11:"topics.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:18:"ecmall:topics.html";s:7:"version";i:1532414119;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:1509:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/swiper.css">
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+
+  <body>
+    <{require file="block/header.html"}>
+    <!-- 主内容区 -->
+    <div id="main" class="main channel module-mg-small">
+      <div class="wrap-lg">
+        <div class="section">
+          <div class="row">
+            <div class="col-lg-3 sidebar">
+              <{widgets id="channel_category"}>
+            </div>
+            <div class="col-lg-10 box">
+              <{widgets id="main_focus"}>
+            </div>
+            <div class="col-lg-3 box">
+              <{widgets id="banners"}>
+              <div class="notice">
+                <{widgets id="banners-1"}>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+            <{widgets id="floor-5"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-6"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-1"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-2"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-3"}>
+        </div>
+      </div>
+    </div>
+    <script src="images/swiper.js"></script>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function() {
+    $('img.imglazyload').lazyload({
+      effect: "fadeIn"
+    });
+  })
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:14;s:8:"platform";s:2:"pc";s:8:"filename";s:10:"index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:17:"ecmall:index.html";s:7:"version";i:1532414119;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:4205:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/swiper.css">
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+
+  <body class="is-index">
+    <{require file="block/header.html"}>
+    <!-- 主内容区 -->
+    <div class="seaview">
+      <div class="wrap-lg">
+        <div class="fl lf-cat"><{widgets id="left_cat"}></div>
+        <div class="fl full-slider">
+          <{widgets id="main_focus"}>
+        </div>
+        <div class="fr fr-ad"><{widgets id="fr_ad"}></div>
+      </div>
+    </div>
+    <div id="main" class="main index">
+      <div class="wrap-lg">
+          <div class="clearfix module">
+            <div class="fl flash-cont">
+              <{widgets id="flash_shoping"}>
+            </div>
+            <div class="fr r-ad">
+              <{widgets id="flash_ads"}>
+            </div>
+          </div>
+          <!-- floor1 -->
+          <div class="clearfix section-item">
+            <div class="items new">
+              <div class="section-title">
+                <{widgets id="section_title1"}>
+              </div>
+              <{widgets id="new_good"}>
+            </div>
+            <div class="items good">
+              <div class="section-title">
+                <{widgets id="section_title2"}>
+              </div>
+              <{widgets id="good_pro"}>
+            </div>
+            <div class="items coupons">
+              <div class="section-title">
+                <{widgets id="section_title3"}>
+              </div>
+              <{widgets id="get_coupon"}>
+            </div>
+          </div>
+          <!-- floor2 -->
+          <div class="foor-title"><{widgets id="floor_title1"}></div>
+          <div class="clearfix section-item floor">
+            <div class="items full-ad"><{widgets id="fashion_left"}></div>
+            <div class="items">
+              <div class="section-title">
+                  <{widgets id="section_title4"}>
+              </div>
+              <{widgets id="fashion_mid"}>
+              </div>
+            <div class="items">
+              <div class="section-title">
+                <{widgets id="section_title5"}>
+              </div>
+              <{widgets id="fashion_right"}></div>
+          </div>
+          <!-- floor3 -->
+          <div class="foor-title"><{widgets id="floor_title2"}></div>
+          <div class="clearfix section-item floor">
+            <div class="items no-padding"><{widgets id="fashion_left2"}></div>
+            <div class="items no-padding goods-list">
+              <{widgets id="fashion_mid2"}>
+              </div>
+            <div class="items full-ad">
+              <{widgets id="fashion_right2"}></div>
+          </div>
+          <!-- floor3 -->
+          <div class="foor-title"><{widgets id="floor_title3"}></div>
+          <div class="clearfix section-item floor">
+            <div class="items full-ad"><{widgets id="fashion_left3"}></div>
+            <div class="items">
+              <div class="section-title">
+                  <{widgets id="section_title6"}>
+              </div>
+              <{widgets id="fashion_mid3"}>
+             </div>
+            <div class="items three-ad">
+              <div class="section-title">
+                  <{widgets id="section_title7"}>
+              </div>
+              <{widgets id="fashion_right3"}>
+            </div>
+          </div>
+          <!-- floor4 -->
+          <div class="clearfix section-item floor">
+            <div class="items no-padding"><{widgets id="fashion_left4"}></div>
+            <div class="items no-padding goods-list">
+              <{widgets id="fashion_mid4"}>
+              </div>
+            <div class="items full-ad">
+              <{widgets id="fashion_right4"}></div>
+          </div>
+          <div class="all-goods">
+            <{widgets id="all_goods"}>
+          </div>
+      </div>
+    </div>
+  <script src="images/swiper.js"></script>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:15;s:8:"platform";s:2:"pc";s:8:"filename";s:12:"default.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:19:"ecmall:default.html";s:7:"version";i:1532414119;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:610:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header2.html"}>
+    <div id="main" class="main clearfix" style="padding: 20px 0;">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:16;s:8:"platform";s:2:"pc";s:8:"filename";s:14:"promotion.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:21:"ecmall:promotion.html";s:7:"version";i:1532414119;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:584:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div id="main" class="main clearfix">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:17;s:8:"platform";s:2:"pc";s:8:"filename";s:15:"topics-(1).html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:22:"ecmall:topics-(1).html";s:7:"version";i:1532414119;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:1509:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/swiper.css">
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+
+  <body>
+    <{require file="block/header.html"}>
+    <!-- 主内容区 -->
+    <div id="main" class="main channel module-mg-small">
+      <div class="wrap-lg">
+        <div class="section">
+          <div class="row">
+            <div class="col-lg-3 sidebar">
+              <{widgets id="channel_category"}>
+            </div>
+            <div class="col-lg-10 box">
+              <{widgets id="main_focus"}>
+            </div>
+            <div class="col-lg-3 box">
+              <{widgets id="banners"}>
+              <div class="notice">
+                <{widgets id="banners-1"}>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+            <{widgets id="floor-5"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-6"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-1"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-2"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-3"}>
+        </div>
+      </div>
+    </div>
+    <script src="images/swiper.js"></script>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function() {
+    $('img.imglazyload').lazyload({
+      effect: "fadeIn"
+    });
+  })
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:18;s:8:"platform";s:2:"pc";s:8:"filename";s:15:"shopcenter.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:22:"ecmall:shopcenter.html";s:7:"version";i:1532414119;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:281:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+
+    <{main}>
+
+    <{require file="block/footer.html"}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:19;s:8:"platform";s:2:"pc";s:8:"filename";s:13:"passport.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:20:"ecmall:passport.html";s:7:"version";i:1532414119;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:434:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body class="login-panel">
+    <{require file="block/passport_header.html"}>
+    <{main}>
+    <{require file="block/passport_footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:20;s:8:"platform";s:2:"pc";s:8:"filename";s:9:"cart.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:16:"ecmall:cart.html";s:7:"version";i:1532414119;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:628:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header2.html"}>
+    <div id="main" class="main clearfix" style="padding: 20px 0; background: #fff;">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:21;s:8:"platform";s:2:"pc";s:8:"filename";s:19:"activity_index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:26:"ecmall:activity_index.html";s:7:"version";i:1532414119;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:587:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div class="wrap-lg purchase-view clearfix">
+      <div class="purchase-banner">
+        <{widgets id="activity_slider"}>
+      </div>
+      <div class="col-lg-4 banner-ad">
+        <{widgets id="activity_advertising"}>
+      </div>
+    </div>
+    <div id="main" class="main purchase-main">
+      <{main}>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:22;s:8:"platform";s:2:"pc";s:8:"filename";s:11:"topics.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:21:"luckymall:topics.html";s:7:"version";i:1532414119;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:1411:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+
+  <body>
+    <{require file="block/header.html"}>
+    <!-- 主内容区 -->
+    <div id="main" class="main channel module-mg-small">
+      <div class="wrap-lg">
+        <div class="section">
+          <div class="row">
+            <div class="col-lg-3 sidebar">
+              <{widgets id="channel_category"}>
+            </div>
+            <div class="col-lg-10 box">
+              <{widgets id="main_focus"}>
+            </div>
+            <div class="col-lg-3 box">
+              <{widgets id="banners"}>
+              <div class="notice">
+                <{widgets id="banners-1"}>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+            <{widgets id="floor-5"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-6"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-1"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-2"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-3"}>
+        </div>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function() {
+    $('img.imglazyload').lazyload({
+      effect: "fadeIn"
+    });
+  })
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:23;s:8:"platform";s:2:"pc";s:8:"filename";s:10:"index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:20:"luckymall:index.html";s:7:"version";i:1532414119;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:2445:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+
+  <body class="is-index">
+    <{require file="block/header.html"}>
+    <!-- 主内容区 -->
+    <div class="seaview">
+     <div class="wrap-lg">
+       <div class="module">
+         <div class="row cover-content">
+           <div class="col-lg-3 box cover-silder-gg">
+             <{widgets id="banners"}>
+           </div>
+         </div>
+       </div>
+     </div>
+      <div class="full-slider">
+        <{widgets id="main_focus"}>
+      </div>
+    </div>
+    <div id="main" class="main index">
+      <div class="wrap-lg">
+        <div class="module">
+          <{widgets id="groupbuying"}>
+        </div>
+        <div class="module">
+          <{widgets id="recommendshop"}>
+        </div>
+        <div class="module">
+          <{widgets id="activity"}>
+        </div>
+        <div class="module">
+          <{widgets id="hot_brand"}>
+        </div>
+        <div class="module">
+          
+        </div>
+        <div class="module">
+          <{widgets id="coupon"}>
+        </div>
+        <div class="module">
+          <{widgets id="floor_index_01"}>
+        </div>
+        <div class="module">
+          <div class="module-bd">
+            <{widgets id="ad_01"}>
+          </div>
+        </div>
+        <div class="module">
+          <{widgets id="floor_index_02"}>
+        </div>
+        <div class="module">
+          <div class="module-bd">
+            <{widgets id="ad_02"}>
+          </div>
+        </div>
+        <div class="module">
+          <{widgets id="floor_index_03"}>
+        </div>
+        <div class="module">
+          <{widgets id="relation_brand_01"}>
+        </div>
+        <div class="module">
+          <{widgets id="floor_index_04"}>
+        </div>
+        <div class="module">
+          <{widgets id="relation_brand_02"}>
+        </div>
+        <div class="module">
+          <{widgets id="floor_index_05"}>
+        </div>
+        <div class="module">
+          <{widgets id="ad_group"}>
+        </div>
+        <div class="module">
+          <{widgets id="goods_recommond"}>
+        </div>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:24;s:8:"platform";s:2:"pc";s:8:"filename";s:12:"default.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:22:"luckymall:default.html";s:7:"version";i:1532414119;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:609:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div id="main" class="main clearfix" style="padding: 20px 0;">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:25;s:8:"platform";s:2:"pc";s:8:"filename";s:19:"shopcenter-(1).html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:29:"luckymall:shopcenter-(1).html";s:7:"version";i:1532414119;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:286:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/shop-header.html"}>
+
+    <{main}>
+
+    <{require file="block/footer.html"}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:26;s:8:"platform";s:2:"pc";s:8:"filename";s:14:"promotion.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:24:"luckymall:promotion.html";s:7:"version";i:1532414119;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:584:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div id="main" class="main clearfix">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:27;s:8:"platform";s:2:"pc";s:8:"filename";s:15:"topics-(1).html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:25:"luckymall:topics-(1).html";s:7:"version";i:1532414119;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:1411:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+
+  <body>
+    <{require file="block/header.html"}>
+    <!-- 主内容区 -->
+    <div id="main" class="main channel module-mg-small">
+      <div class="wrap-lg">
+        <div class="section">
+          <div class="row">
+            <div class="col-lg-3 sidebar">
+              <{widgets id="channel_category"}>
+            </div>
+            <div class="col-lg-10 box">
+              <{widgets id="main_focus"}>
+            </div>
+            <div class="col-lg-3 box">
+              <{widgets id="banners"}>
+              <div class="notice">
+                <{widgets id="banners-1"}>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+            <{widgets id="floor-5"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-6"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-1"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-2"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-3"}>
+        </div>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function() {
+    $('img.imglazyload').lazyload({
+      effect: "fadeIn"
+    });
+  })
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:28;s:8:"platform";s:2:"pc";s:8:"filename";s:21:"gallery-23424234.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:31:"luckymall:gallery-23424234.html";s:7:"version";i:1532414120;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:609:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div id="main" class="main clearfix" style="padding: 20px 0;">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:29;s:8:"platform";s:2:"pc";s:8:"filename";s:16:"product-(1).html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:26:"luckymall:product-(1).html";s:7:"version";i:1532414120;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:609:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div id="main" class="main clearfix" style="padding: 20px 0;">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:30;s:8:"platform";s:2:"pc";s:8:"filename";s:15:"shopcenter.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:25:"luckymall:shopcenter.html";s:7:"version";i:1532414120;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:286:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/shop-header.html"}>
+
+    <{main}>
+
+    <{require file="block/footer.html"}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:31;s:8:"platform";s:2:"pc";s:8:"filename";s:13:"passport.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:23:"luckymall:passport.html";s:7:"version";i:1532414120;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:434:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body class="login-panel">
+    <{require file="block/passport_header.html"}>
+    <{main}>
+    <{require file="block/passport_footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:32;s:8:"platform";s:2:"pc";s:8:"filename";s:9:"cart.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:19:"luckymall:cart.html";s:7:"version";i:1532414120;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:627:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div id="main" class="main clearfix" style="padding: 20px 0; background: #fff;">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:33;s:8:"platform";s:2:"pc";s:8:"filename";s:19:"activity_index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:29:"luckymall:activity_index.html";s:7:"version";i:1532414120;s:5:"theme";s:9:"luckymall";s:4:"memo";s:12:"模板文件";s:7:"content";s:587:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div class="wrap-lg purchase-view clearfix">
+      <div class="purchase-banner">
+        <{widgets id="activity_slider"}>
+      </div>
+      <div class="col-lg-4 banner-ad">
+        <{widgets id="activity_advertising"}>
+      </div>
+    </div>
+    <div id="main" class="main purchase-main">
+      <{main}>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:34;s:8:"platform";s:3:"wap";s:8:"filename";s:10:"index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:18:"wapmall:index.html";s:7:"version";i:1532414120;s:5:"theme";s:7:"wapmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:1698:"<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<{header app=topm}>
+<link rel="stylesheet" href="images/index.css">
+</head>
+
+<body>
+  <{require file="block/header.html"}>
+  <!-- header -->
+  <div class="home">
+    <header>
+      <div class="hd-logo">
+        <{widgets id="wap_logo"}>
+      </div>
+      <div class="hd-search">
+        <{widgets id="wap_search"}>
+      </div>
+      <div class="hd-menu">
+        <{widgets id="wap_catlist"}>
+      </div>
+    </header>
+
+    <!-- nav -->
+    <nav class="nav" id="nav">
+      <{widgets id="wap_nav"}>
+    </nav>
+
+    <div id="slider" class="ui-slider">
+      <{widgets id="wap_top_slider"}>
+    </div>
+
+    <div id="main" class="main">
+      <section class="floor half">
+        <{widgets id="wap_section-1"}>
+      </section>
+      <section class="floor">
+        <{widgets id="wap_section-2"}>
+      </section>
+      <section class="floor">
+        <{widgets id="wap_section-3"}>
+      </section>
+      <section class="hot floor" id="hotsale">
+        <{widgets id="wap_section-4"}>
+      </section>
+      <section class="hot floor" id="hotshop">
+        <{widgets id="wap_section-5"}>
+      </section>
+      <section class="floor" id="catalog">
+        <{widgets id="wap_section-6"}>
+      </section>
+    </div>
+    <div id="gotop"></div>
+  </div>
+  <{require file="block/footer.html"}>
+
+</body>
+</html>
+<script>
+  echo.init();
+  // Echo.init({
+  //   offset: 0, //离可视区域多少像素的图片可以被加载
+  //   throttle: 0 //图片延迟多少毫秒加载
+  // });
+</script>
+";}
+a:9:{s:2:"id";i:35;s:8:"platform";s:3:"wap";s:8:"filename";s:12:"default.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:20:"wapmall:default.html";s:7:"version";i:1532414120;s:5:"theme";s:7:"wapmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:363:"<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<{header app=topm}>
+<link rel="stylesheet" href="images/index.css">
+</head>
+<body>
+  <{require file="block/header.html"}>
+  <{main}>
+  <{require file="block/footer.html"}>
+</body>
+<script>
+  echo.init();
+</script>
+</html>
+";}
+a:9:{s:2:"id";i:36;s:8:"platform";s:3:"wap";s:8:"filename";s:12:"product.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:20:"wapmall:product.html";s:7:"version";i:1532414120;s:5:"theme";s:7:"wapmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:290:"<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<{header app=topm}>
+<link rel="stylesheet" href="images/index.css">
+</head>
+<body>
+  <{require file="block/header.html"}>
+  <{main}>
+</body>
+</html>
+";}
+a:9:{s:2:"id";i:37;s:8:"platform";s:3:"wap";s:8:"filename";s:16:"order_index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:24:"wapmall:order_index.html";s:7:"version";i:1532414120;s:5:"theme";s:7:"wapmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:290:"<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<{header app=topm}>
+<link rel="stylesheet" href="images/index.css">
+</head>
+<body>
+  <{require file="block/header.html"}>
+  <{main}>
+</body>
+</html>
+";}
+a:9:{s:2:"id";i:38;s:8:"platform";s:3:"wap";s:8:"filename";s:13:"passport.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:21:"wapmall:passport.html";s:7:"version";i:1532414120;s:5:"theme";s:7:"wapmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:329:"<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<{header app=topm}>
+<link rel="stylesheet" href="images/index.css">
+</head>
+<body>
+  <{require file="block/header.html"}>
+  <{main}>
+  <{require file="block/footer.html"}>
+</body>
+</html>
+";}
+a:9:{s:2:"id";i:39;s:8:"platform";s:3:"wap";s:8:"filename";s:9:"cart.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:17:"wapmall:cart.html";s:7:"version";i:1532414120;s:5:"theme";s:7:"wapmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:290:"<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<{header app=topm}>
+<link rel="stylesheet" href="images/index.css">
+</head>
+<body>
+  <{require file="block/header.html"}>
+  <{main}>
+</body>
+</html>
+";}
+a:9:{s:2:"id";i:40;s:8:"platform";s:3:"wap";s:8:"filename";s:17:"order_detail.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:25:"wapmall:order_detail.html";s:7:"version";i:1532414120;s:5:"theme";s:7:"wapmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:290:"<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<{header app=topm}>
+<link rel="stylesheet" href="images/index.css">
+</head>
+<body>
+  <{require file="block/header.html"}>
+  <{main}>
+</body>
+</html>
+";}
+a:9:{s:2:"id";i:41;s:8:"platform";s:3:"wap";s:8:"filename";s:19:"activity_index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:27:"wapmall:activity_index.html";s:7:"version";i:1532414120;s:5:"theme";s:7:"wapmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:2012:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <{header app=topm}>
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+  <body class="main">
+    <{require file="block/header.html"}>
+
+    <div class="shop">
+      <header>
+        <div class="list-hd">
+          <div class="backto icon-back ">
+            <input type="button" name="returnBcak" onclick="history.back()">
+          </div>
+          <div class="tit">活动首页</div>
+          <div class="menu">
+            <button class="btn icon-more" id="menu"></button>
+          </div>
+        </div>
+      </header>
+      <script type="text/javascript">
+        $('#menu').dropmenu({
+          content:
+            [
+              {
+                text: '首页',
+                icon: 'home',
+                href: '<{url action=topm_ctl_default@index}>'
+              },
+
+              {
+                text: '商品类目',
+                icon: 'catalog',
+                href: '<{url action=topm_ctl_category@index}>'
+              },
+
+              {
+                text: '购物车',
+                icon: 'barrow',
+                href: '<{url action=topm_ctl_cart@index}>'
+              },
+
+              {
+                text: '会员中心',
+                icon: 'man',
+                href: '<{url action=topm_ctl_member@index}>'
+              },
+            ]
+        });
+
+        $(window).scroll(function(){
+          if(! $('.ui-dropmenu.ui-in').length == 0 ){
+            $('.ui-dropmenu').removeClass('ui-in');
+          }
+        });
+
+      </script>
+
+      <div id="slider" class="ui-slider">
+        <{widgets id="wap_activity_slider"}>
+      </div>
+      <div class="team-buying-head-ad">
+        <div class="ad-item"><{widgets id="wap_tg_ag_01"}></div>
+        <div class="ad-item"><{widgets id="wap_tg_ag_02"}></div>
+      </div>
+    </div>
+    <{main}>
+    <{require file="block/footer.html"}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:42;s:8:"platform";s:2:"pc";s:8:"filename";s:23:"activity_index-(1).html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:30:"ecmall:activity_index-(1).html";s:7:"version";i:1533195871;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:587:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div class="wrap-lg purchase-view clearfix">
+      <div class="purchase-banner">
+        <{widgets id="activity_slider"}>
+      </div>
+      <div class="col-lg-4 banner-ad">
+        <{widgets id="activity_advertising"}>
+      </div>
+    </div>
+    <div id="main" class="main purchase-main">
+      <{main}>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:43;s:8:"platform";s:2:"pc";s:8:"filename";s:11:"topics.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:18:"ecmall:topics.html";s:7:"version";i:1533196865;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:1509:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/swiper.css">
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+
+  <body>
+    <{require file="block/header.html"}>
+    <!-- 主内容区 -->
+    <div id="main" class="main channel module-mg-small">
+      <div class="wrap-lg">
+        <div class="section">
+          <div class="row">
+            <div class="col-lg-3 sidebar">
+              <{widgets id="channel_category"}>
+            </div>
+            <div class="col-lg-10 box">
+              <{widgets id="main_focus"}>
+            </div>
+            <div class="col-lg-3 box">
+              <{widgets id="banners"}>
+              <div class="notice">
+                <{widgets id="banners-1"}>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+            <{widgets id="floor-5"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-6"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-1"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-2"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-3"}>
+        </div>
+      </div>
+    </div>
+    <script src="images/swiper.js"></script>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function() {
+    $('img.imglazyload').lazyload({
+      effect: "fadeIn"
+    });
+  })
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:44;s:8:"platform";s:2:"pc";s:8:"filename";s:10:"index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:17:"ecmall:index.html";s:7:"version";i:1533196865;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:4205:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/swiper.css">
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+
+  <body class="is-index">
+    <{require file="block/header.html"}>
+    <!-- 主内容区 -->
+    <div class="seaview">
+      <div class="wrap-lg">
+        <div class="fl lf-cat"><{widgets id="left_cat"}></div>
+        <div class="fl full-slider">
+          <{widgets id="main_focus"}>
+        </div>
+        <div class="fr fr-ad"><{widgets id="fr_ad"}></div>
+      </div>
+    </div>
+    <div id="main" class="main index">
+      <div class="wrap-lg">
+          <div class="clearfix module">
+            <div class="fl flash-cont">
+              <{widgets id="flash_shoping"}>
+            </div>
+            <div class="fr r-ad">
+              <{widgets id="flash_ads"}>
+            </div>
+          </div>
+          <!-- floor1 -->
+          <div class="clearfix section-item">
+            <div class="items new">
+              <div class="section-title">
+                <{widgets id="section_title1"}>
+              </div>
+              <{widgets id="new_good"}>
+            </div>
+            <div class="items good">
+              <div class="section-title">
+                <{widgets id="section_title2"}>
+              </div>
+              <{widgets id="good_pro"}>
+            </div>
+            <div class="items coupons">
+              <div class="section-title">
+                <{widgets id="section_title3"}>
+              </div>
+              <{widgets id="get_coupon"}>
+            </div>
+          </div>
+          <!-- floor2 -->
+          <div class="foor-title"><{widgets id="floor_title1"}></div>
+          <div class="clearfix section-item floor">
+            <div class="items full-ad"><{widgets id="fashion_left"}></div>
+            <div class="items">
+              <div class="section-title">
+                  <{widgets id="section_title4"}>
+              </div>
+              <{widgets id="fashion_mid"}>
+              </div>
+            <div class="items">
+              <div class="section-title">
+                <{widgets id="section_title5"}>
+              </div>
+              <{widgets id="fashion_right"}></div>
+          </div>
+          <!-- floor3 -->
+          <div class="foor-title"><{widgets id="floor_title2"}></div>
+          <div class="clearfix section-item floor">
+            <div class="items no-padding"><{widgets id="fashion_left2"}></div>
+            <div class="items no-padding goods-list">
+              <{widgets id="fashion_mid2"}>
+              </div>
+            <div class="items full-ad">
+              <{widgets id="fashion_right2"}></div>
+          </div>
+          <!-- floor3 -->
+          <div class="foor-title"><{widgets id="floor_title3"}></div>
+          <div class="clearfix section-item floor">
+            <div class="items full-ad"><{widgets id="fashion_left3"}></div>
+            <div class="items">
+              <div class="section-title">
+                  <{widgets id="section_title6"}>
+              </div>
+              <{widgets id="fashion_mid3"}>
+             </div>
+            <div class="items three-ad">
+              <div class="section-title">
+                  <{widgets id="section_title7"}>
+              </div>
+              <{widgets id="fashion_right3"}>
+            </div>
+          </div>
+          <!-- floor4 -->
+          <div class="clearfix section-item floor">
+            <div class="items no-padding"><{widgets id="fashion_left4"}></div>
+            <div class="items no-padding goods-list">
+              <{widgets id="fashion_mid4"}>
+              </div>
+            <div class="items full-ad">
+              <{widgets id="fashion_right4"}></div>
+          </div>
+          <div class="all-goods">
+            <{widgets id="all_goods"}>
+          </div>
+      </div>
+    </div>
+  <script src="images/swiper.js"></script>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:45;s:8:"platform";s:2:"pc";s:8:"filename";s:12:"default.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:19:"ecmall:default.html";s:7:"version";i:1533196865;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:610:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header2.html"}>
+    <div id="main" class="main clearfix" style="padding: 20px 0;">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:46;s:8:"platform";s:2:"pc";s:8:"filename";s:14:"promotion.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:21:"ecmall:promotion.html";s:7:"version";i:1533196865;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:584:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div id="main" class="main clearfix">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:47;s:8:"platform";s:2:"pc";s:8:"filename";s:15:"topics-(1).html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:22:"ecmall:topics-(1).html";s:7:"version";i:1533196865;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:1509:"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/swiper.css">
+    <link rel="stylesheet" href="images/index.css">
+  </head>
+
+  <body>
+    <{require file="block/header.html"}>
+    <!-- 主内容区 -->
+    <div id="main" class="main channel module-mg-small">
+      <div class="wrap-lg">
+        <div class="section">
+          <div class="row">
+            <div class="col-lg-3 sidebar">
+              <{widgets id="channel_category"}>
+            </div>
+            <div class="col-lg-10 box">
+              <{widgets id="main_focus"}>
+            </div>
+            <div class="col-lg-3 box">
+              <{widgets id="banners"}>
+              <div class="notice">
+                <{widgets id="banners-1"}>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+            <{widgets id="floor-5"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-6"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-1"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-2"}>
+        </div>
+        <div class="section">
+          <{widgets id="floor-3"}>
+        </div>
+      </div>
+    </div>
+    <script src="images/swiper.js"></script>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function() {
+    $('img.imglazyload').lazyload({
+      effect: "fadeIn"
+    });
+  })
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:48;s:8:"platform";s:2:"pc";s:8:"filename";s:23:"activity_index-(1).html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:30:"ecmall:activity_index-(1).html";s:7:"version";i:1533196865;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:587:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div class="wrap-lg purchase-view clearfix">
+      <div class="purchase-banner">
+        <{widgets id="activity_slider"}>
+      </div>
+      <div class="col-lg-4 banner-ad">
+        <{widgets id="activity_advertising"}>
+      </div>
+    </div>
+    <div id="main" class="main purchase-main">
+      <{main}>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:49;s:8:"platform";s:2:"pc";s:8:"filename";s:15:"shopcenter.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:22:"ecmall:shopcenter.html";s:7:"version";i:1533196865;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:286:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/shop-header.html"}>
+
+    <{main}>
+
+    <{require file="block/footer.html"}>
+  </body>
+</html>
+";}
+a:9:{s:2:"id";i:50;s:8:"platform";s:2:"pc";s:8:"filename";s:13:"passport.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:20:"ecmall:passport.html";s:7:"version";i:1533196865;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:434:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body class="login-panel">
+    <{require file="block/passport_header.html"}>
+    <{main}>
+    <{require file="block/passport_footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:51;s:8:"platform";s:2:"pc";s:8:"filename";s:9:"cart.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:16:"ecmall:cart.html";s:7:"version";i:1533196865;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:628:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header2.html"}>
+    <div id="main" class="main clearfix" style="padding: 20px 0; background: #fff;">
+      <div class="wrap-lg">
+        <div class="bread-crumbs">
+          <{widgets id="bread_crumbs"}>
+        </div>
+        <{main}>
+      </div>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+  <script>
+  $(function(){
+    $("img.imglazyload").lazyload({
+         effect : "fadeIn"
+     });
+  });
+  </script>
+</html>
+";}
+a:9:{s:2:"id";i:52;s:8:"platform";s:2:"pc";s:8:"filename";s:19:"activity_index.html";s:8:"filetype";s:4:"html";s:7:"fileuri";s:26:"ecmall:activity_index.html";s:7:"version";i:1533196865;s:5:"theme";s:6:"ecmall";s:4:"memo";s:12:"模板文件";s:7:"content";s:587:"<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <{header app=topc}>
+    <link rel="stylesheet" href="images/index.css" />
+  </head>
+  <body>
+    <{require file="block/header.html"}>
+    <div class="wrap-lg purchase-view clearfix">
+      <div class="purchase-banner">
+        <{widgets id="activity_slider"}>
+      </div>
+      <div class="col-lg-4 banner-ad">
+        <{widgets id="activity_advertising"}>
+      </div>
+    </div>
+    <div id="main" class="main purchase-main">
+      <{main}>
+    </div>
+    <{require file="block/footer.html"}>
+  </body>
+</html>
+";}

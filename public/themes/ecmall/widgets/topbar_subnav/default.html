@@ -1,0 +1,15 @@
+<div class="subnav">
+	<div class="member-cont">
+		<a href="<{url action=topc_ctl_member@index}>" class="mb">会员中心</a>
+		<div class="sub">
+  			<a href="<{url action=topc_ctl_member_trade@tradeList}>">我的订单</a>
+  			<a href="<{url action=topc_ctl_member@itemsCollect}>">我的收藏</a>
+  			<a href="<{url action=topc_ctl_member_point@point}>">我的积分</a>
+  		</div>
+  </div>
+  <a href="<{url action=topshop_ctl_index@index}>">商家中心</a>
+  <!-- <a href="#">帮助中心</a> -->
+  <a href="<{url action=topc_ctl_member_trade@tradeList}>">我的订单</a>
+  <{impc type='shop' shop_id='platform' content="联系我们"}>
+  <a href="#" class="m-qrcode">APP商城<div class="qrcode-show"><img src="<{$data.qrCodeData}>">扫一扫去下载</div></a>
+</div>

@@ -1,0 +1,141 @@
+<style>
+.tableform .division td{
+    padding-top: 8px;
+}
+
+</style>
+    <div class="tableform">
+        <div class="division" style="position:static;">
+            <h3><{t}>账号信息<{/t}></h3>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0"  class="shop-setting">
+                <tr>
+                    <th><{t}>手机号<{/t}>：</th>
+                    <td><{$account.mobile}></td>
+                </tr>
+                
+            </table>
+        </div>
+        <div class="division" style="position:static;">
+            <h3><{t}>店铺资料<{/t}></h3>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0"  class="shop-setting">
+                <tr>
+                    <th><{t}>店铺名<{/t}>：</th>
+                    <td><{$user.shopname}></td>
+                </tr>
+                <tr>
+                    <th><{t}>姓名<{/t}>：</th>
+                    <td><{$user.shopusername}></td>
+                </tr>
+                <tr>
+                    <th><{t}>地址<{/t}>：</th>
+                    <td><{$user.shoparea}></td>
+                </tr>
+                <tr>
+                    <th><{t}>详细地址<{/t}>：</th>
+                    <td><{$user.shopaddr}></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="division" style="position:static;">
+            <h3><{t}>审核记录<{/t}></h3>
+            <div class="tableform">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="gridlist">
+                    <thead>
+                        <tr>
+                            <th style="width:200px;"><{t}>审核时间<{/t}></th>
+                            <th style="width:200px;"><{t}>审核结果<{/t}></th>
+                            <th><{t}>拒绝原因<{/t}></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <{foreach from=$examineLog item=loginfo}> 
+                    <tr>
+                        <td><{$loginfo['time']|cdate:FDATE_STIME}></td>
+                        <{if $loginfo['check_status'] =='1'}>
+                        <td>审核通过</td>
+                        <{/if}>
+                        <{if $loginfo['check_status'] =='2'}>
+                        <td>审核驳回</td>
+                        <{/if}>
+                        <td><{$loginfo['reason']}>&nbsp;</td>
+                    </tr>
+                    <{/foreach}>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <{if $examine_setting}>
+            <{if $account.check_status == "0"}>
+            <div class="table-action">
+                <{button id="action-agree" class="button" target="{update:'messagebox'}" label="审批通过"}>
+                <{button id="action-refuse-dialog" class="button" label="审批驳回"}>
+            </div>
+            <{/if}>
+        <{/if}>
+    </div>
+
+<script>
+    var approve_url = "?app=sysuser&ctl=admin_check&act=approve&user_id=<{$account.user_id}>";
+    var refuse_url = "?app=sysuser&ctl=admin_check&act=refuse&user_id=<{$account.user_id}>&finder_id=<{$env.get.finder_id}>&mobile=<{$account.mobile}>";
+
+    if($('action-refuse-dialog')){
+        $('action-refuse-dialog').addEvent('click',function(e){
+            e.stop();
+            new Dialog(
+                refuse_url,
+                {
+                    modal:true,
+                    height:220,
+                    width:360,
+                    ajaks: false,
+                    ajaksable: false,
+                    title:'<{t}>填写审核驳回原因<{/t}>'
+                }
+            );
+        })
+    }
+
+    function getflag(singlepage){
+        var reg = new RegExp("(^|&)"+ singlepage +"=([^&]*)(&|$)" );
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)
+        var $flag = true;
+        
+    }
+
+    if($('action-agree')){
+        $('action-agree').addEvent('click',function(e){
+            var flag = false;
+            var url = window.location.href;
+            if(url.indexOf("singlepage") == -1){
+                var flag = true;
+            }else{
+                var flag = false;
+            }
+            e.stop();
+            var cfm_str = '确认审核通过？';
+            if(cfm_str&&!confirm(cfm_str)){ return; }
+            new Request.JSON({
+                url:approve_url,
+                method:'post',
+                data:'user_id=<{$account.user_id}>&check_status=1&mobile=<{$account.mobile}>',
+                onComplete:function(rs){
+                    if(rs.success){
+                        MessageBox.success(rs.success);
+                        if(flag){
+                            window.finderGroup['<{$env.get.finder_id}>'].refresh();
+                            window.close();
+                        }else{
+                            window.opener.finderGroup['<{$env.get.finder_id}>'].refresh();
+                            window.close();
+                        }
+                    }else{
+                        MessageBox.error(rs.error);
+                    }
+                }
+            }).send();
+        });
+    }
+
+</script>

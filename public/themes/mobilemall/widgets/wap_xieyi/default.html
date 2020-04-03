@@ -1,0 +1,32 @@
+<div id="xieyi_wap" class="shopex-popover shopex-popover-action xieyi-box shopex-popover-bottom" >
+  <i class="bbc-icon bbc-icon-error btn-modal-close" onclick="shopex('#xieyi_wap').popover('hide');"></i>
+  <div class="bbc-popover-modal goods-sku-modal">
+
+    <!--阶梯价格-->
+    <div id="xieyibox" class="text-box shopex-off-canvas-wrap">
+      <div class="shopex-scroll">
+        <div class="t">
+          <{$setting.title}>
+        </div>
+        <div class="b">
+          <{$setting.text}>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="button" id="zdl">知道了</div>
+
+  </div>
+</div>
+<script>
+  shopex('#xieyibox').scroll();
+  if(!localStorage.getItem('xieyi')){
+    shopex('#xieyi_wap').popover('show')
+  }
+
+  $('#zdl').on('click',function () {
+    shopex('#xieyi_wap').popover('hide')
+    localStorage.setItem('xieyi',1)
+  })
+</script>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <{header app=topwap}>
+  <{if !$env.get.ctl=="admin_theme_widget"}>
+  <script src="images/drp.js"></script>
+  <{/if}>
+  <link rel="stylesheet" href="images/lanyi.css">
+</head>
+<body style="background: #fff">
+<{main}>
+<{widgets id="xieyi"}>
+<div <{if !$env.get.ctl=="admin_theme_widget"}>style="display:none"<{/if}>><{footer app=topwap}>
+</div>
+</body>
+</html>

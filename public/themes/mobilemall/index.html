@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<{if !$env.get.ctl=="admin_theme_widget"}>
+
+<{/if}>
+  <head>
+
+
+    <{header app=topwap}>
+    <link rel="stylesheet" href="images/lanyi.css">
+  </head>
+
+  <!--首页头部-->
+  <body class="has-footer">
+    <{require file="block/header.html"}>
+    <!--首页顶部轮播-->
+    <section class="container-box">
+    <{widgets id="wap_top_slider"}>
+
+    <!--首页导航-->
+    <{widgets id="wap_nav_label"}>
+
+    <!--楼层-->
+    <{widgets id="wap_floor"}>
+    <!-- 商品类型 -->
+    <{widgets id="wap_goods_type"}>
+    <!-- 猜你喜欢商品 -->
+    <{widgets id="wap_like_goods_item"}>
+    <{main app=topwap}>
+  </section>
+  <{require file="block/footer.html"}>
+</body>
+</html>

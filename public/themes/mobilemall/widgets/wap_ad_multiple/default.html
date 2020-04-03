@@ -1,0 +1,18 @@
+<dl class="ly-index-cat <{$setting.class}>" id="multiple_<{$widgets_id}>">
+	<{if $setting.title}><dt class="ly-title"><{$setting.title}></dt><{/if}>
+	<dd>
+		<ul class="clearfix">
+		    <{foreach from=$setting.pic item=parent key=parentId name=morepic}>
+			<li class="item-<{$env.foreach.morepic.iteration}>"><a <{if $parent.tg}>target="_blank"<{/if}> href="<{$parent.linktarget}>">
+				<span><img src="<{$parent.link}>" width="<{$parent.width}>" height="<{$parent.height}>" title="<{$parent.linkinfo}>"/>
+					<{if $parent.bq}><i><{$parent.bq}></i><{/if}>
+				</span>
+					<{if $setting.show_market}><em><{$parent.linkinfo}></em><{/if}>
+				</a>
+			</li>
+			   <{/foreach}>
+		</ul>
+	</dd>
+</dl>
+
+

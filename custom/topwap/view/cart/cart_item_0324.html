@@ -1,0 +1,179 @@
+
+
+<{if $goods.obj_type=='item'}>
+<li>
+  
+
+  <div class="thumbnail">
+    <div class="thumb-img">
+      <a href="<{url action=topwap_ctl_item_detail@index item_id=$goods.item_id}>"><img src="<{$goods.image_default_id|default:$defaultImageId.S.default_image|storager:t}>" alt=""></a>
+    </div>
+    <div class="caption">
+      <div class="order-goods-info">
+        <div class="order-goods-title">
+          <{if $goods.activityDetail}>
+          <a href="<{url action=topwap_ctl_activity@detail id=$goods.activityDetail.activity_info.activity_id}>" data-id="<{$group.activity_id}>">
+            <span class="tag"><{$goods.activityDetail.activity_info.activity_tag}></span>
+          </a>
+          <{/if}>
+          <a href="<{url action=topwap_ctl_item_detail@index item_id=$goods.item_id}>"><{$goods.title}></a>
+        </div>
+        <div>
+          <{if $goods.mini_quantity}>
+          <span style="vertical-align: middle;margin-right: 15px;font-size: 12px"><{$goods.mini_quantity}>件起批</span>
+          <{/if}>
+          <{if $goods.step_price}><!--阶梯价格-->
+          <a href="#goods_<{$goods.cart_id}>"style="vertical-align: baseline; font-size: 0.6rem;color: #FF3D91;text-decoration: underline "  type="" style>查看阶梯价格</a>
+          <div id="goods_<{$goods.cart_id}>" class="shopex-popover shopex-popover-action goods-price-list-box shopex-popover-bottom">
+            <div class="bbc-popover-modal goods-sku-modal">
+              <i class="bbc-icon bbc-icon-error btn-modal-close" onclick="shopex('#goods_<{$goods.cart_id}>').popover('hide');"></i>
+              <{if $goods.step_price}><!--阶梯价格-->
+              <div class="price-box">
+                <table>
+                  <thead>
+                  <tr>
+                    <td>数量</td>
+                    <td>单价</td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <{foreach from=$goods.step_price item=promitem key=key}>
+                  <{assign var=mykey value="k{$key}"}>
+                  <tr class=" <{if $goods.step_price_cur==$mykey}>selected<{/if}> >">
+                    <td>
+                      <{$promitem.f}>-<{$promitem.e}>
+                    </td>
+                    <td>
+                      <{$promitem.p|cur}>
+                    </td>
+                  </tr>
+                  <{/foreach}>
+                  </tbody>
+                </table>
+              </div>
+              <{/if}>
+            </div>
+          </div>
+          <{/if}>
+        </div>
+
+        <div class="order-goods-price">
+          <!--优惠活动-->
+          <{if $goods.promotions}>
+          <a href="#promotion" class="promotion-select" style="vertical-align: middle;color: #FF3D91;border-color: #FF3D91" data-id="<{$goods.item_id}>"  data-skuid="<{$goods.sku_id}>">
+            <{if $goods.selected_promotion==0}>
+            <div class="shopex-ellipsis"><span>不使用活动优惠</span> <i class="bbc-icon bbc-icon-arrow-down"></i></div>
+            <input type="hidden" name="promotionid[<{$goods.cart_id}>]" value="0">
+            <{else}>
+            <div><span><{$goods.promotions[$goods.selected_promotion].promotion_name}></span> <i class="bbc-icon bbc-icon-arrow-down"></i></div>
+            <input type="hidden" name="promotionid[<{$goods.cart_id}>]" value="<{$goods.promotions[$goods.selected_promotion].promotion_id}>">
+            <{/if}>
+          </a>
+          <{/if}>
+          <!-- 运费展示 -->
+          <{if $goods.freeConf}>
+          <span style="margin-left: 10px;color: #999; height: 1.5rem;line-height: 1.5rem;font-size: 10px"><{img src="mian@2x.png" app=topwap alt=""  style="width: 15px;vertical-align: middle;margin-right: 5px;margin-bottom: 3px"}>免运费</span>
+          <{/if}>
+
+        </div>
+        
+        <!-- <div class="order-goods-num-control">
+          <div class="shopex-numbox bbc-numbox" data-numbox-min="1" data-numbox-max="<{$goods.store}>">
+            <button class="shopex-btn shopex-btn-numbox-minus" type="button">-</button>
+            <input id="test" name="cart_num[<{$goods.cart_id}>]" class="action-modify shopex-input-numbox" type="number" value="<{$goods.quantity}>">
+            <button class="shopex-btn shopex-btn-numbox-plus" type="button">+</button>
+          </div>
+          <div class="bbc-numbox shoex-numbox-txt" style="display:none;">x<span><{$goods.quantity}></span></div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <ul class="order-goods-list2">
+  <{foreach from=$goods.cart_item_list item=cart_item key=key}>
+    <!-- <{$cart_item.title}> -->
+
+      <li>
+          <div class="shopex-checkbox bbc-checkbox shop-item-checkbox">
+            <label><input type="hidden" name="cart_id[<{$cart_item.cart_id}>]" value="<{if $cart_item.is_checked}>1<{else}>0<{/if}>"></label>
+            <input type="checkbox" data-name="cart_id[<{$cart_item.cart_id}>]" data-validate="onerequired" data-cartid="<{$cart_item.cart_id}>" <{if $cart_item.is_checked}>checked<{/if}>>
+          </div>
+          <div class="goods-detail-info">
+            <p><span><{if $cart_item.spec_info}><{$cart_item.spec_info}><{/if}> </span></p>
+            <p class="goods-single-price"><{$cart_item.price.price|cur}>/<{$cart_item.unit}></p>
+          </div>
+          <div class="order-goods-num-control" >
+            <div class="shopex-numbox bbc-numbox" data-numbox-min="1" data-numbox-max="<{$cart_item.store}>">
+              <button class="shopex-btn shopex-btn-numbox-minus" type="button">-</button>
+              <input id="test" name="cart_num[<{$cart_item.cart_id}>]" class="action-modify shopex-input-numbox" type="number" value="<{$cart_item.quantity}>">
+              <button class="shopex-btn shopex-btn-numbox-plus" type="button">+</button>
+            </div>
+            <div class="bbc-numbox shoex-numbox-txt" style="display:none;">x<span><{$cart_item.quantity}></span></div>
+            <{if $cart_item.is_checked && $goods.totalQuantity < $cart_item.mini_quantity}>
+              <p class="num_tips" style="text-align: center;color: #ff3d91;font-size: 12px;margin-top: 2px;">
+                数量不满足起批条件
+              </p>
+          <{/if}>
+          </div>
+      </li>
+  <{/foreach}>
+  </ul>
+  <{if $goods.gift}>
+  <div class="gift-list">
+    <{foreach from=$goods.gift.gift_item item=giftitem}>
+    <div class="gift-item fonts font-gray-40">
+      <div class="gift-name shopex-ellipsis"><span style="color: #666">【赠品】</span><{$giftitem.title}>&nbsp;&nbsp; <{$giftitem.spec_info}></div>
+      <{if $giftitem.realStore == 0}>
+      <div class="content-right font-red">无库存</div>
+      <{else}>
+      <div class="content-right">x<{$giftitem.gift_num}></div>
+      <{/if}>
+    </div>
+    <{/foreach}>
+  </div>
+  <{/if}>
+</li>
+<{/if}>
+
+
+<{if $goods.obj_type=='package'}>
+<li>
+  <div class="fontS font-gray-40 content-bottom-padded"><span class="tag tag-outline">组合</span> <{$goods.title}></div>
+  <div class="thumbnail">
+    <div class="shopex-checkbox bbc-checkbox shop-item-checkbox">
+      <label><input type="hidden" name="cart_id[<{$goods.cart_id}>]" value="<{if $goods.is_checked}>1<{else}>0<{/if}>"></label>
+      <input type="checkbox" data-name="cart_id[<{$goods.cart_id}>]" data-cartid="<{$goods.cart_id}>" <{if $goods.is_checked}> checked <{/if}> >
+    </div>
+    <div class="package-goods-group">
+      <{foreach from=$goods.skuList item=skuList}>
+      <div class="package-goods-item">
+        <div class="thumb-img">
+          <a href="<{url action=topwap_ctl_item_detail@index item_id=$goods.item_id}>"><img src="<{$skuList.image_default_id|storager:t}>" alt=""></a>
+        </div>
+        <div class="caption">
+          <div class="order-goods-info">
+            <div class="order-goods-title">
+              <a href="<{url action=topwap_ctl_item_detail@index item_id=$skuList.item_id }>"><{$skuList.title}></a>
+            </div>
+            <div class="order-goods-sku"><{if $skuList.spec_info}><{$skuList.spec_info}><{/if}></div>
+            <div class="order-goods-price content-right">
+              <p><mark><{$skuList.price.price|cur}></mark></p>
+              <p><span class="fonts font-gray-40 original-price"><{$skuList.price.old_price|cur}></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <{/foreach}>
+      <div class="package-goods-num-control content-right">
+        <div class="shopex-numbox bbc-numbox" data-numbox-min="1" data-numbox-max="<{$goods.store}>">
+          <button class="shopex-btn shopex-btn-numbox-minus" type="button">-</button>
+          <input id="test" name="cart_num[<{$goods.cart_id}>]" class="action-modify shopex-input-numbox" type="number" value="<{$goods.quantity}>">
+          <button class="shopex-btn shopex-btn-numbox-plus" type="button">+</button>
+        </div>
+        <div class="bbc-numbox shoex-numbox-txt" style="display:none;">x<span><{$goods.quantity}></span></div>
+      </div>
+    </div>
+  </div>
+</li>
+<{/if}>
+
+

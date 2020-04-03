@@ -1,0 +1,81 @@
+<form id="lotteryForm" action="?app=sysuser&ctl=admin_user&act=saveAdd"  method="POST" class="lottery-box">
+  <div class="tableform">
+    <div class="division">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <th><{t}>公司名称：<{/t}></th>
+          <td><input type="text" name="company_name" size=30 vtype="required" value="<{$lottery_name}>" maxlength='20'><em><font color='red'>*</font></em></td>
+        </tr>    
+		<tr>
+          <th><{t}>联系人姓名：<{/t}></th>
+          <td><input type="text" name="touch_name" size=30 vtype="required" value="<{$lottery_name}>" maxlength='20'><em><font color='red'>*</font></em></td>
+        </tr>	
+		<tr>
+          <th><{t}>手机号：<{/t}></th>
+          <td><input type="text" name="mobile" size=30 vtype="required&&mobile" value="<{$lottery_name}>" maxlength='20'><em><font color='red'>*</font></em></td>
+        </tr>
+		<tr>
+          <th><{t}>会员等级：<{/t}></th>
+          <td>
+              <select name="grade_id" class="form-control">
+                <{foreach from=$grade item=shopdata key=key}>
+                <option value="<{$shopdata.grade_id}>"><{$shopdata.grade_name}></option>
+                <{/foreach}>
+              </select>
+			<em><font color='red'>*</font></em></td>
+        </tr>		
+		<tr>
+          <th><{t}>营业执照：<{/t}></th>
+          <td><{input type="image" name="business_img" vtype="required" width=40 height=40}><span class="notice-inline">
+              <{t}>请上传营业执照。<{/t}></span><em><font color='red'>*</font></em></td>
+        </tr>
+		<tr>
+          <th><{t}>地址：<{/t}></th>
+          <td><{input type="area" name="addr" vtype="required" size=30 }><em><font color='red'>*</font></em></td>
+        </tr>	
+		<tr>
+          <th><{t}>用户名：<{/t}></th>
+          <td><{input type="text" name="pam_user[account]" vtype="required" size=30 }><em><font color='red'>*</font></em></td>
+        </tr>	
+		<tr>
+          <th><{t}>登录密码：<{/t}></th>
+          <td><{input type="password" name="pam_user[password]" vtype="required" size=30 }><em><font color='red'>*</font></em></td>
+        </tr>	
+		<tr>
+          <th><{t}>确认登录密码：<{/t}></th>
+          <td><{input type="password" name="pam_user[pwd_confirm]" vtype="required" size=30 }><em><font color='red'>*</font></em></td>
+        </tr>
+      </table>
+    </div>
+    <div class="table-action">
+      <{button type="submit" id='lottery_form_submit' label="保存"|t:'syscategory'}>
+    </div>
+  </div>
+</form>
+
+<script>
+  var _form = $('lotteryForm');
+  var btn =$('lottery_form_submit');
+  var finder = finderGroup['<{$env.get._finder.finder_id}>'];
+
+  _form.store('target',{
+    onSuccess:function(response){
+      var hash_res_obj = JSON.decode(response);
+      if (hash_res_obj.success != undefined && hash_res_obj.success != ""){
+        try{
+          var _dialogIns = btn.getParent('.dialog').retrieve('instance');
+        }catch(e){}
+
+        if(_dialogIns){
+
+          _dialogIns.close();
+          window.finderGroup['<{$env.get._finder.finder_id}>'].refresh();
+        }
+      }
+    }
+  });
+  var maxKey = getMaxKey();
+  btn.addEvent('click',function(){
+    _form.fireEvent('submit',{stop:$empty});
+  });
+</script>

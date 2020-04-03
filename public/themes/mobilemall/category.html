@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <{header app=topwap}>
+    <style>
+        .shopex-row.shopex-fullscreen > [class*="shopex-col-"] {
+            height: 100%;
+        }
+
+        .shopex-col-xs-3,
+        .shopex-control-content {
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .shopex-segmented-control .shopex-control-item {
+            line-height: 3rem;
+            width: 100%;
+        }
+
+        .shopex-segmented-control.shopex-segmented-control-inverted .shopex-control-item.shopex-active {
+            background-color: #fff;
+        }
+    </style>
+    <{header app=topwap}>
+    <{if !$env.get.ctl=="admin_theme_widget"}>
+    <script src="images/drp.js"></script>
+    <{/if}>
+    <link rel="stylesheet" href="images/lanyi.css?<{$env.now}>">
+</head>
+<body>
+<div class="ly-header-box cat">
+    <form action="<{url action=topwap_ctl_item_list@index}>" method="post" class="ly-search" style="margin-right: 12px" id="goods_search">
+        <input  type="search" name="search_keywords" class="header-search shopex-input-clear" value="<{$search_keywords}>" placeholder="<{t}>寻找感兴趣的商品<{/t}>">
+        <!--<span class="hd-xiangji"></span>-->
+    </form>
+    <!-- TODO-->
+    <!--<div class="ly-hd-msg">
+        <i class="num">5</i>
+    </div>-->
+</div>
+
+<{main}>
+<{require file="block/footer.html"}>
+<script>
+$('.ly-footer-box a').eq(2).addClass('act').siblings().removeClass('act')
+</script>
+</body>
+</html>

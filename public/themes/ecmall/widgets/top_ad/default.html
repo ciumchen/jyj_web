@@ -1,0 +1,54 @@
+<div class="top-bn drop-banner">
+<span class="drop">展开▼</span>
+<i class="close">x</i>
+  <a href="<{$data.ad_pic_link}>" class="big-pic" target="_blank" style="background:url(<{$data.ad_pic|storager}>) no-repeat center 0;">
+  </a>
+  <a href="<{$data.ad_pic2_link}>" class="small-pic" target="_blank" style="background:url(<{$data.ad_pic2|storager}>) no-repeat center 0;"></a>
+</div>
+<script>
+	$(function(){
+		var $bigPic = $(".top-bn .big-pic"),
+			$smallPic = $(".top-bn .small-pic"),
+			sessionStorage = window.sessionStorage,
+			isActive = sessionStorage.getItem('actived'),
+			isRemoved = sessionStorage.getItem('removed');
+
+        if (isRemoved != 'yes'){
+			if(isActive != 'yes'){
+				$(".top-bn .big-pic").animate({height:'420px'},500,function(){
+					$('.drop').text('收起▲');
+					sessionStorage.setItem('actived','yes');
+				});
+
+				window.setTimeout(function(){
+					$bigPic.animate({height:0},500,function(){
+						$(this).siblings('.drop').text('展开▼');
+					});
+					$smallPic.animate({height:'80px'},500);
+				},4000);
+			}else{
+				$smallPic.height('80px');
+			}
+
+			$('.t-bn .drop').click(function(){
+				var $txt = $('.top-bn .drop').text();
+			     $(this).text($txt == '展开▼' ? '收起▲' : '展开▼');
+			     if($txt == '收起▲'){
+			     	$bigPic.stop().animate({height:'0'},500);
+			     	$smallPic.stop().animate({height:'80px'},500);
+			     }else{
+			     	$bigPic.animate({height:'420px'},500);
+			     	$smallPic.animate({height:'0px'},500);		     }
+			})
+			
+			$('.top-bn .close').click(function(){
+				$('.t-bn .close,.t-bn .drop').hide();
+				that = $(this);
+				that.next().animate({height:0},200,function(){
+					that.parent().remove();
+					sessionStorage.setItem('removed','yes');
+				});
+			})
+		}
+	})
+</script>

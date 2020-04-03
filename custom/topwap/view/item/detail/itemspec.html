@@ -1,0 +1,256 @@
+
+<section class="container no-header" style="padding-bottom:5rem;">
+  <div class="tabs-box">
+      <{if $item[spec_desc] && count($item[spec_desc][1]) > 1}>
+        <div class="tab-top goods-tab">
+            <ul>
+              <{foreach from=$item[spec_desc][1] item=spec_value key=key }>
+                <li class="<{if $key == 0}>act<{/if}>"><span><{$spec_value.spec_value}></span><span class="total-num spec-<{$spec_value.spec_value_id}>" style="display: none;">0</span></li>
+              <{/foreach}>
+            </ul>
+        </div>
+      <{/if}>
+
+      <div class="tab-content" style="padding: .6rem 0">
+          <ul>
+              <{foreach from=$item[sel_sku] item=sel_sku key=key}>
+                <li class="item">
+                  <{foreach from=$sel_sku item=v key=k }>
+                    <div class="goods-item">
+                        <span><{$v.spec_info_2}></span>
+                        <div class="cal-op">
+                            <div class="order-goods-num-control">
+                                <div class="shopex-numbox bbc-numbox" data-numbox-min="0" data-numbox-max="<{$v.realStore}>">
+                                    <button class="shopex-btn shopex-btn-numbox-minus" type="button" disabled="">-</button>
+                                    <input id="test" name="sku_sel_num[<{$v.sku_id}>]" spec-id="<{$v.spec_desc.spec_value_id.1}>" sku-id="<{$v.sku_id}>" rel="sel-input" price="<{$v.price}>" step-price='<{$v.step_price|json_encode}>' class="action-modify shopex-input-numbox sku-sel-input sku-sel-input-<{$v.sku_id}>" type="number" value="0">
+                                    <button class="shopex-btn shopex-btn-numbox-plus" type="button">+</button>
+                                </div>
+                                <div class="bbc-numbox shoex-numbox-txt" style="display:none;">x<span>1</span></div>
+                            </div>
+                            <p>库存：<{$v.realStore}></p>
+                        </div>
+                    </div>
+                  <{/foreach}>
+                </li>
+              <{/foreach}>
+              
+          </ul>
+      </div>
+  </div>
+</section>
+
+
+<section class="bottom-ops">
+  <div class="goods-total">
+      <p>总计采购金额：<span class="total-price">0</span>元</p>
+      <a href="https://www.juyoujie.net/wap/item-detail.html?item_id=478#sku"
+        class="section-list-item">共加入<span class="total-nums">0</span>条 </a>
+  </div>
+  <div class="goods-bottom-op" >
+        <{if $item.valid && $item.realStore > 0}>
+          <{if $nologin!=1}>
+            <div class="add_action">加入进货单</div>
+          <{else}>
+            <div class="add_action">加入进货单</div>
+          <{/if}>
+        <{/if}>
+        <{if !$item.valid }>
+          <div class="bbc-btn-disabled">暂不销售</div>
+        <{/if}>
+        <{if $item.realStore <= 0}>
+          <div class="bbc-btn-disabled notify"  style="background:#ff3598 !important;">到货通知</div>
+        <{/if}>
+  </div>
+</section>
+
+<div id="sku" class="shopex-popover shopex-popover-action shopex-popover-bottom">
+  <div class="bbc-popover-modal goods-sku-modal">
+      <div class="goods-total" style="background-color: #FFF8F8;padding-right: 0">
+          <p>总计采购金额：<span class="total-price">0</span>元</p>
+          <p class="btn-modal-close">共加入<span class="total-nums">0</span>条</p>
+      </div>
+      <div id="skuScroll" class="goods-sku-list" style="overflow-y: scroll;-webkit-overflow-scrolling: touch;">
+          <ul class="goods-edit-list" >
+              <{foreach from=$item[sku] item=v key=k }>
+              <li class="sku-goods-item-<{$v.sku_id}>" style="display:none;">
+                  <div>
+                      <i class="delete-item"
+                         sku-id="<{$v.sku_id}>"></i><span style="line-height: 150%"><{$v.spec_desc.spec_value|implode}></span>
+                  </div>
+                  <div>
+                      <span class="step-show-price-<{$v.sku_id}>"><{$v.price|cur}></span>
+                      <div class="order-goods-num-control">
+                          <div class="shopex-numbox bbc-numbox" data-numbox-min="1"
+                               data-numbox-max="<{$v.realStore}>">
+                              <button class="shopex-btn shopex-btn-numbox-minus" type="button" disabled="">-</button>
+                              <input id="test" name="sku_num[<{$v.sku_id}>]" sku-id="<{$v.sku_id}>" rel="input"
+                                     class="action-modify shopex-input-numbox sku-input-<{$v.sku_id}>" type="number"
+                                     value="0">
+                              <button class="shopex-btn shopex-btn-numbox-plus" type="button">+</button>
+                          </div>
+                          <div class="bbc-numbox shoex-numbox-txt" style="display:none;">x<span>1</span></div>
+                      </div>
+                  </div>
+              </li>
+              <{/foreach}>
+          </ul>
+      </div>
+      <div class="goods-sku-op">
+          <div class="goods-sku-op-item goods-op-buy" style="background-color: #FF3D91;line-height: 45px;font-size: 14px;letter-spacing: .5px;">
+            
+              <{if $item.valid && $item.realStore > 0}>
+                <{if $nologin!=1}>
+                  <div class=" add_action">加入进货单</div>
+                <{else}>
+                  <div class="add_action">加入进货单</div>
+                <{/if}>
+              <{/if}>
+              <{if !$item.valid }>
+                <div class="bbc-btn-disabled">暂不销售</div>
+              <{/if}>
+              <{if $item.realStore <= 0}>
+                <div class="bbc-btn-disabled notify" style="background:#ff3598 !important;">到货通知</div>
+              <{/if}>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+<script>
+
+$(function(){
+    $('.btn-modal-close').on('tap',function(){
+        shopex('#sku').popover('hide');
+    })
+  var setTotal = function(){
+    var totalNums = 0;
+    var totalPrice = 0;
+    var specTotal = [];
+    $('.sku-sel-input').each(function(){
+      var stepPrice = $(this).attr('step-price');
+      stepPrice = stepPrice ? eval('('+ stepPrice +')') : null;
+      
+      var curPrice = parseFloat($(this).attr('price'));
+      var selNums = parseInt($(this).val());
+      var specId = $(this).attr('spec-id');
+      var skuId = $(this).attr('sku-id');
+
+      if (stepPrice){
+        for(let index in stepPrice) {
+          stepItem = stepPrice[index];
+          if (selNums >= stepItem.f && selNums <= stepItem.e) {
+            curPrice = parseFloat(stepItem.p);
+          }
+        }
+      }
+      console.log(curPrice);
+      $('.step-show-price-'+skuId).html('¥' + curPrice.toFixed(2));
+
+      skuPrice = selNums * curPrice;
+      totalPrice += skuPrice;
+      totalNums += selNums;
+
+      if (specId) {
+        if (! specTotal[specId]) {
+          specTotal[specId] = 0;
+        }
+        specTotal[specId] += selNums;
+      }
+    });
+    
+    for(let specIndex in specTotal){
+      $('.spec-' + specIndex).html(specTotal[specIndex])
+      if (specTotal[specIndex] > 0){
+        $('.spec-' + specIndex).show();
+      }else{
+        $('.spec-' + specIndex).hide();
+      }
+    }
+
+    totalPrice = totalPrice.toFixed(2);
+    $('.total-price').html(totalPrice);
+    $('.total-nums').html(totalNums);
+    return {totalPrice: totalPrice, totalNums: totalNums}
+  };
+
+  $('.action-modify').on('change',function () {
+      var skuId = $(this).attr('sku-id');
+      var selNum = $(this).val();
+      var rel = $(this).attr('rel');
+
+      if (rel == 'sel-input'){
+        $('.sku-input-'+skuId).val(selNum);
+        if (selNum > 0){
+          $('.sku-goods-item-'+skuId).show();
+          $('.sku-input-'+skuId).parent().find('.shopex-btn-numbox-minus').removeAttr("disabled");;
+        }else{
+          $('.sku-goods-item-'+skuId).hide();
+        }
+      }else if(rel == 'input') {
+        $('.sku-sel-input-'+skuId).val(selNum);
+        if (selNum > 0){
+          $('.sku-goods-item-'+skuId).show();
+        }else{
+          //$('.sku-goods-item-'+skuId).hide();
+        }
+      }
+      setTotal();
+  });
+
+  $('.delete-item').click(function(){
+    var skuId = $(this).attr('sku-id');
+    $('.sku-input-'+skuId).val(0);
+    $('.sku-sel-input-'+skuId).val(0);
+    $('.sku-goods-item-'+skuId).hide();
+    setTotal();
+  });
+
+  $('.add_action').click(function(){
+    var itemData = [];
+    $('.sku-sel-input').each(function(){
+      var skuId = $(this).attr('sku-id');
+      var selNum = $(this).val();
+      if(selNum > 0) {
+        var item = {
+          sku_id: skuId, 
+          quantity: selNum
+        }
+        itemData.push(item);
+      }
+    });
+
+    if(itemData.length <= 0) {
+      shopex.toast('<{t}>请先选择完整规格<{/t}>');
+      return false;
+    }
+
+    $('#areaSelect').attr("disabled","disabled");
+    $.post('<{url action=topwap_ctl_cart@addBatchCart}>', {itemData: itemData}, function(ret){
+      if (ret.success) {
+        window.location.href = '<{url action=topwap_ctl_item_detail@index}>?item_id=<{$item.item_id}>';
+      } else{
+        shopex.toast(ret.message);
+      }
+      $('#areaSelect').attr("disabled","");
+    }, 'json');
+    
+  })
+  
+  $('.notify').click(function(){
+    // if($('.action-selected-spec').attr('data-selected') == '0') {
+    //   $(this).addClass('selected-action');
+    //   shopex('#sku').popover('show');
+    //   return;
+    // }
+    // var sku_id = $('input[name="item[sku_id]"]').val();
+    // console.log(333);
+	  var url = "<{url action=topwap_ctl_item_detail@viewNotifyItem}>";
+	  url = url+'?shop_id='+shopId+'&item_id='+item_id//+'&sku_id='+sku_id;
+	  window.location.href=url;
+  });
+});
+shopex('#skuScroll').scroll();
+</script>

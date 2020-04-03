@@ -1,0 +1,27 @@
+<{if $items}>
+  <{foreach from=$items item=item}>
+  <li data-link="<{url action=topwap_ctl_item_detail@index item_id=$item.item_id}>">
+    <div class="thumbnail">
+      <div class="thumb-img">
+        <{if $item.image_default_id}>
+        <a href="#"><img src="<{$item.image_default_id|storager:'m'}>" alt=""></a>
+        <{else}>
+        <a href="#"><img src="<{$image_default_id.M.default_image|storager}>" alt=""></a>
+        <{/if}>
+      </div>
+      <div class="caption">
+        <h1 class="goods-title"><{if $item.activity}><span class="tag"><{$item.activity.activity_tag}></span><{/if}><{$item.title}></h1>
+
+        <div class="price">
+          <div class="amount  lsj"><span>零售价</span><{$item.price|cur}></div>
+          <div class="amount"><span>会员价</span><{$item.price*$item.dis_count|cur}></div>
+        </div>
+        <div class="tag-box">
+          <div class="purchased">已有<{$item.sold_quantity|default:0}>人购买</div>
+        </div>
+
+      </div>
+    </div>
+  </li>
+  <{/foreach}>
+<{/if}>

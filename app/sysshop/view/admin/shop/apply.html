@@ -1,0 +1,676 @@
+<div class="tableform shopEdit">
+  <form id="sysshop_form" name="sysshop_form" action="?app=sysshop&ctl=admin_shop&act=saveApply"  method="post">
+    <input type="hidden" name="shop[shop_id]" value="<{$shop.shop_id}>">
+    <div class="division">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <input type="hidden" name="shop[shop_name]" value="<{$shop.shop_name}>">
+
+        <tbody>
+          <tr>
+            <th><em class="red">填写公司基本信息</em></th>
+
+          </tr>
+          <tr>
+            <th><{t}><span class="red">*</span>公司名称：<{/t}></th>
+            <td><{input type="text" vname="公司名称不能为空" vtype="alphanum" required name="shop_info[company_name]" value=$shop_info.company_name
+            placeholder=输入营业执照上公司法人名称
+            }> </td>
+          </tr>
+          <tr>
+            <th><{t}><span class="red">*</span>公司法人：<{/t}></th>
+            <td><{input type="text" vname="公司法人不能为空" vtype="alphanum"  name="shop_info[representative]" value=$shop_info.representative
+            placeholder=请输入营业执照上法人姓名
+            }> </td>
+          </tr>
+          <tr>
+            <th><{t}><span class="red">*</span>统一社会信用代码：<{/t}></th>
+            <td><{input type="text" vname="统一社会信用代码不能为空" vtype="alphanum"  name="shop_info[license_num]" value=$shop_info.license_num
+            placeholder=请输入营业执照上的18位统一社会信用代码
+            }> </td>
+          </tr>
+          <tr>
+            <th><{t}><span class="red">*</span>公司所在地址：<{/t}></th>
+            <td><{input type="text" vname="公司所在地址不能为空" vtype="alphanum"  name="shop_info[company_addr]" value=$shop_info.company_addr
+            placeholder=请与营业执照上的地址信息一致
+            }> </td>
+          </tr>
+          <tr>
+            <th><{t}><span class="red">*</span>店铺类型：<{/t}></th>
+            <td>
+              <select name="shop[shop_type]" id="shop_type" class="form-control">
+                <{foreach from=$shoptypelist item=typedata key=key}>
+                <option value="<{$typedata.shop_type}>" disabled="disabled" <{if $typedata.shop_type == $shop.shop_type}>selected<{/if}>><{$typedata.name}></option>
+                <{/foreach}>
+              </select>
+            </td>
+          </tr>
+          <{if $shop.shop_type == 'store'}>
+          <tr>
+            <th><{t}><span class="red">*</span>店铺经营类目：<{/t}></th>
+            <td>
+              <select name="cat[cat_id][]" id="shop_cat" class="form-control" autocomplete="off" multiple="multiple">
+                <{foreach from=$catlist item=catname key=key}>
+                <option  value="<{$key}>" disabled="disabled" <{if $catname.selected}> selected<{/if}>><{$catname.cat_name}></option>>
+                <{/foreach}>
+              </select>
+            </td>
+          </tr>
+          <{else}>
+          <tr>
+            <th><{t}><span class="red">*</span>店铺经营类目：<{/t}></th>
+            <td>
+              <select name="cat[cat_id][]" id="shop_cat" class="form-control" autocomplete="off">
+                <{foreach from=$catlist item=catname key=key}>
+                <option  value="<{$key}>" disabled="disabled" <{if $catname.selected}> selected<{/if}> > <{$catname.cat_name}> </option>
+                <{/foreach}>
+              </select>
+            </td>
+          </tr>
+          <{/if}>
+          <tr>
+            <th><{t}><span class="red">*</span>上传营业执照副本扫描件：<{/t}></th>
+            <td>
+              <div class="col-md-5 relative notify">
+                <span class="red">请上传盖好公章的营业执照扫副本扫描件，文件不能大于<{$env.config.image.uploadedFileMaxSize|format_filesize}></span>&nbsp;&nbsp;
+                <a href="<{$resUrl}>/images/yyzz0328.jpg" target="_blank" class="img-example">查看示例</a>
+              </div>
+              <div>
+                <div class="image-wrapper">
+                  <{if $shop_info.license_img}>
+                    <{foreach from=$shop_info.license_img item=license key=key}>
+                      <div class="img-list">
+                        <input type="hidden" name="shop_info[license_img][<{$key}>]" data-key="shop_info[license_img]" value="<{$license}>">
+                        <img src="<{$license|storager:t}>"/>
+                        <div class="image-mask">
+                          <a href="<{$license|storager:t}>" target="_blank">
+                            <i class="fa fa-search-plus show-img" data-value=""></i>
+                          </a>
+                          <i class="fa fa-trash del-img_btn"></i>
+                        </div>
+                      </div>
+                    <{/foreach}>
+                  <{/if}>
+                  <!-- 下面DIV要挨着一起 不能有空格 -->
+                </div><div class="image-input-handle">
+                  +
+                  <input type="file" multiple data-name="shop_info[license_img]" class="js-image" value="" accept="image/jpg,image/jpeg,image/png,image/bmp">
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><{t}>上传商标证书扫描件：<{/t}></th>
+            <td>
+              <div class="col-md-5 relative notify">
+                <span class="red">请上传盖好公章的商标证书扫描件，可以多个上传，如果涉及商标转让的，请一并上传转让改好公章的的文件，文件单个不能大于<{$env.config.image.uploadedFileMaxSize|format_filesize}> </span>&nbsp;&nbsp;
+                <a href="<{$resUrl}>/images/sbzs0328.jpg" target="_blank" class="img-example">查看示例</a>
+              </div>
+              <div>
+                <div class="image-wrapper">    
+                  <{if $shop_info.trademark_img}>
+                    <{foreach from=$shop_info.trademark_img item=trademark key=key}>           
+                      <div class="img-list">
+                        <input type="hidden" name="shop_info[trademark_img][<{$key}>]" data-key="shop_info[trademark_img]" value="<{$trademark}>">   
+                        <img src="<{$trademark|storager:t}>">
+                        <div class="image-mask">
+                          <a href="<{$trademark|storager:t}>" target="_blank">
+                            <i class="fa fa-search-plus show-img" data-value=""></i>
+                          </a>
+                          <i class="fa fa-trash del-img_btn"></i>
+                        </div>
+                      </div>
+                    <{/foreach}>
+                  <{/if}>
+                  <!-- 下面DIV要挨着一起 不能有空格 -->
+                </div><div class="image-input-handle">
+                  +
+                    <input type="file" data-name="shop_info[trademark_img]" class="js-image" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple>
+                  
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><{t}>上传质检报告扫描件：<{/t}></th>
+            <td>
+              <div class="col-md-5 relative notify">
+                <span class="red">请上传盖好公章的质检报告扫描件，涉及多张文件的时候，请单独一张一张上传，文件单个不能大于<{$env.config.image.uploadedFileMaxSize|format_filesize}></span>&nbsp;&nbsp;
+                <a href="<{$resUrl}>/images/zjbg1-0328.jpg" target="_blank" class="img-example">查看示例</a>
+              </div>
+              <div>
+                <div class="image-wrapper">
+                  <{if $shop_info.inspection_report_img}>
+                    <{foreach from=$shop_info.inspection_report_img item=inspection_report key=key}>           
+                      <div class="img-list">
+                        <input type="hidden" name="shop_info[inspection_report_img][<{$key}>]" data-key="shop_info[inspection_report_img]" value="<{$inspection_report}>">   
+                        <img src="<{$inspection_report|storager:t}>">
+                        <div class="image-mask">
+                          <a href="<{$inspection_report|storager:t}>" target="_blank">
+                            <i class="fa fa-search-plus show-img" data-value=""></i>
+                          </a>
+                          <i class="fa fa-trash del-img_btn"></i>
+                        </div>
+                      </div>
+                    <{/foreach}>
+                  <{/if}>
+                  <!-- <div class="img-list">
+                    <input type="hidden" name="inspection_report_img" value="">
+                    <img src="http://localhost/images/54/f1/77/95e1ac68e33caf739b6b357730277167a599653f.jpg" class="js-image-list">
+                    <div class="image-mask">
+                      <a href="http://localhost/images/54/f1/77/95e1ac68e33caf739b6b357730277167a599653f.jpg" target="_blank">
+                        <i class="fa fa-search-plus show-img" data-value=""></i>
+                      </a>
+                      <i class="fa fa-trash del-img_btn"></i>
+                    </div>
+                  </div> -->
+                   <!-- 下面DIV要挨着一起 不能有空格 -->
+                </div><div class="image-input-handle">
+                  +
+                  <input type="file" data-name="shop_info[inspection_report_img]" class="js-image" value="" accept="image/jpg,image/jpeg,image/png,image/bmp">
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><{t}>上传条码证书扫描件：<{/t}></th>
+            <td>
+              <div class="col-md-5 relative notify">
+                <span class="red">请上传盖好公章的质检报告扫描件，涉及多张文件的时候，请单独一张一张上传，文件单个不能大于<{$env.config.image.uploadedFileMaxSize|format_filesize}></span>&nbsp;&nbsp;
+                <a href="<{$resUrl}>/images/zzjgdm.jpg" target="_blank" class="img-example">查看示例</a>
+              </div>
+              <div>
+                <div class="image-wrapper">
+                  <{if $shop_info.barcode_certificate_img}>
+                    <{foreach from=$shop_info.barcode_certificate_img item=barcode_certificate key=key}>           
+                      <div class="img-list">
+                        <input type="hidden" name="shop_info[barcode_certificate_img][<{$key}>]" data-key="shop_info[barcode_certificate_img]" value="<{$barcode_certificate}>">   
+                        <img src="<{$barcode_certificate|storager:t}>">
+                        <div class="image-mask">
+                          <a href="<{$barcode_certificate|storager:t}>" target="_blank">
+                            <i class="fa fa-search-plus show-img" data-value=""></i>
+                          </a>
+                          <i class="fa fa-trash del-img_btn"></i>
+                        </div>
+                      </div>
+                    <{/foreach}>
+                  <{/if}>
+                  <!-- <div class="img-list">
+                    <input type="hidden" name="barcode_certificate_img">
+                    <img src="http://localhost/images/54/f1/77/95e1ac68e33caf739b6b357730277167a599653f.jpg" class="js-image-list">
+                    <div class="image-mask">
+                      <a href="http://localhost/images/54/f1/77/95e1ac68e33caf739b6b357730277167a599653f.jpg" target="_blank">
+                        <i class="fa fa-search-plus show-img" data-value=""></i>
+                      </a>
+                      <i class="fa fa-trash del-img_btn"></i>
+                    </div>
+                  </div> -->
+                  <!-- 下面DIV要挨着一起 不能有空格 -->
+                </div><div class="image-input-handle">
+                  +
+                  <input type="file" data-name="shop_info[barcode_certificate_img]" class="js-image" value="" accept="image/jpg,image/jpeg,image/png,image/bmp">
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><em class="red">填写收款银行信息</em></th>
+          </tr>
+
+          <tr>
+            <th><{t}><span class="red">*</span>银行账户：<{/t}></th>
+            <td><{input type="text" vname="银行账户不能为空" vtype="unsignedint" name="shop_info[bankID]" value=$shop_info.bankID
+            placeholder=请输入开户银行的银行卡帐号信息
+            }> </td>
+            <!-- placeholder="请输入开户银行的银行卡号" -->            
+          </tr>
+          <tr>
+            <th><{t}><span class="red">*</span>开户银行：<{/t}></th>
+            <td>
+              <{input type="text" vname="开户银行不能为空" vtype="alphanum"  name="shop_info[bank_name]" value=$shop_info.bank_name
+              placeholder=请输入详细的开户银行
+            }>
+              <div class="remind-content">
+                <i class="glyphicon glyphicon-exclamation-sign"></i>
+                <span class="w62p">比如：平安银行深圳南山支行</span>
+              </div>
+            </td>
+            <!-- placeholder="请输入详细的开户银行" -->
+          </tr>
+          <tr>
+            <th><{t}><span class="red">*</span>收款人姓名：<{/t}></th>
+            <td><{input type="text" vname="收款人姓名不能为空" vtype="alphanum"  name="shop_info[bank_user_name]" value=$shop_info.bank_user_name
+            placeholder=请输入银行卡的开户人姓名
+            }> </td>
+            <!-- placeholder="请输入银行卡的开户人姓名" -->
+          </tr>
+          <tr>
+            <th><em class="red">填写退货信息</em></th>
+          </tr>
+          <tr>
+            <th><{t}><span class="red">*</span>退货地址：<{/t}></th>
+            <td>
+              <{input type="text" vname="退货地址不能为空" vtype="alphanum"  name="shop_info[return_back_addr]" value=$shop_info.return_back_addr
+              placeholder=请填写收货人地址，需详细到街道
+            }>
+            </td>
+            <!-- placeholder="请填写收货人地址，需详细到街道" -->
+          </tr>
+          <tr>
+            <th><{t}><span class="red">*</span>收货人：<{/t}></th>
+            <td><{input type="text" vname="收货人不能为空" vtype="alphanum"  name="shop_info[return_back_contacts]" value=$shop_info.return_back_contacts
+              placeholder=请填写收货人姓名
+            }></td>
+            <!-- placeholder="请填写收货人姓名" -->
+          </tr>
+          <tr>
+            <th><{t}><span class="red">*</span>收货人电话：<{/t}></th>
+            <td>
+              <{input type="number" vname="收货人电话不能为空" vtype="phone"  name="shop_info[return_back_cmobile]" value=$shop_info.return_back_cmobile
+              placeholder=请填写收货人电话
+            }>
+              <!-- <input class="x-input" type="number" name="asd" vtype="number" required data-validate-regexp-message="统一社会信用代码格式不正确"> -->
+              <!-- <input class="x-input" type="number" vtype="required" name="asd" value="shopex" id="dom_el_6ab13c8"> -->
+            </td>
+            <!-- placeholder="请填写收货人电话" -->
+          </tr>
+          <tr>
+            <th></th>
+            <td>
+              <div class="red">请填写长期有效的信息，以便于货物收取安全！</div>
+            </td>
+          </tr>
+          <!-- <tr>
+            <th><{t}>法人身份：<{/t}></th>
+            <td>
+            <select name="shop_info[is_mainland]" id="is_mainland">
+            <option value="1" <{if $shop_info.is_mainland == 1}>selected<{/if}>>中国大陆居民</option>
+            <option value="2" <{if $shop_info.is_mainland != 1}>selected<{/if}>>非中国大陆居民</option>
+            </select>
+            </td>
+          </tr>
+          <tr id="corporate_identity">
+            <th><{t}>法人身份证号：<{/t}></th>
+            <td><{input type="text" id="corid" name="shop_info[corporate_identity]" value=$shop_info.corporate_identity}> </td>
+          </tr>
+
+          <tr id="passport_number">
+            <th><{t}>法人护照号：<{/t}></th>
+            <td><{input type="text" id="passnum" name="shop_info[passport_number]" value=$shop_info.passport_number}> </td>
+          </tr>
+          <tr>
+            <th><{t}>银行开户公司名：<{/t}></th>
+            <td><{input type="text" vtype="required"  name="shop_info[bank_user_name]" value=$shop_info.bank_user_name}> </td>
+          </tr>
+         <tr>
+            <th><{t}>开户银行所在地：<{/t}></th>
+            <td><{input type="text" vtype="required"  name="shop_info[bank_area]" value=$shop_info.bank_area}> </td>
+          </tr>
+          <{if $shop_info.corporate_identity_img}>
+          <tr>
+            <th><{t}>法人身份证正反面复印件：<{/t}></th>
+            <td>
+              正面： <{input type="image" vtype="required" name="shop_info[corporate_identity_img_z]" width=100 height=100 value=$shop_info.corporate_identity_img}>
+              反面：<{input type="image" vtype="required" name="shop_info[corporate_identity_img_f]" width=100 height=100 }>
+            </td>
+          </tr>
+          <{else}>
+          <tr>
+            <th><{t}>法人身份证正反面复印件：<{/t}></th>
+            <td>
+              正面： <{input type="image" vtype="required" name="shop_info[corporate_identity_img_z]" width=100 height=100 value=$shop_info.corporate_identity_img_z}>
+              反面：<{input type="image" vtype="required" name="shop_info[corporate_identity_img_f]" width=100 height=100 value=$shop_info.corporate_identity_img_f}>
+            </td>
+          </tr>
+          <{/if}>
+          <tr>
+            <th><{t}>法定经营范围：<{/t}></th>
+            <td><{input type="textarea" vtype="required"  name="shop_info[scope]" value=$shop_info.scope}> </td>
+          </tr>
+          
+          <tr>
+            <th><{t}>公司详细地址：<{/t}></th>
+            <td><{input type="text" vtype="required"  name="shop_info[company_addr]" value=$shop_info.company_addr}> </td>
+          </tr>
+          <tr>
+            <th><{t}>公司电话：<{/t}></th>
+            <td><{input type="unsignedint" name="shop_info[company_phone]" value=$shop_info.company_phone}> </td>
+          </tr>
+          <tr>
+            <th><{t}>公司联系人：<{/t}></th>
+            <td><{input type="text" vtype="required"  name="shop_info[company_contacts]" value=$shop_info.company_contacts}> </td>
+          </tr>
+          <tr>
+            <th><{t}>公司联系人手机：<{/t}></th>
+            <td><{input type="unsignedint" vtype="required" name="shop_info[company_cmobile]" value=$shop_info.company_cmobile}> </td>
+          </tr>
+          <tr>
+            <th><{t}>营业执照副本复印件：<{/t}></th>
+            <td><{input type="image" vtype="required"  name="shop_info[license_img]" value=$shop_info.license_img width=100 height=100}> </td>
+          </tr>
+          <tr>
+            <th><{t}>注册资本：<{/t}></th>
+            <td><{input type="text" vtype="required"  name="shop_info[enroll_capital]" value=$shop_info.enroll_capital maxlength="20"}> </td>
+          </tr>
+          <tr>
+            <th><{t}>公司官网：<{/t}></th>
+            <td><{input type="url" name="shop_info[shop_url]" value=$shop_info.shop_url}> </td>
+          </tr>
+          <tr>
+            <th><em class="red">组织机构代码证</em></th>
+
+          </tr>
+          <tr>
+            <th><{t}>组织机构代码：<{/t}></th>
+            <td><{input type="text" vtype="required" name="shop_info[tissue_code]" value=$shop_info.tissue_code}> </td>
+          </tr>
+          <tr>
+            <th><{t}>组织机构代码证复印件：<{/t}></th>
+            <td><{input type="image" vtype="required"  name="shop_info[tissue_code_img]" value=$shop_info.tissue_code_img width=100 height=100}> </td>
+          </tr>
+
+          <tr>
+            <th><em class="red">税务登记证</em></th>
+
+          </tr>
+          <tr>
+            <th><{t}>税务登记证<{/t}></th>
+            <td><{input type="text" vtype="required"  name="shop_info[tax_code]" value=$shop_info.tax_code}> </td>
+          </tr>
+          <tr>
+            <th><{t}>税务登记证复印件：<{/t}></th>
+            <td><{input type="image" vtype="required"  name="shop_info[tax_code_img]" value=$shop_info.tax_code_img width=100 height=100}> </td>
+          </tr>
+          <tr>
+            <th><em class="red">店铺信息</em></th>
+          </tr>
+          <tr class="brand-type" style="<{if $shop.shop_type == 'cat' || $shop.shop_type == 'store'}>display:none;<{/if}>">
+            <th><{t}>经营品牌：<{/t}></th>
+            <td>
+                <{foreach from=$brands item=item key=key}>
+                  <{$item.brand_name}>&nbsp;&nbsp;
+                <{/foreach}>
+            </td>
+          </tr>
+          <tr class="brand-type" style="<{if $shop.shop_type == 'cat' || $shop.shop_type == 'store'}>display:none;<{/if}>">
+            <th><{t}>品牌授权书电子版：<{/t}></th>
+            <td>
+              <{input type="image" vtype="required" name="brand[brand_warranty]" value=$brand.brand_warranty  width=100 height=100}>
+              <input type="hidden" name="brand[brand_id]" value="<{$brand.brand_id}>">
+            </td>
+          </tr>
+          <tr>
+            <th><{t}>店铺名称：<{/t}></th>
+            <td><{$shop.shop_name}> </td>
+          </tr>
+          <tr>
+            <th><{t}>店铺描述：<{/t}></th>
+            <td><{input type="textarea" name="shop[shop_descript]" value=$shop.shop_descript maxlength="200"}> </td>
+          </tr>
+          <tr>
+            <th><{t}>店主姓名：<{/t}></th>
+            <td><{input type="text" vtype="required"  name="shop[shopuser_name]" value=$shop.shopuser_name}> </td>
+          </tr>
+          <{if $shop.shopuser_identity_img}>
+            <tr>
+            <th><{t}>店主身份证电子版：<{/t}></th>
+            <td>
+              正面：<{input type="image" vtype="required" name="shop[shopuser_identity_img_z]" value=$shop.shopuser_identity_img width=100 height=100}>
+              反面： <{input type="image" vtype="required" name="shop[shopuser_identity_img_f]"  width=100 height=100}>
+            </td>
+          </tr>
+
+          <{else}>
+          <tr>
+            <th><{t}>店主身份证电子版：<{/t}></th>
+            <td>
+              正面：<{input type="image" vtype="required" name="shop[shopuser_identity_img_z]" value=$shop.shopuser_identity_img_z width=100 height=100}>
+              反面： <{input type="image" vtype="required" name="shop[shopuser_identity_img_f]" value=$shop.shopuser_identity_img_f width=100 height=100}>
+            </td>
+          </tr>
+          <{/if}>
+          <tr>
+            <th><{t}>地址：<{/t}></th>
+            <td><{input type="text" vtype="required"  name="shop[shop_addr]" value=$shop.shop_addr}> </td>
+          </tr>
+          <tr>
+            <th><{t}>手机号码：<{/t}></th>
+            <td><{input type="digits" vty pe="required"  name="shop[mobile]" value=$shop.mobile}> </td>
+          </tr>
+          <tr>
+            <th><{t}>邮箱：<{/t}></th>
+            <td><{input type="email" name="shop[email]" value=$shop.email}> </td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+<{area inject='.mainFoot'}>
+    <table cellspacing="0" cellpadding="0" class="table-action">
+      <tbody>
+        <tr valign="middle">
+          <td>
+            <{assign var="___c"  value='确定退出?'|t:'sysshop'}>
+
+            <{button label="保存并关闭窗口"|t:'sysshop' class="btn-primary" type="button"  onclick="submitForm(event,2)"}>
+
+            <{button label="关  闭"|t:'content' class="btn-secondary" type="button" isclosedialogbtn="1"}>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <{/area}>
+  </form>
+</div>
+<script>
+  // dom转字符串
+  function parseDom(arg) {
+　　var objE = document.createElement("div");
+　　objE.innerHTML = arg;
+    return objE.childNodes;
+  };
+  // 图片删除
+  function imgDel(event,dom){
+    // 查找容器下所有删除节点然后用indexof找到索引 然后将其删除
+    let item =this;
+    let lists = Array.from(document.querySelectorAll('.image-wrapper .del-img_btn'));
+    let index = lists.indexOf(item);
+    dom.remove();
+  };
+  // 初始化图片删除；
+  function initDel() {
+    let delDom = document.querySelectorAll('.del-img_btn');
+    for(let i = 0 ;i<delDom.length; i++){
+      delDom[i].addEventListener('click',function(){
+        this.parentNode.parentNode.remove();
+      })
+    }
+  };
+  initDel();
+
+  var uploadedFileMaxSize = <{$env.config.image.uploadedFileMaxSize}>;
+  // 图片上传函数
+  function imgAjax(obj){
+    let {url, data} = obj;
+    return new Promise(resolve=>{
+      jQuery.ajax({
+          url: url,
+          type: 'POST',
+          data: data,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function (rs) {
+             resolve(rs.data);
+          },
+          error: function (err) {
+              reject(err);
+          }
+      });
+    });
+    
+  }
+  // 多图上传事件
+  async function imgChange(_this,name,key){
+    let imgReg = (/.jpg$|.jpeg$|.gif$|.png$|.bmp$/i);
+    let files = _this.files;
+    let imgArr = [];
+    for (let i = 0; i < files.length; i++) {
+        // 如果有不是img类型的就跳出去
+        if(!imgReg.test(_this.files[i].type)){
+          MessageBox.error('选择文件类型不对，所传文件已经移除');
+          continue;
+        }
+        if(_this.files[i].size > uploadedFileMaxSize){
+          MessageBox.error('有文件大于2M了，所传图片已经移除');
+          continue;
+        }
+        // blob类型
+        // let imgUrl = window.URL.createObjectURL(files[i]);
+        let url = '?app=image&ctl=admin_manage&act=image_upload_without_tag';
+        var formData = new FormData();
+        let multiple = _this.multiple;
+
+            formData.append('upload_item', files[i]);
+        let data = await imgAjax({ url:url, data:formData });
+
+        let imgUrl = data.url;
+        // 图片数据汇总
+        imgArr.push(imgUrl);
+        let cloneDom = `<div class="img-list">
+                          <input type="hidden" name="${name}[${key}]" value="${imgUrl}" data-key="${name}">
+                          <img src="${imgUrl}" class="js-image-list">
+                          <div class="image-mask">
+                            <a href="${imgUrl}" target="_blank">
+                              <i class="fa fa-search-plus show-img" data-value=""></i>
+                            </a>
+                            <i class="fa fa-trash del-img_btn"></i>
+                          </div>
+                        </div>`;
+        // dom转换
+        let cloneToDom = parseDom(cloneDom)[0];
+        //  图片位置
+        let siblingDom = _this.parentNode.previousSibling;
+        // 图片插入 
+        siblingDom.appendChild(cloneToDom);
+
+        // node节点最后为删除按钮，先写死 后续优化
+        cloneToDom.lastElementChild.lastElementChild.addEventListener('click',function(Event){
+          // 将克隆的dom节点删掉
+          cloneToDom.remove();
+        });
+    }
+  };
+  // 多图上传绑定事件
+  function initImgChange() {
+    let imgList = document.querySelectorAll('.js-image');
+    for(let i = 0; i < imgList.length; i++){
+      imgList[i].addEventListener('change',function(Event){
+        let name = this.getAttribute('data-name');
+        let key = document.querySelectorAll(`input[data-key="${name}"]`).length;
+        imgChange(this, this.getAttribute('data-name'),key);
+      })
+    }
+  };
+  initImgChange();
+  var submitForm = function (event,sign){
+    var _form=$('sysshop_form');
+    switch (sign){
+      case 1:
+        var target={
+          onComplete:function(){
+                       location.reload();
+                     }};
+        break;
+      case 2:
+        var target={
+          onComplete:function(rs){
+                       if(rs&&!!JSON.decode(rs).success){
+                           window.finderGroup['<{$env.get.finder_id}>'].refresh();
+                           _form.getParent('.dialog').retrieve('instance').close();
+                       }
+                     }};
+        break;
+    }
+    _form.store('target',target);
+    if(document.querySelectorAll('input[data-key="shop_info[license_img]"]').length === 0){
+      MessageBox.error('请上传营业执照副本扫描件');
+      return false;
+    };
+    let vform = Boolean;
+    // 必选项为空提示文案和阻止提交
+    for(let i = 0; i<jQuery('#sysshop_form .x-input').length; i++){
+      if(jQuery('#sysshop_form .x-input')[i].value === ''){
+          MessageBox.error(jQuery('#sysshop_form .x-input')[i].getAttribute("vname"));
+          vform = false;
+          break;
+      }
+    };
+    if(vform === false) return false;
+    jQuery('#sysshop_form .x-input').each((index, item)=>{
+        if( jQuery(item).val() === ''){
+         
+          console.log(index)
+          return false;
+        }
+    })
+
+    if(confirm('是否保存?')) {
+      _form.fireEvent('submit',new Event(event));
+    }
+  };
+
+  $("shop_cat").addEvent("change",function(){
+    var shoptype = $("shop_type").get('value');
+    if($("shop_cat").get('value') && shoptype !="cat") {
+      new Request({
+        url: '<{url route="shopadmin" app="sysshop" ctl="admin_shop" act="ajaxCatBrand"}>',
+        data: 'cat_id='+$("shop_cat").get('value'),
+        onComplete: function(rs){
+          console.log(rs);
+          rs = JSON.decode(rs);
+          var optionstring = "";
+          if(rs && rs.length>0) {
+            for (var j = 0; j < rs.length; j++) {
+              optionstring += '<option value="' + rs[j].brand_id + '"';
+              if(rs[j].brand_id == '<{$shop.shop_brand}>') {
+                optionstring += ' selected';
+              }
+              optionstring += '>' + rs[j].brand_name + '</option>';
+            }
+            //$("shop_brand").set("html","<option value=''>请选择...</option> "+optionstring);
+          }
+        }
+      }).send();
+    }
+  });
+$("shop_cat").fireEvent('change');
+function personality(){
+
+  var isMainLand,cardId,passportNum,passnum,corid;
+  cardId = $('corporate_identity');
+  passportNum = $('passport_number');
+  passnum = $('passnum');
+  corid = $('corid');
+  isMainLand = $('is_mainland').getValue();
+  console.log(isMainLand);
+  if(isMainLand == 1){
+    cardId.setStyle('display','');
+    passportNum.setStyle('display','none');
+    corid.setProperty('vtype','required');
+    if(passnum.getProperty('vtype')){
+      passnum.erase('vtype');
+    }
+  }else{
+    cardId.setStyle('display','none');
+    passportNum.setStyle('display','');
+    passnum.setProperty('vtype','required');
+    if(corid.getProperty('vtype')){
+      corid.erase('vtype');
+    }
+  }
+
+}
+// $("is_mainland").addEvent("change", function(){
+//  personality();
+// });
+// personality();
+</script>

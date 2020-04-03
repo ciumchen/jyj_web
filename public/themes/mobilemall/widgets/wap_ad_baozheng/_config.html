@@ -1,0 +1,130 @@
+<div class="tableform" id="picAddress">
+    <div class="division">
+        挂件标题：<input type="text" name="title" value="<{$setting.title}>">(<font color="red">留空不显示</font>)&nbsp;&nbsp;&nbsp;
+        挂件class：<input type="text" name="class" value="<{$setting.class}>">&nbsp;&nbsp;&nbsp;(<font color="red">设计师专用</font>)
+        <label>显示描述：<input type="checkbox"   name="show_market" value="1"  <{if $setting.show_market}>checked<{/if}> /></label>
+
+    </div>
+    <div class="piccontent" id="ad_ly_multiple">
+        <{foreach from=$setting.pic item=data key=key}>
+        <div  class="pic_items clearfix division">
+            <div class="th"><{t app="b2c"}>图片地址:<{/t}></div>
+            <div class="td"><input type=hidden name=pic[<{$data.id}>][id] value="<{$data.id}>">
+                <input type="text" name='pic[<{$data.id}>][link]' class="imgsrc" id="pic[<{$data.id}>][link]"  value="<{$data.link}>">
+                <input type=button value=上传图片 class="uploadbtn">
+            </div>
+            <div class="th"><{t app="b2c"}>链接地址:<{/t}></div>
+            <div class="td"><input type="text" name="pic[<{$data.id}>][linktarget]" value="<{$data.linktarget}>"></div>
+            <div class="th"><{t app="b2c"}>描述:<{/t}></div>
+            <div class="td"><input type="text" name="pic[<{$data.id}>][linkinfo]" value="<{$data.linkinfo}>"></div>
+            <div class="th"><{t app="b2c"}>标签:<{/t}></div>
+            <div class="td"><input type="text"  class="w2" name="pic[<{$data.id}>][bq]" value="<{$data.bq}>"></div>
+            <div class="th"><{t app="b2c"}>宽:<{/t}></div>
+            <div class="th"><{t app="b2c"}>宽:<{/t}></div>
+            <div class="td"><input type="text" class="w" name="pic[<{$data.id}>][width]" value="<{$data.width}>"></div>
+            <div class="th"><{t app="b2c"}>高:<{/t}></div>
+            <div class="td"><input type="text" class="w" name="pic[<{$data.id}>][height]" value="<{$data.height}>"></div>
+            <div class="td">
+                <label style="float:left">新窗口：<input type="checkbox"   name="pic[<{$data.id}>][tg]" value="1"  <{if $data.tg}>checked<{/if}> /></label>
+                <span class="go-prev">↑</span>
+                <span class="go-next">↓</span>
+                <span onclick="$(this).getParents('.pic_items').destroy()" class="delete"></span>
+            </div>
+
+        </div>
+        <{/foreach}>
+    </div>
+    <{button label=$___b2c="添加图片"|t:'b2c' class="addimage" app="desktop" icon="btn_add.gif"}>
+
+</div>
+<script>
+
+(function(){
+  var tag_type='div',tag_class='pic_items clearfix division';
+
+  document.getElement(".addimage").addEvent('click',function(){
+
+    var i=new Date().getTime();
+
+    var tpl='<div class="th"><{t app="b2c"}>图片地址:<{/t}></div>'+
+      '<div class="td"><input type=hidden name=pic['+i+'][id] value="'+i+'"><input type="text" name="pic['+i+'][link]" class="imgsrc">'+
+      '<input type=button value=<{t app="b2c"}>上传图片<{/t}> class="uploadbtn" id="pic['+i+']"></div>'+
+      '<div class="th"><{t app="b2c"}>链接地址:<{/t}></div>'+
+      '<div class="td"><input type="text" name="pic['+i+'][linktarget]"></div>'+
+      '<div class="th"><{t app="b2c"}>描述:<{/t}></div>'+
+      '<div class="td"><input type="text" name="pic['+i+'][linkinfo]"></div>'+
+      '<div class="th"><{t app="b2c"}>标签:<{/t}></div>'+
+      '<div class="td"><input  class="w2" type="text" name="pic['+i+'][bq]"></div>'+
+      '<div class="th"><{t app="b2c"}>宽:<{/t}></div>'+
+      '<div class="td"><input class="w" type="text" name="pic['+i+'][width]"></div>'+
+      '<div class="th"><{t app="b2c"}>高:<{/t}></div>'+
+      '<div class="td"><input class="w" type="text" name="pic['+i+'][height]"></div>'+
+      '<div class="td"><label  style="float:left">新窗口：<input type="checkbox"   name="pic['+i+'][tg]" /></label><span class="go-prev">↑</span><span class="go-next">↓</span><span class="delete" onclick="$(this).getParents(\'.pic_items\').destroy()">'+
+      '</span></div>'+
+      '';
+
+    $('picAddress').getElement('.piccontent').adopt(new Element(tag_type,{'html':tpl,'width':'100%','class':tag_class}));
+
+    $('pic['+i+']').addEvent('click',function(e){bindevent(this)});
+  });
+
+  $$(".piccontent .uploadbtn").addEvent('click',function(e){bindevent(this)});
+  $$(".small_piccontent .uploadbtn").addEvent('click',function(e){bindevent(this)});
+
+  function bindevent(el){
+    var target=$(el).getParent('.pic_items').getElement('.imgsrc');
+    var goto_url=encodeURIComponent('<{url route="shopadmin" app="image" ctl="admin_manage" act="image_broswer" type="big"}>');
+    var url='<{url route="shopadmin" app="desktop" act="alertpages" goto=""}>'+goto_url;
+    Ex_Loader('modedialog',function(){
+      return new imgDialog(url,{onCallback:function(image_id,image_src){
+          target.value=image_src;
+        }});
+    });
+  }
+
+
+  var panel = $('ad_ly_multiple');
+  panel.addEvent('click',function(e){
+    var clickTarget = $(e.target);
+
+    if(clickTarget.hasClass('go-prev')){
+      e.stop();
+      var item = clickTarget.getParent('.division'),
+        itemP = item.getPrevious('.division');
+      if(itemP){
+        item.injectBefore(itemP);
+      }
+    }
+    if(clickTarget.hasClass('go-next')){
+      e.stop();
+      var item = clickTarget.getParent('.division'),
+        itemN =item.getNext('.division');
+      if(itemN){
+        item.injectAfter(itemN);
+      }
+    }
+  })
+
+})();
+
+
+
+
+
+
+
+</script>
+<style type="text/css">
+    .pic_items {line-height:25px;}
+    .pic_items input[type="text"]{border: #ddd 1px solid;height: 25px;border-radius: 3px;margin-left: 5px;}
+    .pic_items .td,.pic_items .th{float:left;}
+    .pic_items .td{padding-right:10px;}
+    .pic_items .w{width:30px}
+    .pic_items .w2{width:50px}
+    .go-next,.go-prev{display:inline-block;border:1px solid #eee;padding:2px 9px;cursor: pointer;color:#204097;float:left;    display: block; height: 20px;line-height: 20px;line-height: 1.5
+    }
+    .go-next:hover,.go-prev:hover{color:#f60;border-color:#f60; background-color:#eee}
+    .go-next{margin-left:5px}
+    #ad_ly_multiple .delete {height: 20px;width: 16px;cursor: pointer;float: left;_display: inline; margin-left: 5px;background-color: #fff;border: 1px solid #ddd;text-align: center;line-height: 1.5 }
+    #ad_ly_multiple .delete:before{content: 'X'}
+</style>

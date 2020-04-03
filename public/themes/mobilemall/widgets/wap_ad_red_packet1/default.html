@@ -1,0 +1,63 @@
+<style>
+  .widget-redpacket{background-color: white;}
+  .redpacket-info{padding: 0.5rem;border-bottom: 1px solid #dddddd;}
+  .red-list{display: flex;justify-content: flex-start;align-items: center;flex-wrap:wrap;padding: 1%;}
+  .red-list li{position: relative;width:33.333%;background-size: contain;padding: 5px;box-sizing: border-box;}
+  .red-packet{background-color: #d23202;border-radius: 10px;font-size: 0.7rem;overflow: hidden;}
+  .redpacket-title{background-color: #f75252;padding:0.5rem 1rem 1rem;border-radius: 0 0 20% 20%;box-sizing: border-box;height: 4rem;text-align: center;}
+  .redpacket-title span,.redpacket-money span{display: block;height: 2.2rem;overflow: hidden;color: #ffffff;}
+  .redpacket-money span{color: yellow;}
+  .redpacket-description{color: #666666;font-size: 0.7rem;}
+  .redpacket-money span{height: auto;}
+  .redpacket-money{padding: 1.5rem 0.5rem 1rem 0.5rem;text-align:center;white-space: nowrap;color: yellow;position: relative;font-size: 1rem;}
+  .redpacket-money::before{content: '￥';color: #d33302;position: absolute;top: -1.1rem;left: 50%;display:inline-block;width: 2rem;height: 2rem;line-height:2rem;border-radius: 50%;background-color: yellow;text-align:center;margin-left: -1rem;font-size: 1rem;}
+  .pop-tips{width: 200px; height: 100px; font-size: 0.8rem; box-sizing: border-box; position: fixed; left: 50%; top: 50%; margin-left: -100px; margin-top: -100px; text-align:center; background-color: #000; background-color: rgba(0,0,0,.7); color:#fff; z-index: 999; border-radius: 5px; display: table; vertical-align: middle;} .tip-inner{display: table-cell; vertical-align: middle; padding: 0 1rem;}
+</style>
+<{if $setting.hongbao}>
+  <div class="widget-redpacket">
+    <{if $setting.title || $setting.desc}>
+      <div class="redpacket-info">
+        <div class="title"><{$setting.title}></div>
+        <p class="redpacket-description"><{$setting.desc}></p>
+      </div>
+    <{/if}>
+    <ul class="red-list">
+      <{foreach from=$setting.hongbao item=row}>
+      <li>
+        <div data-id="<{$row.hongbao_id}>" class="red-packet">
+          <p class="redpacket-title"><span><{$row.name}></span></p>
+          <p class="redpacket-money"><span><{$row.money|cur}></span></p>
+        </div>
+      </li>
+      <{/foreach}>
+    </ul>
+  </div>
+<{/if}>
+<script>
+  // 提示框
+  var popTip = function(t){
+      var $pop=$('<div class="pop-tips"><div class="tip-inner">'+ t +'</div></div>');
+        $pop.appendTo($("body"));
+      setTimeout(function(){
+        $pop.remove();
+      },2000);
+  };
+  $('.red-list').on('click', '.red-packet', function(){
+    $('.pop-tips').remove();
+    var $txt = $(this).find('.redpacket-money');
+    $.get('<{url action=topc_ctl_member_hongbao@getHongbao}>',
+        {
+          'hongbao_id': $(this).attr('data-id'),
+          'money': $txt.text().substr(1)
+        },
+        function(rs){
+          if(rs.success) {
+            popTip(rs.message);
+            $txt.text('已领取');
+          }
+          if(rs.error) {
+            popTip(rs.message);
+          }
+        });
+  });
+</script>

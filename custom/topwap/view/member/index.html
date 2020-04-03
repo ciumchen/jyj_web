@@ -1,0 +1,87 @@
+<div class="member-hd">
+    <div class="ly-member-hd-setting">
+
+<!--        <a href="" class="msg-link">-->
+<!--            <i class="icon msg2"></i>-->
+<!--            <span class="num">2</span>-->
+<!--        </a>-->
+        <a class="setting-link" href="<{url action=topwap_ctl_member@setting}>">
+            <i class="icon setting"></i>
+        </a>
+    </div>
+    <div class="member-info" onclick="location.href = '<{url action=topwap_ctl_member@detail}>'">
+        <div class="img-box">
+            <img src="images/tx.png" >
+        </div>
+        <div class="text-box">
+            <div class="s">
+                <{$account}> <i>早上好~</i>
+            </div>
+            <div class="x">
+                开始满满正能量的一天
+            </div>
+        </div>
+    </div>
+    <div class="hd-menu">
+        <ul>
+            <li onclick="location.href='<{url action=topwap_ctl_member_hongbao@index}>'"><span>红包（个）</span><em><{$hongbaoCount.hongbao_total|default:0|cur}></em></li>
+            <li onclick="location.href='<{url action=topwap_ctl_member_coupon@index}>'"><span>优惠券（张）</span><em><{$coupon.count|default:0}></em></li>
+            <li onclick="location.href='<{url action=topwap_ctl_member_point@point}>'"><span>积分</span><em><{$userInfo.point|default:0}></em></li>
+        </ul>
+    </div>
+</div>
+<div class="ly-member-cat">
+    <div class="hd">
+        <span class="title">我的订单</span>
+        <a href="<{url action=topwap_ctl_member_trade@tradeList}>">全部订单</a>
+    </div>
+    <ul>
+        <li onclick="location.href='<{url action=topwap_ctl_member_trade@tradeList s=1}>'"><span><img src="images/mm1.png" alt=""><{if $nupay}><span class="shopex-badge bbc-badge"><{$nupay}></span><{/if}></span><em>待付款</em></li>
+        <li onclick="location.href='<{url action=topwap_ctl_member_trade@tradeList s=2}>'"><span><img src="images/mm2.png" alt=""><{if $nudelivery}><span class="shopex-badge bbc-badge"><{$nudelivery}></span><{/if}></span><em>待发货</em></li>
+        <li onclick="location.href='<{url action=topwap_ctl_member_trade@tradeList s=3}>'"><span><img src="images/mm3.png" alt=""><{if $nuconfirm}><span class="shopex-badge bbc-badge"><{$nuconfirm}></span><{/if}></span><em>待收货</em></li>
+        <li onclick="location.href='<{url action=topwap_ctl_member_aftersales@aftersalesList}>'"><span><img src="images/mm4.png" alt=""></span><em>售后/退款</em></li>
+    </ul>
+</div>
+<div class="ly-mod-box">
+    <img src="images/mad.png" >
+</div>
+<div class="ly-member-fmenu">
+    <div class="hd">
+        <div class="title">常用工具</div>
+    </div>
+    <ul>
+        <!--TODO 隐藏未开发功能-->
+      <!--  <li><span><img src="images/mb1.png" alt=""></span><em>商户入驻</em></li> -->
+        <li onclick="location.href='<{url action=topwap_ctl_member_favorite@index}>'"><span><img src="images/mb2.png" alt=""></span><em>我的收藏</em></li>
+<!--        <li><span><img src="images/mb3.png" alt=""></span><em>联系客服</em></li>-->
+        <li onclick="location.href='/wap/addr-list.html'"><span><img src="images/mb4.png" alt=""></span><em>地址管理</em></li>
+<!--        <li><span><img src="images/mb5.png" alt=""></span><em>用户指南</em></li>-->
+<!--        <li><span><img src="images/mb6.png" alt=""></span><em>疑难解答</em></li>-->
+        <li>&nbsp;</li>
+        <li>&nbsp;</li>
+<!--        <li>&nbsp;</li>-->
+    </ul>
+</div>
+
+<script>
+
+//会员签到
+var flag = true;
+$('.checkin').on('tap',function(){
+  if (flag) {
+    flag = false;//改变flag状态，防止重复提交
+    var url = "<{url action=topwap_ctl_member@checkin}>";
+    var that = $(this);
+    $.post(url,function(rs){
+      if(rs.success){
+        $('.checkedin').show();
+        that.hide();
+        shopex.alert(rs.message + "，成功领取" + that.attr('data-pointnum') + "积分" );
+      }
+    });
+  }
+});
+$('.checkedin').on('tap', function(e) {
+  shopex.alert("您今天已经签到过了");
+});
+</script>

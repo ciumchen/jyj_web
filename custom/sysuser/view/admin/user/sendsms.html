@@ -1,0 +1,24 @@
+<div class="tableform">
+	<form action="?app=sysuser&ctl=admin_user&act=sendSms"  method="post">
+	<div class="division">
+	    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+	    	<input type="hidden" name="user_id" value="<{$data.user_id}>">
+	      <tbody>
+	        <tr>
+	          <th><{t}>会员名称：<{/t}></th>
+	          <td><span class="price0"><{ $data.login_account}></span></td>
+	          </tr>
+	        <tr>
+	          <th ><{t}>手机号：<{/t}></th>
+	          <td><{$data.mobile}></td>
+	        </tr>
+			<tr>
+			<th><{t}>请填写短信内容：<{/t}></th>
+	          <td><{input type="text" vtype="required" maxlength="255" size="50" name="content" value="您的登录名是：{$data.login_account}，密码是："}></td>
+			</tr>
+	      </tbody>
+	    </table>
+	</div>
+	<div class="table-action"><{button type="submit" label="保存"|t:'___sysuser' }></div>
+	</form>
+</div>

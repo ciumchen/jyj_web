@@ -1,0 +1,148 @@
+<div class="ly-reg-head">
+  <span class="ly-back" onclick="history.go(-1)"></span>
+  <div class="title">账号注册</div>
+  <span class="right"><a href="<{url action=topwap_ctl_passport@goLogin}>">登录</a></span>
+</div>
+<div class="ly-reg-box" id="view_make">
+  <form action="<{url action=topwap_ctl_passport@doRegister}>"  method="post"  id="form_register" >
+    <input type="hidden" name="type" value="signup">
+	<input type="hidden" name="key" value="topwap_signup">
+    <dl>
+      <dt>账号信息</dt>
+      <dd>
+        <ul>
+          <li>
+            <label>手机号</label>
+            <div class="input-box"><input placeholder="请输入您的手机号码" type="tel" name="uname"  value="" /></div>
+          </li>
+          <li>
+            <label>验证码</label>
+            <div class="input-box">
+              <input style="padding-right: 10px;" type="text" name="vcode"  value="" />
+            </div>
+            <button class="send_code" id="send_vcode" type="button">获取验证码</button>
+          </li>
+          <li>
+            <label>密码</label>
+            <div class="input-box"><input placeholder="请设置您的密码,8-16个字符 支持字母数字" type="password" name="pam_user[password]"  value="" /></div>
+          </li>
+          <li>
+            <label>确认密码</label>
+            <div class="input-box"><input placeholder="请确认您的密码" type="password" name="pam_user[pwd_confirm]"  value="" /></div>
+          </li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt style="border-top: 0;">店铺资料</dt>
+      <dd>
+        <ul>
+          <li>
+            <label>店铺名</label>
+            <div class="input-box"><input placeholder="请输入您的店铺名" type="text" name="shop[shopname]"  value="" /></div>
+          </li>
+          <li>
+            <label>姓名</label>
+            <div class="input-box"><input placeholder="请输入您的姓名" type="text" name="shop[shopusername]"  value="" /></div>
+          </li>
+          <li>
+            <label>地址</label>
+            <div class="input-box"  id="showCityPicker" >        <input type="text" value="" id="cityResult" readonly placeholder="请选择地区">
+        <input type="hidden" name="shop[shoparea]" required value="" id="cityResultId"></div>
+          </li>
+          <li class="jr-box">
+            <label>详细地址</label>
+            <div class="input-box"><input placeholder="请输入详细地址" type="text" name="shop[shopaddr]"  value="" /></div>
+          </li>
+
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt style="border-top: 0;">名店资料</dt>
+      <dd>
+        <ul>
+          <li>
+            <label>介绍人</label>
+            <div class="input-box"><input placeholder="请输入您的店铺名" type="text" name="shop[ditroducer]"  value="" /></div>
+          </li>
+
+        </ul>
+      </dd>
+    </dl>
+    <div class="ly-reg-bottom">
+      <div class="gouxuan"><input id="table_cbox" type="checkbox" name="license" value="1" />  <label for="table_cbox">注册即表示同意聚优街</label><a href="<{url action=topwap_ctl_passport@registerLicense}>">《用户协议》</a></div>
+      <div class="box">
+        <button type="submit"  class="submit">立即注册</button>
+      </div>
+    </div>
+  </form>
+</div> 
+
+
+<script>
+  (function($, doc) {
+    $.init();
+    $.ready(function() {
+
+      var cityPicker = new $.PopPicker({
+        layer: 3
+      });
+
+      $.ajax({
+        url: '<{$env.base_url}>/app/ectools/statics/scripts/region.json',
+        type: 'GET',
+        dataType: 'json',
+        success: function(rs){
+          cityPicker.setData(rs);
+        },
+      })
+
+      var showCityPickerButton = doc.getElementById('showCityPicker');
+      var cityResult = doc.getElementById('cityResult');
+      var cityResultId = doc.getElementById('cityResultId');
+      showCityPickerButton.addEventListener('tap', function(event) {
+        cityPicker.show(function(items) {
+          cityResult.value = (items[0] || {}).value + " " + (items[1] || {}).value + " " + (items[2].value? (items[2] || {}).value : " ");
+          cityResultId.value = (items[0] || {}).id + "," + (items[1] || {}).id + "," + (items[2].id? (items[2] || {}).id : "")
+          //返回 false 可以阻止选择框的关闭
+          //return false;
+        });
+      }, false);
+    });
+  })(shopex, document);
+$('#form_register').find('button[type=submit]').data('ajaxConfig', {
+  "update": "#view_make",
+});
+
+var form = $('#form_register');
+$('#send_vcode').on('click', function(e) {
+  var type = form.find('input[name=type]').val();
+  var uname = form.find('input[name=uname]').val();
+  if($(this).hasClass('disabled')) return false;
+  sendVerify(this, 'uname='+uname+'&type=' +type);
+})
+
+function sendVerify(el, data) {
+  var url = "<{url action=topwap_ctl_passport@sendVcode}>";
+  var textCont = $(el);
+  $(el).addClass('disabled');
+  textCont.html('<i>0</i>');
+  var cd = new countdown(textCont.find('i'), {
+    start: 120,
+    secondOnly: true,
+    callback: function(e) {
+      $(el).removeClass('disabled');
+      textCont.html('重发验证码');
+    }
+  });
+  $.post(url, data, function(rs) {
+    if(rs.error) {
+      cd.stop();
+      alert(rs.message);
+      $(el).removeClass('disabled');
+      textCont.html('重发验证码');
+    }
+  });
+}
+</script>

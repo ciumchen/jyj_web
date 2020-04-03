@@ -1,0 +1,52 @@
+
+<form id="sysuserform" class="tableform" name="sysuserform"  method='post' action='?app=sysuser&ctl=admin_user&act=saveCompanyInfo' >
+	<h2 class="head-title"><{t}>基本信息<{/t}></h2>
+    <input type="hidden" name="user_id" value="<{$data.userId}>">
+    <div class="division">
+        <table width="100%" cellspacing="0" cellpadding="0">
+         <tr>
+          <th><{t}>公司名称：<{/t}></th>
+          <td><input type="text" name="company_name" size=30 vtype="required" value="<{$data.company_name}>" maxlength='20'><em><font color='red'>*</font></em></td>
+        </tr>    
+		<tr>
+          <th><{t}>联系人姓名：<{/t}></th>
+          <td><input type="text" name="touch_name" size=30 vtype="required" value="<{$data.touch_name}>" maxlength='20'><em><font color='red'>*</font></em></td>
+        </tr>	
+		<tr>
+          <th><{t}>手机号：<{/t}></th>
+          <td><input type="text" name="mobile" size=30 vtype="required&&mobile" value="<{$data.mobile}>" maxlength='20'><em><font color='red'>*</font></em></td>
+        </tr>
+		<tr>
+          <th><{t}>营业执照：<{/t}></th>
+          <td><{input type="image" name="business_img" vtype="required" value="{$data.business_img}" width=40 height=40}><span class="notice-inline">
+              <{t}>请上传营业执照。<{/t}></span><em><font color='red'>*</font></em></td>
+        </tr>
+		<tr>
+          <th><{t}>地址：<{/t}></th>
+          <td><{input type="area" name="addr" vtype="required" size=30 value=$data.addr}><em><font color='red'>*</font></em></td>
+        </tr>	
+        </table>
+    </div>
+    <div class="table-action">
+        <button class="btn btn-primary" type="submit"><{t}>保存<{/t}></button>
+    </div>
+</form>
+
+<script>
+    $('sysuserform').store('target',{
+        onComplete:function(rs){
+            if(!rs) return;
+            rs = JSON.decode(rs);
+            if(rs.success){
+                if(window.finderGroup) window.finderGroup['<{$env.get.finder_id}>'].refresh();
+                if($('sysuserform').getParent('.dialog')){
+                    var Dlg = $('sysuserform').getParent('.dialog').retrieve('instance');
+                    if(Dlg.update){
+                        Dlg.update.retrieve('instance').initContent();
+                    }
+                    Dlg.close();
+                }
+            }
+        }
+    });
+</script>

@@ -1,0 +1,35 @@
+<div class="ly-brand-tabs" style="top: 3.131556rem;">
+  <div class="left">
+    <ul>
+      <{foreach from=$data item=catlv1 name=cat1}>
+      <li class="<{if $env.foreach.cat1.iteration == 1}>act<{/if}>"><span><{$catlv1.cat_name}></span></li>
+      <{/foreach}>
+    </ul>
+  </div>
+  <div class="right" style="padding-top: 0">
+    <{foreach from=$data item=catlv1 name=lv1cat name=cat1}>
+    <div class="ct-box" style="<{if $env.foreach.cat1.iteration != 1}>display:none<{/if}>">
+<!--      <div class="ad-box" style="margin-bottom: 0.5rem";><img src="images/cad1.png" ></div>-->
+      <{foreach from=$catlv1.lv2 item=catlv2}>
+      <div style="margin-bottom: 0.5rem">
+        <div class="title">
+          <{$catlv2.cat_name}>
+        </div>
+        <ul>
+          <{foreach from=$catlv2.lv3 item=catlv3}>
+          <li><a class="img-box" href="<{url action=topwap_ctl_item_list@index cat_id=$catlv3.cat_id}>"><{if $catlv3.cat_logo}><img src="<{$catlv3.cat_logo|storager:t}>" /><{/if}></a><span><{$catlv3.cat_name}></span></li>
+          <{/foreach}>
+        </ul>
+      </div>
+      <{/foreach}>
+    </div>
+    <{/foreach}>
+  </div>
+</div>
+<script>
+$('.ly-brand-tabs').on('click','.left li',function(){
+  var index = $(this).index()
+  $('.ct-box').eq(index).show().siblings().hide()
+  $(this).addClass('act').siblings().removeClass('act')
+})
+</script>

@@ -1,0 +1,20 @@
+<table id="levelPriceEditor" class="gridlist" cellpadding="0" cellspacing="0" style="width:100%;">
+  <thead>
+	<tr>
+	  <th style="width:30%;"><{t}>会员等级<{/t}></th>
+	  <th style="width:30%;"><{t}>商家折扣<{/t}></th>
+	  <th style="width:30%;"><{t}>平台折扣<{/t}></th>
+	</tr>
+  </thead>
+  <tbody>
+	<{foreach from=$item item=level key=key}>
+		<tr>
+		  <td><{$level.grade_name}></td>
+		  <td><{input size="6" type="text" value=$level.price name="lv_price[{$level.grade_id}]" grade_id=$level.grade_id vtype="required&&unsigned"}></td>
+		  <td style="height:40px;"><{$level.dis_count}></td>
+		</tr>
+	<{/foreach}>	
+		
+  </tbody>
+</table>
+<span class="notice-inline" style="color:red;">折扣：如果输入0.8，表示该会员以销售价8折的价格购买，有效范围0-1</span>
