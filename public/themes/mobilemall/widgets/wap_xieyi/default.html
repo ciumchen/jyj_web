@@ -1,22 +1,27 @@
-<div id="xieyi_wap" class="shopex-popover shopex-popover-action xieyi-box shopex-popover-bottom" >
+<div id="xieyi_wap" class="shopex-popover shopex-popover-action xieyi-box shopex-popover-bottom" style="top: 25%">
   <i class="bbc-icon bbc-icon-error btn-modal-close" onclick="shopex('#xieyi_wap').popover('hide');"></i>
   <div class="bbc-popover-modal goods-sku-modal">
+
+    <div class="t">
+      <{$setting.title}>
+    </div>
 
     <!--阶梯价格-->
     <div id="xieyibox" class="text-box shopex-off-canvas-wrap">
       <div class="shopex-scroll">
-        <div class="t">
-          <{$setting.title}>
-        </div>
         <div class="b">
           <{$setting.text}>
         </div>
-
       </div>
 
     </div>
-    <div class="button" id="zdl">知道了</div>
-
+<!--    <div class="button" id="zdl">知道了</div>-->
+    <div class="ly-reg-bottom" style="border-radius: 10px;">
+      <div class="gouxuan"><input id="table_cbox2" type="checkbox" checked="checked" name="license" value="1">  <label for="table_cbox2">注册即表示同意聚优街</label></div>
+      <div class="box" style="padding: 0 0.939467rem">
+        <button type="button" id="ty">同意</button>
+      </div>
+    </div>
   </div>
 </div>
 <script>
@@ -28,5 +33,23 @@
   $('#zdl').on('click',function () {
     shopex('#xieyi_wap').popover('hide')
     localStorage.setItem('xieyi',1)
+  })
+
+  $('#ty').on('click',function () {
+    var license = $("input[name='license']:checked").val();
+    if (license == 1) {
+      shopex('#xieyi_wap').popover('hide');
+      localStorage.setItem('xieyi',1);
+    }
+  });
+
+  /*input修改监听*/
+  $("input[name='license']").on('change',function () {
+    var license = $("input[name='license']:checked").val();
+    if (license != 1) {
+      $("#ty").addClass('ty-disabled');
+    } else {
+      $("#ty").removeClass('ty-disabled');
+    }
   })
 </script>
