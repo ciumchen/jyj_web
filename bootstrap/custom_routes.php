@@ -974,6 +974,8 @@ route::group(array('prefix' => 'wap', 'middleware' => ['theme_middleware_preview
     route::get('payment.html', [ 'uses' => 'topwap_ctl_paycenter@index' ]);
     route::match(array('GET', 'POST'), 'create.html', ['uses' => 'topwap_ctl_paycenter@createPay']);
     route::post('do-payment.html', [ 'uses' => 'topwap_ctl_paycenter@dopayment' ]);
+    // 配合临时APP支付
+    route::get('do-payment.html', [ 'uses' => 'topwap_ctl_paycenter@dopayment' ]);
     route::get('finish.html', [ 'uses' => 'topwap_ctl_paycenter@finish' ]);
     //刮刮卡
     route::post('ajax/getprize.html', [ 'uses' => 'topwap_ctl_paycenter@getPrize' ]);
