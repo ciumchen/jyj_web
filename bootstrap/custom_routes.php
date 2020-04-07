@@ -978,7 +978,7 @@ route::group(array('prefix' => 'wap', 'middleware' => ['theme_middleware_preview
     //刮刮卡
     route::post('ajax/getprize.html', [ 'uses' => 'topwap_ctl_paycenter@getPrize' ]);
     route::post('ajax/issueprize.html', [ 'uses' => 'topwap_ctl_paycenter@issue' ]);
-
+	route::post('do-paymentapp.html', [ 'uses' => 'topwap_ctl_paycenter@dopaymentapp' ]);//app专用返回json
 
     // 微信的数据做转发
     route::match(array('GET', 'POST', 'PUT', 'DELETE'), 'wxpayjsapi.html', ['uses' => 'topwap_ctl_wechat@wxpayjsapi']);

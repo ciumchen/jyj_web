@@ -30,4 +30,21 @@
   </section>
   <{require file="block/footer.html"}>
 </body>
+<script>
+function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+   function cooktime(name,value,time){
+   var exp=new Date();
+      exp.setTime(exp.getTime()+time*60*24*60*1000);
+      document.cookie=name+"="+escape(value)+";expires="+exp.toGMTString();
+ }
+    var fromapp=getQueryString('fromapp');
+    if(fromapp){
+     cooktime('fromapp',fromapp,'360');//
+    }
+</script>
 </html>

@@ -13,7 +13,8 @@ class topwap_ctl_paycenter extends topwap_controller {
             'wapupacp' => 'bbc-icon-unipay pay-style-unipay',
             'deposit' => 'bbc-icon-qianbao pay-style-qianbao',
             'malipay' => 'bbc-icon-zhifubao pay-style-zhifubao',
-            'wxpayjsapi' => 'bbc-icon-weixin pay-style-weixin'
+            'wxpayjsapi' => 'bbc-icon-weixin pay-style-weixin',
+            'wxpayApp' => 'bbc-icon-weixin pay-style-weixin'
     );
 
     public function __construct($app)
@@ -271,9 +272,73 @@ class topwap_ctl_paycenter extends topwap_controller {
         return $this->splash('success', $url, $msg, true);
     }
 
+    // 真正的支付
+    public function dopaymentapp()
+    {
+        if(isset($_POST['json'])){
+            if(json_decode($_POST['json'])){
+                $json = json_decode($_POST['json'],true);
+                $postdata['payment']['payment_id']=$json['payment_id'];
+
+                $postdata['payment']['pay_app_id']='wxpayApp';
+                $db = app::get('systrade')->database();
+                $sql="select user_id,payment,tid from ectools_trade_paybill where payment_id=".$postdata['payment']['payment_id'];
+                $arr=$db->executeQuery($sql)->fetchAll();
+                $postdata['payment']['money']=0;
+                foreach($arr as $k2=>$payment_data){
+                    //$payment_data=$arr[0];
+                    $postdata['payment']['money']+=$payment_data['payment'];
+                    $alltids[]=$payment_data['tid'];
+                }
+                $postdata['payment']['tids']=implode(',',$alltids);
+
+
+            }
+        }
+        else {
+
+            $postdata = input::get();
+        }
+        $payment = $postdata['payment'];
+        $payment['deposit_password'] = $postdata['deposit_password'];
+
+
+        $payment['user_id'] = userAuth::id();
+
+        //兼容app 传过来的数据,app传过来只有payment_id2017-10-18 20:46:14
+        if(!$payment['user_id']){
+
+            $payment['user_id']=$payment_data['user_id'];
+        }
+
+        //兼容app 传过来的数据,app传过来只有payment_id2017-10-18 20:46:14
+
+        $payment['platform'] = "wap";
+        $payment['hongbao_ids'] = implode(',',$_SESSION['pay_user_hongbao_id']);
+        unset($_SESSION['pay_user_hongbao_id']);
+        try
+        {
+            app::get('topwap')->rpcCall('payment.trade.pay',$payment);
+        }
+        catch(Exception $e)
+        {
+            $msg = $e->getMessage();
+            $url = url::action('topwap_ctl_paycenter@index',array('payment_id'=>$payment['payment_id']));
+            echo '<meta charset="utf-8"><script>alert("'.$msg.'");location.href="'.$url.'";</script>';
+            exit();
+        }
+        $url = url::action('topwap_ctl_paycenter@finish',array('payment_id'=>$payment['payment_id']));
+        return $this->splash('success', $url, $msg, true);
+    }
+
     // 开始支付
     public function dopayment()
     {
+        if($_POST['payment']['pay_app_id']=='wxpayApp'){
+            header('Content-Type:text/html; charset=UTF-8');
+            echo '发起微信支付中请稍候...';
+            exit;
+        }
         $postdata = input::get();
         $payment = $postdata['payment'];
         $payment['deposit_password'] = $postdata['deposit_password'];
