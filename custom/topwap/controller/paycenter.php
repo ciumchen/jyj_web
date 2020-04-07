@@ -151,15 +151,6 @@ class topwap_ctl_paycenter extends topwap_controller {
                 }
             }
 
-            // APP-支付方式过滤
-            if ($_COOKIE['fromapp']) {
-                if ($payment['app_id'] !== 'wxpayApp') {
-                    unset($payments[$paymentKey]);
-                }
-            } elseif ($payment['app_id'] === 'wxpayApp') {
-                unset($payments[$paymentKey]);
-            }
-
         }
 
         $filter['fields'] = "*";
