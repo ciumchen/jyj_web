@@ -1313,3 +1313,6 @@ input[type="submit"], .shopex-btn-primary, .shopex-btn-blue {
 #xieyibox {
 	height: 45vh;
 }
+.ly-reg-bottom .ty-disabled {
+	opacity: 0.4;
+}
