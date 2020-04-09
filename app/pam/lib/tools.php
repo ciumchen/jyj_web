@@ -31,7 +31,7 @@ class pam_tools
             }
             $type = 'email';
         }
-        elseif(preg_match("/^1[34578]{1}[0-9]{9}$/",$loginName))
+        elseif(preg_match("/^1[345789]{1}[0-9]{9}$/",$loginName))
         {
             $type = 'mobile';
         }
