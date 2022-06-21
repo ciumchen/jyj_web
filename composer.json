@@ -21,7 +21,7 @@
         "monolog/monolog": "~1.11",
         "qiniu/php-sdk": "7.0.*",
 		"endroid/qrcode": "1.5.*",
-        "guzzlehttp/guzzle": "6.2.*",
+        "guzzlehttp/guzzle": "6.5.*",
         "nesbot/carbon": "~1.19",
         "predis/predis": "1.0.*",
 		"foolz/sphinxql-query-builder": "1.0.*",
